@@ -4,241 +4,319 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MintHaven Store</title>
-<meta name="description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more. Everything supports the server, and it's never pay-to-win.">
+<meta name="description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more. Support the server, never pay-to-win.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f4f7f1;
-  --surface:#ffffff;
-  --surface-2:#fbfdf9;
-  --ink:#222b2a;
-  --ink-2:#5f6b68;
-  --ink-3:#93a09b;
-  --line:#e6ece2;
-  --green:#3cbf6d; --green-d:#31a75d; --green-lt:#e3f5ea;
-  --blue:#3ea6f0; --blue-lt:#e2f1fd;
-  --purple:#977bef; --purple-lt:#ece6fc;
-  --yellow:#ffcb45; --yellow-lt:#fff3d4;
-  --teal:#2fbfae; --teal-lt:#ddf4f1;
-  --orange:#ff9838; --orange-lt:#ffeeda;
-  --r:16px; --r-lg:22px; --r-pill:100px;
-  --shadow:0 12px 26px -14px rgba(30,60,40,.20);
-  --shadow-lg:0 22px 44px -20px rgba(30,60,40,.28);
-  --f-disp:"Baloo 2",system-ui,sans-serif;
-  --f-body:"Nunito",system-ui,sans-serif;
+  --night0:#070d17;
+  --night1:#0c1524;
+  --panel:#152435;
+  --panel-2:#1b2d42;
+  --slot:#0d1826;
+  --edge:#060b12;
+  --hi:rgba(255,255,255,.08);
+  --lo:rgba(0,0,0,.45);
+  --mint:#4ade9b;
+  --mint-2:#35bd80;
+  --mint-deep:#1d7a4e;
+  --mint-glow:rgba(74,222,155,.45);
+  --gold:#ffd167;
+  --text:#e7f5ec;
+  --muted:#a7bfb2;
+  --px:"Press Start 2P",monospace;
+  --body:"Nunito",system-ui,sans-serif;
+  --oct:polygon(0 8px,8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px));
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{background:var(--bg)}
+html{background:var(--night0)}
 body{
-  font-family:var(--f-body);
-  font-size:15px;color:var(--ink);
-  background:var(--bg);
+  font-family:var(--body);font-size:15px;color:var(--text);
   min-height:100vh;display:flex;flex-direction:column;
+  background:
+    radial-gradient(900px 500px at 15% -80px, rgba(74,222,155,.10), transparent 60%),
+    radial-gradient(700px 420px at 90% 30px, rgba(85,164,255,.07), transparent 60%),
+    linear-gradient(180deg,#0a1322 0%,#0a1220 40%,var(--night0) 100%);
+  position:relative;
 }
+/* pixel star field */
+body::before,body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-repeat:repeat;
+}
+body::before{
+  background-image:
+    radial-gradient(2px 2px at 20px 30px,rgba(255,255,255,.55) 50%,transparent 51%),
+    radial-gradient(2px 2px at 130px 90px,rgba(255,255,255,.35) 50%,transparent 51%),
+    radial-gradient(2px 2px at 220px 40px,rgba(160,255,210,.5) 50%,transparent 51%),
+    radial-gradient(2px 2px at 300px 130px,rgba(255,255,255,.3) 50%,transparent 51%),
+    radial-gradient(2px 2px at 70px 160px,rgba(160,255,210,.35) 50%,transparent 51%);
+  background-size:340px 200px;
+  animation:twinkle 4s steps(2) infinite;
+}
+body::after{
+  background-image:
+    radial-gradient(2px 2px at 60px 60px,rgba(255,255,255,.4) 50%,transparent 51%),
+    radial-gradient(2px 2px at 180px 20px,rgba(255,209,103,.5) 50%,transparent 51%),
+    radial-gradient(2px 2px at 260px 110px,rgba(255,255,255,.3) 50%,transparent 51%);
+  background-size:300px 170px;
+  animation:twinkle 5s steps(2) 1.6s infinite;
+}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.35}}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
-.disp{font-family:var(--f-disp)}
 img,svg{display:block}
+.px{font-family:var(--px);letter-spacing:0}
+
+/* ---------- game panel bevel ---------- */
+.panel{
+  background:var(--panel);
+  border:2px solid var(--edge);
+  clip-path:var(--oct);
+  box-shadow:inset 0 3px 0 var(--hi), inset 0 -3px 0 var(--lo), inset 3px 0 0 rgba(255,255,255,.03), inset -3px 0 0 rgba(0,0,0,.25);
+}
 
 /* ---------- top bar ---------- */
 .topbar{
-  background:rgba(255,255,255,.92);
-  border-bottom:1px solid var(--line);
+  background:#0a1420;
+  border-bottom:2px solid var(--edge);
   position:sticky;top:0;z-index:50;
-  backdrop-filter:blur(8px);
+}
+.topbar::after{
+  content:"";display:block;height:5px;
+  background:repeating-linear-gradient(90deg,#35bd80 0 14px,#2fae74 14px 28px,#4ade9b 28px 42px,#2b9c69 42px 56px);
+  box-shadow:0 2px 8px rgba(74,222,155,.35);
 }
 .topbar-inner{
-  max-width:1140px;margin:0 auto;padding:0 16px;
-  height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;
+  max-width:1150px;margin:0 auto;padding:0 16px;
+  height:58px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;
 }
-.brand{grid-column:1;display:inline-flex;align-items:center;gap:10px;font-family:var(--f-disp);font-weight:800;font-size:19px;color:var(--ink)}
-.brand-mk{width:24px;height:24px;border-radius:7px;background:linear-gradient(145deg,#5fe08a,var(--green-d));box-shadow:0 3px 8px -2px rgba(60,191,109,.6)}
+.brand{grid-column:1;display:inline-flex;align-items:center;gap:10px;font-family:var(--px);font-size:13px;color:var(--mint);text-shadow:0 0 12px var(--mint-glow)}
+.brand svg{width:26px;height:26px;image-rendering:pixelated;filter:drop-shadow(0 0 6px var(--mint-glow))}
 .ip-chip{
-  grid-column:2;
-  display:flex;align-items:center;gap:9px;
-  background:var(--green-lt);border:2px solid transparent;border-radius:var(--r-pill);
-  padding:8px 16px;color:var(--green-d);
-  font-size:13px;font-weight:800;letter-spacing:.4px;
-  transition:border-color .15s, transform .1s;
+  grid-column:2;display:flex;align-items:center;gap:9px;
+  background:#12213296;border:2px solid #23394f;
+  clip-path:var(--oct);
+  padding:9px 16px;color:var(--mint);
+  font-family:var(--px);font-size:13px;
+  transition:transform .1s;
 }
-.ip-chip.dead{color:var(--ink-2);background:var(--surface-2);cursor:default}
+.ip-chip.dead{color:var(--muted)}
+.ip-chip span{white-space:nowrap}
+.ip-chip:not(.dead){box-shadow:0 0 14px rgba(74,222,155,.15)}
 .ip-chip:active{transform:scale(.98)}
-.ip-chip .hint{color:var(--ink-3);font-weight:700;letter-spacing:0}
+.ip-chip .hint{font-family:var(--body);color:var(--muted);font-weight:700;font-size:13px}
 .top-right{grid-column:3;justify-self:end;display:flex;align-items:center;gap:10px}
 .top-btn{
   display:flex;align-items:center;
-  background:var(--surface);border:2px solid var(--line);border-radius:var(--r-pill);
-  padding:8px 16px;font-size:13px;font-weight:800;color:var(--ink-2);
+  background:var(--panel-2);border:2px solid #23394f;clip-path:var(--oct);
+  padding:8px 14px;font-size:13px;font-weight:800;color:var(--text);
 }
-.currency{font-size:13px;font-weight:800;color:var(--ink-2);padding:8px 4px}
+.currency{font-family:var(--px);font-size:13px;color:var(--gold);padding:8px 2px;text-shadow:0 0 10px rgba(255,209,103,.35);white-space:nowrap}
 
 /* ---------- layout ---------- */
 .wrap{
-  width:100%;max-width:1140px;margin:26px auto 56px;padding:0 16px;
-  display:grid;grid-template-columns:280px 1fr;gap:24px;
-  align-items:start;flex:1;
+  width:100%;max-width:1150px;margin:24px auto 56px;padding:0 16px;
+  display:grid;grid-template-columns:280px 1fr;gap:22px;
+  align-items:start;flex:1;position:relative;z-index:1;
 }
 
 /* ---------- sidebar ---------- */
 .side{display:flex;flex-direction:column;gap:16px;position:sticky;top:86px}
-.logo-card{
-  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
-  padding:26px 16px 22px;text-align:center;
-}
-.logo-mk{
-  width:74px;height:74px;border-radius:20px;margin:0 auto 14px;
-  background:linear-gradient(145deg,#5fe08a,var(--green-d));
-  box-shadow:0 10px 22px -8px rgba(60,191,109,.55);
-  display:flex;align-items:center;justify-content:center;
-}
-.logo-mk svg{width:46px;height:46px;image-rendering:pixelated}
-.logo-name{font-family:var(--f-disp);font-weight:800;font-size:22px;color:var(--ink);line-height:1.15}
-.logo-sub{font-size:13px;color:var(--ink-2);margin-top:2px;font-weight:700}
-.nav-card{background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden;padding:8px}
-.nav-item{
-  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
-  padding:12px 14px;border-radius:12px;color:var(--ink-2);
-  font-family:var(--f-disp);font-size:15px;font-weight:700;
-  transition:background .12s,color .12s;
-}
-.nav-item.active{background:var(--green);color:#fff}
-.nav-item .dot{width:10px;height:10px;border-radius:4px;flex:none}
-.nav-item.active .dot{background:rgba(255,255,255,.85)!important}
-.nav-group-head{
-  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
-  padding:12px 14px;border-radius:12px;color:var(--ink-2);
-  font-family:var(--f-disp);font-size:15px;font-weight:700;
-}
-.nav-group-head .caret{margin-left:auto;transition:transform .15s;font-size:13px;color:var(--ink-3)}
-.nav-group.open .caret{transform:rotate(180deg)}
-.nav-sub{display:none;padding-left:14px}
-.nav-group.open .nav-sub{display:block}
-.side-note{
-  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
-  padding:18px;text-align:center;
-}
-.side-note .t{font-family:var(--f-disp);font-weight:800;font-size:16px;color:var(--ink);margin-bottom:6px}
-.side-note p{font-size:13px;color:var(--ink-2);font-weight:700;line-height:1.55}
-
-/* ---------- main ---------- */
-.main{display:flex;flex-direction:column;gap:20px;min-width:0;scroll-margin-top:76px}
-.banner{
-  border-radius:var(--r-lg);box-shadow:var(--shadow-lg);
-  background:linear-gradient(135deg,#28874e,#1e6f41);
-  padding:34px 30px;position:relative;overflow:hidden;color:#fff;
-}
-.banner::after{
+.logo-card{padding:24px 14px 20px;text-align:center;position:relative;overflow:hidden}
+.logo-card::before{
   content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(300px 160px at 92% -50px, rgba(255,255,255,.18), transparent 70%),
-    repeating-linear-gradient(0deg, transparent 0 30px, rgba(255,255,255,.045) 30px 32px),
-    repeating-linear-gradient(90deg, transparent 0 30px, rgba(255,255,255,.045) 30px 32px);
+  background:radial-gradient(220px 120px at 50% -20px, rgba(74,222,155,.18), transparent 70%);
   pointer-events:none;
 }
-.banner h1{font-family:var(--f-disp);font-weight:800;font-size:30px;position:relative;line-height:1.15}
-.banner p{position:relative;margin-top:8px;font-weight:700;font-size:15px;color:#fff;max-width:520px;line-height:1.55}
-.card{
-  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
-  padding:22px;
+.logo-card svg{width:88px;height:88px;margin:0 auto 12px;image-rendering:pixelated;filter:drop-shadow(0 4px 14px var(--mint-glow));animation:bob 4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.logo-name{font-family:var(--px);font-size:15px;color:var(--mint);text-shadow:0 0 14px var(--mint-glow)}
+.logo-sub{font-size:13px;color:var(--muted);margin-top:9px;font-weight:700}
+.nav-card{padding:8px}
+.nav-item{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  padding:12px 13px;margin:3px 0;color:var(--muted);
+  background:var(--slot);border:2px solid #1c2c3f;clip-path:var(--oct);
+  font-family:var(--px);font-size:13px;
+  box-shadow:inset 0 2px 0 rgba(0,0,0,.4);
+  transition:color .12s,border-color .12s,box-shadow .12s;
 }
-.card h2{font-family:var(--f-disp);font-weight:800;font-size:19px;color:var(--ink);margin-bottom:10px}
-.card p{font-size:15px;line-height:1.65;color:var(--ink-2);font-weight:600}
+.nav-item.active{
+  color:#0b1a12;background:linear-gradient(180deg,#5fe08a,var(--mint-2));
+  border-color:var(--mint-deep);
+  box-shadow:inset 0 3px 0 rgba(255,255,255,.35), inset 0 -3px 0 rgba(0,0,0,.25), 0 0 16px var(--mint-glow);
+}
+.nav-item .dot{width:10px;height:10px;flex:none;box-shadow:0 0 8px currentColor}
+.nav-item.active .dot{background:#0b1a12!important;box-shadow:none}
+.nav-group-head{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  padding:12px 13px;margin:3px 0;color:var(--text);
+  font-family:var(--px);font-size:13px;
+}
+.nav-group-head .caret{margin-left:auto;transition:transform .15s;color:var(--muted);font-size:13px}
+.nav-group.open .caret{transform:rotate(180deg)}
+.nav-sub{display:none;padding-left:12px}
+.nav-group.open .nav-sub{display:block}
+.side-note{padding:18px;text-align:center}
+.side-note .t{font-family:var(--px);font-size:13px;color:var(--gold);margin-bottom:9px;text-shadow:0 0 10px rgba(255,209,103,.3)}
+.side-note p{font-size:13px;color:var(--muted);font-weight:700;line-height:1.55}
+
+/* ---------- hero ---------- */
+.main{display:flex;flex-direction:column;gap:18px;min-width:0;scroll-margin-top:80px}
+.hero{
+  position:relative;overflow:hidden;
+  border:2px solid var(--edge);clip-path:var(--oct);
+  background:linear-gradient(180deg,#0e2b4a 0%,#0f3552 34%,#14584e 78%,#187653 100%);
+  padding:34px 30px 42px;min-height:250px;
+  box-shadow:inset 0 3px 0 rgba(255,255,255,.06), inset 0 -3px 0 rgba(0,0,0,.35);
+}
+.hero .moon{
+  position:absolute;top:26px;right:64px;width:34px;height:34px;
+  background:
+    linear-gradient(#f4f7e8,#d8e6c9);
+  box-shadow:0 0 30px 6px rgba(244,247,232,.35);
+  image-rendering:pixelated;
+  clip-path:polygon(25% 0,75% 0,75% 12.5%,100% 12.5%,100% 87.5%,75% 87.5%,75% 100%,25% 100%,25% 87.5%,0 87.5%,0 12.5%,25% 12.5%);
+}
+.cloud{position:absolute;height:12px;background:rgba(255,255,255,.16);box-shadow:14px -8px 0 rgba(255,255,255,.13), 34px 0 0 rgba(255,255,255,.10);width:46px;animation:drift linear infinite}
+.c1{top:44px;left:-60px;animation-duration:56s}
+.c2{top:96px;left:-120px;animation-duration:74s;transform:scale(1.5)}
+.c3{top:150px;left:-80px;animation-duration:64s;opacity:.7}
+@keyframes drift{to{transform:translateX(1400px)}}
+.hero .island{
+  position:absolute;right:26px;bottom:14px;width:236px;height:190px;
+  image-rendering:pixelated;
+  filter:drop-shadow(0 18px 22px rgba(0,0,0,.45)) drop-shadow(0 0 18px rgba(74,222,155,.25));
+  animation:bob 6s ease-in-out infinite;
+}
+.spark{position:absolute;width:10px;height:10px;pointer-events:none;
+  background:
+    linear-gradient(transparent 40%, currentColor 40% 60%, transparent 60%),
+    linear-gradient(90deg,transparent 40%, currentColor 40% 60%, transparent 60%);
+  animation:twinkle 2.6s steps(2) infinite;
+}
+.hero h1{font-family:var(--px);font-size:22px;line-height:1.5;color:#fff;max-width:440px;position:relative;text-shadow:0 3px 0 rgba(0,0,0,.45), 0 0 22px rgba(74,222,155,.35)}
+.hero h1 .mintword{color:var(--mint)}
+.hero p{position:relative;margin-top:14px;font-weight:700;font-size:15px;color:#eafff3;max-width:430px;line-height:1.6;text-shadow:0 2px 0 rgba(0,0,0,.35)}
+.hero p b{color:var(--gold)}
+
+/* ---------- cards ---------- */
+.card{padding:22px}
+.card h2{font-family:var(--px);font-size:15px;color:var(--mint);margin-bottom:12px;text-shadow:0 0 12px var(--mint-glow)}
+.card p{font-size:15px;line-height:1.65;color:var(--muted);font-weight:600}
 .card p + p{margin-top:11px}
-.card p strong{color:var(--ink)}
+.card p strong{color:var(--text)}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  border-radius:var(--r-pill);padding:12px 22px;
-  font-family:var(--f-disp);font-size:15px;font-weight:700;
-  transition:transform .12s, box-shadow .12s, background .12s;
+  padding:13px 22px;clip-path:var(--oct);
+  font-family:var(--px);font-size:13px;
+  transition:filter .12s, transform .1s;
 }
-.btn-green{background:var(--green);color:#fff;box-shadow:0 5px 0 var(--green-d)}
-.btn-green:active{transform:translateY(3px);box-shadow:0 2px 0 var(--green-d)}
-.btn-ghost{background:var(--surface);color:var(--ink-2);border:2px solid var(--line)}
+.btn-green{
+  background:linear-gradient(180deg,#54d684,#2fa768);color:#08150e;
+  border:2px solid var(--mint-deep);
+  box-shadow:inset 0 3px 0 rgba(255,255,255,.35), inset 0 -4px 0 rgba(0,0,0,.3), 0 0 16px rgba(74,222,155,.25);
+}
+.btn-green:active{transform:translateY(2px)}
+.btn-ghost{background:var(--panel-2);color:var(--text);border:2px solid #23394f}
 
 /* ---------- category grid ---------- */
 .cat-head{
-  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
-  padding:16px 22px;
+  padding:16px 20px;
   display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
 }
-.cat-head .ct{font-family:var(--f-disp);font-weight:800;font-size:19px;color:var(--ink)}
-.cat-head .cb{font-size:13px;color:var(--ink-2);font-weight:700}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cat-head .ct{font-family:var(--px);font-size:15px;color:var(--text);text-shadow:0 0 12px rgba(74,222,155,.25)}
+.cat-head .cb{font-size:13px;color:var(--muted);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .prod{
-  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
-  padding:14px 14px 16px;text-align:center;
+  padding:12px 12px 14px;text-align:center;
   display:flex;flex-direction:column;align-items:center;gap:5px;
-  transition:transform .15s, box-shadow .15s;
+  transition:transform .15s;position:relative;
 }
 .tile{
-  width:100%;border-radius:var(--r);height:110px;
+  width:100%;height:112px;position:relative;margin-bottom:9px;
+  background:var(--slot);
+  border:2px solid var(--tile-c, var(--mint));
+  clip-path:var(--oct);
+  box-shadow:inset 0 4px 0 rgba(0,0,0,.5), inset 0 0 26px var(--tile-g, rgba(74,222,155,.12));
   display:flex;align-items:center;justify-content:center;
-  position:relative;margin-bottom:9px;
 }
-.tile svg{width:72px;height:72px;image-rendering:pixelated}
+.tile svg{width:70px;height:70px;image-rendering:pixelated;filter:drop-shadow(0 0 8px var(--tile-g, rgba(74,222,155,.35)))}
 .badge{
-  position:absolute;right:10px;top:10px;
-  background:#fff;color:var(--ink);border-radius:var(--r-pill);
-  font-size:13px;font-weight:800;padding:2px 10px;box-shadow:var(--shadow);
+  position:absolute;right:8px;top:8px;
+  background:#0a1420;color:var(--gold);border:2px solid #23394f;
+  font-family:var(--px);font-size:13px;padding:3px 7px;
 }
-.prod .name{font-family:var(--f-disp);font-size:16px;font-weight:700;color:var(--ink);line-height:1.25}
-.prod .price{font-family:var(--f-disp);font-size:16px;font-weight:800;color:var(--ink);margin-bottom:9px}
+.prod .name{font-size:15px;font-weight:800;color:var(--text);line-height:1.3}
+.prod .price{font-family:var(--px);font-size:13px;color:var(--gold);margin:4px 0 10px;text-shadow:0 0 10px rgba(255,209,103,.3)}
 .prod .buy{
   width:100%;max-width:170px;min-height:44px;
-  background:var(--green);color:#fff;border-radius:var(--r-pill);
-  font-family:var(--f-disp);font-size:15px;font-weight:700;
-  box-shadow:0 5px 0 var(--green-d);
-  transition:transform .12s, box-shadow .12s, background .12s;
+  background:linear-gradient(180deg,#54d684,#2fa768);color:#08150e;
+  border:2px solid var(--mint-deep);clip-path:var(--oct);
+  font-family:var(--px);font-size:13px;
+  box-shadow:inset 0 3px 0 rgba(255,255,255,.35), inset 0 -4px 0 rgba(0,0,0,.3);
+  transition:filter .12s, transform .1s, box-shadow .15s;
 }
-.prod .buy:active{transform:translateY(3px);box-shadow:0 2px 0 var(--green-d)}
+.prod .buy:active{transform:translateY(2px)}
 
 @media(hover:hover){
-  .ip-chip:not(.dead):hover{border-color:var(--green)}
-  .top-btn:hover{border-color:var(--ink-3)}
-  .nav-item:not(.active):hover{background:var(--surface-2);color:var(--ink)}
-  .nav-group-head:hover{background:var(--surface-2)}
-  .btn-green:hover{background:#46cc78;transform:translateY(-2px);box-shadow:0 7px 0 var(--green-d)}
-  .btn-ghost:hover{border-color:var(--ink-3)}
-  .prod:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-  .prod .buy:hover{background:#46cc78;transform:translateY(-2px);box-shadow:0 7px 0 var(--green-d)}
+  .ip-chip:not(.dead):hover{border-color:var(--mint)}
+  .top-btn:hover{border-color:var(--mint)}
+  .nav-item:not(.active):hover{color:var(--text);border-color:#2f4763}
+  .btn-green:hover,.prod .buy:hover{filter:brightness(1.1)}
+  .btn-ghost:hover{border-color:var(--mint)}
+  .prod:hover{transform:translateY(-4px)}
+  .prod:hover .tile{box-shadow:inset 0 4px 0 rgba(0,0,0,.5), inset 0 0 34px var(--tile-g, rgba(74,222,155,.2)), 0 0 22px var(--tile-g, rgba(74,222,155,.25))}
 }
 
 /* ---------- footer ---------- */
-footer{border-top:1px solid var(--line);background:var(--surface);margin-top:auto}
+footer{
+  border-top:2px solid var(--edge);margin-top:auto;position:relative;z-index:1;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 8px, transparent 8px 16px),
+    #0a1420;
+}
+footer::before{
+  content:"";display:block;height:5px;
+  background:repeating-linear-gradient(90deg,#2b3d52 0 14px,#22334a 14px 28px,#31465e 28px 42px);
+}
 .foot-inner{
-  max-width:1140px;margin:0 auto;padding:26px 16px;
+  max-width:1150px;margin:0 auto;padding:26px 16px;
   display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
 }
-.foot-brand{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-disp);font-weight:800;font-size:16px}
-.foot-inner .fb{font-size:13px;color:var(--ink-2);font-weight:600;line-height:1.6}
-.ptw{font-size:13px;font-weight:800;color:var(--green-d)}
+.foot-brand{display:inline-flex;align-items:center;gap:9px;font-family:var(--px);font-size:13px;color:var(--mint)}
+.foot-brand svg{width:20px;height:20px;image-rendering:pixelated}
+.foot-inner .fb{font-size:13px;color:var(--muted);font-weight:600;line-height:1.6}
+.ptw{font-size:13px;font-weight:800;color:var(--mint);margin-top:6px;text-shadow:0 0 10px rgba(74,222,155,.25)}
 
 /* ---------- modal ---------- */
 .modal-bg{
-  position:fixed;inset:0;background:rgba(24,38,30,.45);backdrop-filter:blur(3px);
+  position:fixed;inset:0;background:rgba(4,9,16,.75);backdrop-filter:blur(3px);
   display:none;align-items:center;justify-content:center;z-index:100;padding:16px;
 }
 .modal-bg.open{display:flex}
 .modal{
-  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);
-  max-width:420px;width:100%;padding:26px;text-align:center;
+  background:var(--panel);border:2px solid var(--mint-deep);clip-path:var(--oct);
+  box-shadow:inset 0 3px 0 var(--hi), inset 0 -3px 0 var(--lo), 0 0 40px rgba(74,222,155,.2);
+  max-width:430px;width:100%;padding:26px;text-align:center;
 }
-.modal .tile{height:120px;max-width:200px;margin:0 auto 6px}
-.modal h3{font-family:var(--f-disp);font-weight:800;font-size:20px;color:var(--ink);margin-bottom:2px}
-.modal .mp{font-size:15px;color:var(--ink-2);font-weight:600;line-height:1.6;margin:10px 0 18px}
-.modal .price-line{font-family:var(--f-disp);font-size:17px;font-weight:800;color:var(--ink)}
+.modal .tile{height:120px;max-width:200px;margin:0 auto 10px}
+.modal h3{font-family:var(--px);font-size:15px;color:var(--mint);margin-bottom:8px;line-height:1.5}
+.modal .mp{font-size:15px;color:var(--muted);font-weight:600;line-height:1.6;margin:10px 0 18px}
+.modal .price-line{font-family:var(--px);font-size:15px;color:var(--gold);text-shadow:0 0 10px rgba(255,209,103,.3)}
 .modal .btn + .btn{margin-left:8px}
 
-/* ---------- toast ---------- */
+/* ---------- toast (advancement style) ---------- */
 .toast{
-  position:fixed;top:72px;left:50%;transform:translateX(-50%) translateY(-140px);
-  background:var(--ink);color:#fff;font-weight:800;font-size:14px;
-  padding:11px 20px;border-radius:var(--r-pill);z-index:120;
-  transition:transform .25s ease;box-shadow:var(--shadow-lg);
+  position:fixed;top:76px;left:50%;transform:translateX(-50%) translateY(-160px);
+  background:#0a1420;color:var(--gold);border:2px solid var(--gold);clip-path:var(--oct);
+  font-family:var(--px);font-size:13px;
+  padding:13px 20px;z-index:120;
+  transition:transform .25s ease;box-shadow:0 0 24px rgba(255,209,103,.25);
   visibility:hidden;
 }
 .toast.show{transform:translateX(-50%) translateY(0);visibility:visible}
@@ -251,13 +329,19 @@ footer{border-top:1px solid var(--line);background:var(--surface);margin-top:aut
   .nav-card{order:1}
   .main{order:2}
   .side-note{order:3}
-  .topbar-inner{display:flex;justify-content:space-between;height:60px;padding:0 12px}
-  .brand span:not(.brand-mk){display:none}
+  .topbar-inner{display:flex;justify-content:space-between;height:58px;padding:0 12px}
+  .brand span{display:none}
   .ip-chip .hint{display:none}
   .grid{grid-template-columns:repeat(2,1fr)}
+  .hero .island{width:150px;height:120px;opacity:.5;right:0;bottom:-6px;z-index:0}
+  .hero h1{font-size:17px;position:relative;z-index:1}
+  .hero p{z-index:1}
 }
 @media(max-width:520px){
   .grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .cloud,.logo-card svg,.hero .island,body::before,body::after,.spark{animation:none}
 }
 </style>
 </head>
@@ -282,7 +366,7 @@ const CONFIG = {
    checkoutUrl + "/package/" + checkoutId). No url/id = no checkout button yet. */
 const CATALOG = {
   "ranks": {
-    label:"Global Ranks", tile:"green", blurb:"Permanent ranks across all game modes.",
+    label:"Global Ranks", tile:"gold", blurb:"Permanent ranks across all game modes.",
     items:[
       { id:"vip",  name:"VIP",   price:15.00, art:"helm-iron" },
       { id:"vipp", name:"VIP +", price:20.00, art:"helm-gold" },
@@ -312,7 +396,7 @@ const CATALOG = {
     ]
   },
   "survival-claim": {
-    label:"Claim Blocks", group:"Survival", tile:"yellow", blurb:"Protect more land in Survival.",
+    label:"Claim Blocks", group:"Survival", tile:"orange", blurb:"Protect more land in Survival.",
     items:[
       { id:"cb2",  name:"2k Claim Blocks",  price:2.00,  art:"block" },
       { id:"cb5",  name:"5k Claim Blocks",  price:3.50,  art:"block", badge:"5k" },
@@ -331,16 +415,16 @@ const CATALOG = {
   "survival-furniture": {
     label:"Furniture", group:"Survival", tile:"teal", blurb:"Infinite build blocks for decorating.",
     items:[
-      { id:"con1",  name:"Infinite Concrete Key",            price:3.50,  art:"key-grey" },
-      { id:"con5",  name:"5 Infinite Concrete Key Bundle",   price:14.98, art:"key-grey", badge:"×5" },
-      { id:"con10", name:"10 Infinite Concrete Key Bundle",  price:19.98, art:"key-grey", badge:"×10" },
-      { id:"gla1",  name:"Infinite Stained Glass Key",       price:3.50,  art:"key-cyan" },
+      { id:"con1",  name:"Infinite Concrete Key",                price:3.50,  art:"key-grey" },
+      { id:"con5",  name:"5 Infinite Concrete Key Bundle",       price:14.98, art:"key-grey", badge:"×5" },
+      { id:"con10", name:"10 Infinite Concrete Key Bundle",      price:19.98, art:"key-grey", badge:"×10" },
+      { id:"gla1",  name:"Infinite Stained Glass Key",           price:3.50,  art:"key-cyan" },
       { id:"gla5",  name:"5 Infinite Stained Glass Key Bundle",  price:14.98, art:"key-cyan", badge:"×5" },
       { id:"gla10", name:"10 Infinite Stained Glass Key Bundle", price:19.98, art:"key-cyan", badge:"×10" }
     ]
   },
   "oneblock-crates": {
-    label:"Crates", group:"Oneblock", tile:"orange", blurb:"Crate keys for the Oneblock mode.",
+    label:"Crates", group:"Oneblock", tile:"blue", blurb:"Crate keys for the Oneblock mode.",
     items:[
       { id:"osam1",   name:"Samurai Crate Key",          price:4.00,   art:"key-red" },
       { id:"osam10",  name:"10 Samurai Key Bundle",      price:23.87,  art:"key-red",  badge:"×10" },
@@ -369,18 +453,47 @@ const CATALOG = {
 };
 </script>
 
-<!-- ============ shared logo sprite ============ -->
+<!-- ============ shared sprites ============ -->
 <svg width="0" height="0" style="position:absolute">
   <defs>
     <g id="px-logo">
-      <rect x="2" y="5" width="12" height="9" fill="#ffffff" opacity=".95"/>
-      <rect x="2" y="5" width="12" height="2" fill="#ffffff"/>
-      <rect x="2" y="12" width="12" height="2" fill="#d8f5e3"/>
-      <rect x="2" y="2" width="3" height="3" fill="#ffffff"/>
-      <rect x="6" y="1" width="3" height="4" fill="#eafff2"/>
-      <rect x="10" y="2" width="3" height="3" fill="#ffffff"/>
-      <rect x="4" y="7" width="2" height="2" fill="#a9ecc4"/>
-      <rect x="10" y="9" width="2" height="2" fill="#a9ecc4"/>
+      <rect x="2" y="5" width="12" height="9" fill="#2fae74"/>
+      <rect x="2" y="5" width="12" height="2" fill="#4ade9b"/>
+      <rect x="2" y="12" width="12" height="2" fill="#1f7a52"/>
+      <rect x="2" y="2" width="3" height="3" fill="#4ade9b"/>
+      <rect x="6" y="1" width="3" height="4" fill="#35bd80"/>
+      <rect x="10" y="2" width="3" height="3" fill="#4ade9b"/>
+      <rect x="4" y="7" width="2" height="2" fill="#8fd9ba"/>
+      <rect x="10" y="9" width="2" height="2" fill="#1f7a52"/>
+    </g>
+    <!-- floating island: 32x26 grid -->
+    <g id="px-island">
+      <!-- tree canopy -->
+      <rect x="20" y="0" width="8" height="3" fill="#4ade9b"/>
+      <rect x="18" y="2" width="12" height="3" fill="#35bd80"/>
+      <rect x="20" y="5" width="8" height="2" fill="#2fae74"/>
+      <rect x="19" y="1" width="3" height="2" fill="#8fd9ba"/>
+      <!-- trunk -->
+      <rect x="23" y="7" width="2" height="4" fill="#7a5236"/>
+      <!-- grass top -->
+      <rect x="2" y="11" width="28" height="3" fill="#4ade9b"/>
+      <rect x="2" y="11" width="28" height="1" fill="#8fd9ba"/>
+      <rect x="0" y="13" width="32" height="2" fill="#2fae74"/>
+      <!-- dirt -->
+      <rect x="1" y="15" width="30" height="4" fill="#7a5236"/>
+      <rect x="3" y="16" width="3" height="2" fill="#5d3d27"/>
+      <rect x="12" y="17" width="4" height="2" fill="#5d3d27"/>
+      <rect x="24" y="16" width="3" height="2" fill="#5d3d27"/>
+      <!-- stone taper -->
+      <rect x="4" y="19" width="24" height="3" fill="#4c5a6b"/>
+      <rect x="8" y="22" width="14" height="2" fill="#3c4856"/>
+      <rect x="12" y="24" width="6" height="2" fill="#2c3642"/>
+      <!-- ore sparkles -->
+      <rect x="9" y="20" width="2" height="1" fill="#4ade9b"/>
+      <rect x="20" y="21" width="2" height="1" fill="#ffd167"/>
+      <!-- vines -->
+      <rect x="5" y="15" width="1" height="4" fill="#2fae74"/>
+      <rect x="27" y="15" width="1" height="3" fill="#2fae74"/>
     </g>
   </defs>
 </svg>
@@ -388,7 +501,7 @@ const CATALOG = {
 <!-- ============ top bar ============ -->
 <div class="topbar">
   <div class="topbar-inner">
-    <a class="brand" href="#" aria-label="MintHaven — store home"><span class="brand-mk"></span><span>MintHaven</span></a>
+    <a class="brand" href="#" aria-label="MintHaven — store home"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg><span>MINTHAVEN</span></a>
     <button class="ip-chip" id="ipChip">
       <span id="ipText"></span>
       <span class="hint" id="ipHint"></span>
@@ -403,15 +516,15 @@ const CATALOG = {
 <!-- ============ layout ============ -->
 <div class="wrap">
   <aside class="side">
-    <div class="logo-card">
-      <div class="logo-mk"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg></div>
-      <div class="logo-name">MintHaven</div>
+    <div class="logo-card panel">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg>
+      <div class="logo-name">MINTHAVEN</div>
       <div class="logo-sub">Official Server Store</div>
     </div>
 
-    <nav class="nav-card" id="nav" aria-label="Store categories"></nav>
+    <nav class="nav-card panel" id="nav" aria-label="Store categories"></nav>
 
-    <div class="side-note">
+    <div class="side-note panel">
       <div class="t">Need help?</div>
       <p id="sideHelp"></p>
     </div>
@@ -424,7 +537,7 @@ const CATALOG = {
 <footer>
   <div class="foot-inner">
     <div>
-      <div class="foot-brand"><span class="brand-mk"></span>MintHaven</div>
+      <div class="foot-brand"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg>MINTHAVEN</div>
       <div class="ptw">🌿 Never pay-to-win — everything here is a helper or cosmetic.</div>
     </div>
     <div class="fb">
@@ -452,7 +565,7 @@ const CATALOG = {
 
 <script>
 /* ---------- pixel sprite renderer ---------- */
-const SLOT = "#20302a";
+const SLOT = "#0a1220";
 function helm(A,B,C){ return [
   [4,3,8,1,B],[3,4,10,3,A],[5,7,6,2,SLOT],
   [3,7,2,4,A],[11,7,2,4,A],[12,4,1,3,C],[3,10,2,1,C],[11,10,2,1,C]
@@ -462,51 +575,52 @@ function key(K,L){ return [
   [5,7,2,6,K],[7,9,2,1,K],[7,12,2,1,K],[4,2,2,1,L]
 ];}
 const CROWN = [
-  [3,10,10,3,"#f5b83d"],[3,5,2,5,"#f5b83d"],[7,4,2,6,"#f5b83d"],[11,5,2,5,"#f5b83d"],
-  [4,11,2,1,"#3cbf6d"],[7,11,2,1,"#e2554d"],[10,11,2,1,"#3ea6f0"],[3,10,10,1,"#ffd97a"]
+  [3,10,10,3,"#ffd167"],[3,5,2,5,"#ffd167"],[7,4,2,6,"#ffd167"],[11,5,2,5,"#ffd167"],
+  [4,11,2,1,"#4ade9b"],[7,11,2,1,"#ff6b61"],[10,11,2,1,"#5bb8ff"],[3,10,10,1,"#ffe49d"]
 ];
 const BLOCK = [
-  [3,3,10,3,"#4fca77"],[3,3,10,1,"#7ddf9e"],
+  [3,3,10,3,"#4fca77"],[3,3,10,1,"#8fe0af"],
   [3,6,10,7,"#a9744f"],[3,6,10,1,"#8a5c3b"],
-  [5,8,2,2,"#8a5c3b"],[9,10,2,2,"#8a5c3b"],[4,4,2,1,"#a3ecbb"]
+  [5,8,2,2,"#8a5c3b"],[9,10,2,2,"#8a5c3b"],[4,4,2,1,"#b6f0cb"]
 ];
 const TICKET = [
-  [2,5,12,6,"#3cbf6d"],[2,5,12,1,"#7ddf9e"],[2,10,12,1,"#2b9151"],
-  [7,5,1,6,"#ffffff"],[9,7,3,2,"#ffffff"],[4,7,2,2,"#ffffff"]
+  [2,5,12,6,"#4ade9b"],[2,5,12,1,"#8fe0af"],[2,10,12,1,"#1d7a4e"],
+  [7,5,1,6,"#0d1826"],[9,7,3,2,"#0d1826"],[4,7,2,2,"#0d1826"]
 ];
 const STAR = [
-  [7,2,2,3,"#ffcb45"],[7,11,2,3,"#ffcb45"],[2,7,3,2,"#ffcb45"],[11,7,3,2,"#ffcb45"],
-  [5,5,6,6,"#ffcb45"],[6,6,4,4,"#ffd97a"],[7,7,2,2,"#fff3d4"]
+  [7,2,2,3,"#ffd167"],[7,11,2,3,"#ffd167"],[2,7,3,2,"#ffd167"],[11,7,3,2,"#ffd167"],
+  [5,5,6,6,"#ffd167"],[6,6,4,4,"#ffe49d"],[7,7,2,2,"#fff4d6"]
 ];
 const CLOUD = [
-  [3,4,10,3,"#f2f6fb"],[4,3,8,1,"#ffffff"],[3,7,10,1,"#b9c6d6"],
-  [4,9,1,2,"#3ea6f0"],[7,10,1,2,"#3ea6f0"],[10,9,1,2,"#3ea6f0"],[6,12,1,2,"#3ea6f0"],[9,13,1,2,"#3ea6f0"]
+  [3,4,10,3,"#eef4fb"],[4,3,8,1,"#ffffff"],[3,7,10,1,"#9fb4cc"],
+  [4,9,1,2,"#5bb8ff"],[7,10,1,2,"#5bb8ff"],[10,9,1,2,"#5bb8ff"],[6,12,1,2,"#5bb8ff"],[9,13,1,2,"#5bb8ff"]
 ];
 const ART = {
-  "helm-iron": helm("#aeb8b3","#dfe6e2","#8f9a94"),
-  "helm-gold": helm("#f5b83d","#ffd97a","#cf982a"),
-  "helm-dia":  helm("#45c4d3","#a8ecf2","#2fa1af"),
-  "helm-em":   helm("#3cbf6d","#7ddf9e","#31a75d"),
+  "helm-iron": helm("#c3cdc8","#ecf2ef","#93a09b"),
+  "helm-gold": helm("#ffd167","#ffe49d","#cf982a"),
+  "helm-dia":  helm("#57d4e0","#a8ecf2","#3aa8b5"),
+  "helm-em":   helm("#4ade9b","#8fe0af","#2fae74"),
   "crown":     CROWN,
-  "key-mint":  key("#3cbf6d","#8fe0af"),
-  "key-gold":  key("#f5b83d","#ffd97a"),
-  "key-red":   key("#e2554d","#f0928c"),
-  "key-blue":  key("#3ea6f0","#9dd2f8"),
-  "key-cyan":  key("#2fbfae","#8fe0d7"),
-  "key-pink":  key("#ef7bb8","#f7b6d9"),
-  "key-grey":  key("#93a09b","#c3ccc8"),
+  "key-mint":  key("#4ade9b","#a5ecc9"),
+  "key-gold":  key("#ffd167","#ffe49d"),
+  "key-red":   key("#ff6b61","#ffa39c"),
+  "key-blue":  key("#5bb8ff","#a6d8ff"),
+  "key-cyan":  key("#3ed3c0","#9fe8de"),
+  "key-pink":  key("#ff7bc2","#ffb6dd"),
+  "key-grey":  key("#aab6b1","#d3dcd8"),
   "block":     BLOCK,
   "ticket":    TICKET,
   "star":      STAR,
   "cloud":     CLOUD
 };
+/* rarity glow per category tile key */
 const TILES = {
-  green:"linear-gradient(145deg,#d9f2e2,#b9e8cd)",
-  blue:"linear-gradient(145deg,#ddeffd,#bcdff9)",
-  yellow:"linear-gradient(145deg,#fff1cf,#ffe3a1)",
-  purple:"linear-gradient(145deg,#ebe4fc,#d7c9f8)",
-  teal:"linear-gradient(145deg,#dcf4f0,#bde8e2)",
-  orange:"linear-gradient(145deg,#ffeeda,#ffdcb0)"
+  gold:   ["#ffd167","rgba(255,209,103,.35)"],
+  blue:   ["#5bb8ff","rgba(91,184,255,.35)"],
+  orange: ["#ffb054","rgba(255,176,84,.35)"],
+  purple: ["#c89bff","rgba(200,155,255,.35)"],
+  teal:   ["#3ed3c0","rgba(62,211,192,.35)"],
+  green:  ["#4ade9b","rgba(74,222,155,.35)"]
 };
 function artSvg(artKey){
   const cells = ART[artKey] || ART["key-mint"];
@@ -514,31 +628,32 @@ function artSvg(artKey){
   return `<svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
 }
 function tileHtml(cat, it){
-  return `<div class="tile" style="background:${TILES[cat.tile] || TILES.green}">${artSvg(it.art)}${it.badge ? `<span class="badge">${it.badge}</span>` : ""}</div>`;
+  const [c, g] = TILES[cat.tile] || TILES.green;
+  return `<div class="tile" style="--tile-c:${c};--tile-g:${g}">${artSvg(it.art)}${it.badge ? `<span class="badge">${it.badge}</span>` : ""}</div>`;
 }
 
 /* ---------- nav (grouped like the reference: top-level + collapsible groups) ---------- */
 const nav = document.getElementById("nav");
-const DOTS = {green:"#3cbf6d",blue:"#3ea6f0",yellow:"#ffcb45",purple:"#977bef",teal:"#2fbfae",orange:"#ff9838"};
 function buildNav(){
   const groups = [];
   const seen = {};
-  groups.push({type:"link", key:"home", label:"Store Home", dot:"#3cbf6d"});
+  groups.push({type:"link", key:"home", label:"Store Home", dot:"#4ade9b"});
   for (const [key, cat] of Object.entries(CATALOG)){
+    const dot = (TILES[cat.tile] || TILES.green)[0];
     if (!cat.group){
-      groups.push({type:"link", key, label:cat.label, dot:DOTS[cat.tile]});
+      groups.push({type:"link", key, label:cat.label, dot});
     } else {
       if (!seen[cat.group]){ seen[cat.group] = {type:"group", label:cat.group, children:[]}; groups.push(seen[cat.group]); }
-      seen[cat.group].children.push({key, label:cat.label, dot:DOTS[cat.tile]});
+      seen[cat.group].children.push({key, label:cat.label, dot});
     }
   }
   nav.innerHTML = groups.map(g => {
     if (g.type === "link")
-      return `<a class="nav-item" data-page="${g.key}" href="#${g.key === "home" ? "" : g.key}"><span class="dot" style="background:${g.dot}"></span>${g.label}</a>`;
+      return `<a class="nav-item" data-page="${g.key}" href="#${g.key === "home" ? "" : g.key}"><span class="dot" style="background:${g.dot};color:${g.dot}"></span>${g.label}</a>`;
     const kids = g.children.map(c =>
-      `<a class="nav-item" data-page="${c.key}" href="#${c.key}"><span class="dot" style="background:${c.dot}"></span>${c.label}</a>`).join("");
+      `<a class="nav-item" data-page="${c.key}" href="#${c.key}"><span class="dot" style="background:${c.dot};color:${c.dot}"></span>${c.label}</a>`).join("");
     return `<div class="nav-group" data-group="${g.label}">
-      <button class="nav-group-head" type="button" aria-expanded="false"><span class="dot" style="background:#93a09b"></span>${g.label}<span class="caret">▾</span></button>
+      <button class="nav-group-head" type="button" aria-expanded="false"><span class="dot" style="background:#5a748c;color:#5a748c"></span>${g.label}<span class="caret">▾</span></button>
       <div class="nav-sub">${kids}</div></div>`;
   }).join("");
   nav.querySelectorAll(".nav-group-head").forEach(h =>
@@ -564,11 +679,17 @@ function itemUrl(it){
 
 function homePage(){
   return `
-  <div class="banner">
-    <h1>Welcome to the MintHaven Store!</h1>
+  <div class="hero">
+    <div class="moon"></div>
+    <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+    <svg class="island" viewBox="0 0 32 26" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><use href="#px-island"/></svg>
+    <span class="spark" style="top:38px;left:46%;color:#8fe0af"></span>
+    <span class="spark" style="top:120px;left:58%;color:#ffd167;animation-delay:.9s"></span>
+    <span class="spark" style="top:70px;left:30%;color:#a6d8ff;animation-delay:1.7s"></span>
+    <h1>Welcome to <span class="mintword">MINTHAVEN</span></h1>
     <p>Grab ranks, crate keys, claim blocks and more. Everything's earnable in-game too — this just helps the server, and it's <b>never pay-to-win</b>.</p>
   </div>
-  <div class="card">
+  <div class="card panel">
     <h2>Thank you 💚</h2>
     <p>Thank you for supporting <strong>MintHaven MC</strong>. Everything you buy here goes straight back into the server — hosting, plugins and new content.</p>
     ${checkoutLive ? `
@@ -576,7 +697,7 @@ function homePage(){
     <p><strong>Important:</strong> make sure you enter your exact Minecraft username at checkout. All purchases are final.</p>` : `
     <p><strong>Heads up:</strong> online checkout is opening soon — browse the packages now and check back shortly.</p>`}
   </div>
-  ${hasContact ? `<div class="card"><div class="btn-row">
+  ${hasContact ? `<div class="card panel"><div class="btn-row">
       ${hasDiscord ? `<a class="btn btn-green" href="${CONFIG.discord}" target="_blank" rel="noopener">Join our Discord</a>` : ""}
       ${hasMail ? `<a class="btn btn-ghost" href="mailto:${CONFIG.contactEmail}">Contact</a>` : ""}
   </div></div>` : ""}`;
@@ -586,10 +707,10 @@ function catPage(key){
   const cat = CATALOG[key];
   const title = cat.group ? `${cat.group} — ${cat.label}` : cat.label;
   return `
-  <div class="cat-head"><span class="ct">${title}</span><span class="cb">${cat.blurb}</span></div>
+  <div class="cat-head panel"><span class="ct">${title}</span><span class="cb">${cat.blurb}</span></div>
   <div class="grid">
     ${cat.items.map(it => `
-      <div class="prod">
+      <div class="prod panel">
         ${tileHtml(cat, it)}
         <div class="name">${it.name}</div>
         <div class="price">${money(it.price)}</div>
@@ -678,7 +799,7 @@ if (CONFIG.serverIp){
 } else {
   chip.classList.add("dead");
   chip.disabled = true;
-  document.getElementById("ipText").textContent = "Server address coming soon";
+  document.getElementById("ipText").textContent = "COMING SOON";
 }
 const dTop = document.getElementById("discordTop");
 if (hasDiscord){ dTop.style.display = "flex"; dTop.href = CONFIG.discord; }
