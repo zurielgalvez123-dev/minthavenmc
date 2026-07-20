@@ -34,6 +34,7 @@ body{
     radial-gradient(1200px 500px at 50% -100px, rgba(74,222,155,.07), transparent 60%),
     var(--bg);
   min-height:100vh;
+  display:flex;flex-direction:column;
 }
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none}
@@ -49,32 +50,33 @@ img,svg{display:block}
 }
 .topbar-inner{
   max-width:1120px;margin:0 auto;padding:0 16px;
-  height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  height:56px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;
 }
 .ip-chip{
+  grid-column:2;
   display:flex;align-items:center;gap:10px;
   background:var(--panel);border:1px solid var(--line);border-radius:8px;
   padding:8px 14px;color:var(--mint);
   font-size:13px;font-weight:800;letter-spacing:.6px;
   transition:border-color .15s, transform .1s;
 }
-.ip-chip:hover{border-color:var(--mint-dark)}
+.ip-chip.dead{color:var(--muted);cursor:default}
 .ip-chip:active{transform:scale(.98)}
 .ip-chip .hint{color:var(--muted);font-weight:600;letter-spacing:0;text-transform:none}
-.top-right{display:flex;align-items:center;gap:10px}
+.top-right{grid-column:3;justify-self:end;display:flex;align-items:center;gap:10px}
 .top-btn{
   display:flex;align-items:center;gap:8px;
   background:var(--panel);border:1px solid var(--line);border-radius:8px;
   padding:8px 14px;font-size:13px;font-weight:700;color:var(--text);
-  transition:border-color .15s;
 }
-.top-btn:hover{border-color:var(--mint-dark)}
+.currency{font-size:13px;font-weight:700;color:var(--muted);padding:8px 4px}
 
 /* ---------- layout ---------- */
 .wrap{
-  max-width:1120px;margin:24px auto 48px;padding:0 16px;
+  width:100%;max-width:1120px;margin:24px auto 48px;padding:0 16px;
   display:grid;grid-template-columns:280px 1fr;gap:24px;
   align-items:start;
+  flex:1;
 }
 
 /* ---------- sidebar ---------- */
@@ -105,7 +107,6 @@ img,svg{display:block}
   transition:background .12s,border-color .12s;
 }
 .nav-item:last-child{border-bottom:none}
-.nav-item:hover{background:var(--panel2)}
 .nav-item.active{border-left-color:var(--mint);background:var(--panel2);color:var(--mint)}
 .nav-item .ico{width:22px;height:22px;flex:none;image-rendering:pixelated}
 .side-note{
@@ -117,10 +118,10 @@ img,svg{display:block}
 .side-note a{color:var(--mint);font-weight:700}
 
 /* ---------- main ---------- */
-.main{display:flex;flex-direction:column;gap:20px;min-width:0}
+.main{display:flex;flex-direction:column;gap:20px;min-width:0;scroll-margin-top:72px}
 .welcome{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px 20px;
 }
 .welcome .wt{font-size:13px;color:var(--mint)}
 .welcome .ws{font-size:13px;color:var(--muted);font-weight:600;margin-top:6px}
@@ -131,7 +132,7 @@ img,svg{display:block}
     repeating-linear-gradient(90deg, #2fae74 0 24px, #35bd80 24px 48px, #2fae74 48px 72px, #28a06a 72px 96px),
     var(--mint-dark);
   min-height:150px;position:relative;overflow:hidden;
-  display:flex;align-items:flex-end;
+  display:flex;align-items:center;justify-content:center;
 }
 .banner::before{
   content:"";position:absolute;inset:0;
@@ -140,9 +141,9 @@ img,svg{display:block}
     repeating-linear-gradient(90deg, transparent 0 22px, rgba(0,0,0,.06) 22px 24px);
 }
 .banner-label{
-  position:relative;margin:16px;padding:10px 14px;border-radius:8px;
+  position:relative;padding:14px 22px;border-radius:8px;
   background:rgba(13,17,16,.82);border:1px solid rgba(74,222,155,.35);
-  font-size:13px;color:var(--text);
+  font-size:17px;color:var(--text);text-align:center;
 }
 .card{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
@@ -155,21 +156,22 @@ img,svg{display:block}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 .btn{
   display:inline-flex;align-items:center;gap:8px;
-  border-radius:8px;padding:11px 18px;
+  border-radius:8px;padding:12px 18px;
   font-size:14px;font-weight:800;
   transition:transform .1s, filter .15s;
 }
 .btn:active{transform:scale(.97)}
 .btn-mint{background:var(--mint);color:#0c1410;box-shadow:0 4px 0 var(--mint-dark)}
-.btn-mint:hover{filter:brightness(1.06)}
 .btn-ghost{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
-.btn-ghost:hover{border-color:var(--mint-dark)}
 
 /* ---------- category grid ---------- */
 .cat-head{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:14px 20px;font-size:13px;color:var(--text);
+  padding:16px 20px;
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
 }
+.cat-head .ct{font-size:13px;color:var(--text)}
+.cat-head .cb{font-size:13px;color:var(--muted);font-weight:600}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .prod{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
@@ -177,22 +179,37 @@ img,svg{display:block}
   display:flex;flex-direction:column;align-items:center;gap:6px;
   transition:transform .15s, border-color .15s;
 }
-.prod:hover{transform:translateY(-3px);border-color:var(--mint-dark)}
-.prod .art{width:88px;height:88px;image-rendering:pixelated;margin-bottom:8px}
+.art-wrap{position:relative;margin-bottom:8px}
+.prod .art{width:88px;height:88px;image-rendering:pixelated}
+.badge{
+  position:absolute;right:-6px;bottom:-2px;
+  background:var(--gold);color:#3a2c07;border-radius:6px;
+  font-size:13px;font-weight:800;padding:2px 7px;
+}
 .prod .name{font-size:15px;font-weight:800;color:var(--text)}
 .prod .price{font-size:14px;font-weight:800;color:var(--mint-dim);margin-bottom:10px}
 .prod .buy{
-  width:100%;max-width:150px;
+  width:100%;max-width:150px;min-height:44px;
   background:var(--mint);color:#0c1410;border-radius:8px;
-  padding:10px 0;font-size:14px;font-weight:800;
+  font-size:14px;font-weight:800;
   box-shadow:0 3px 0 var(--mint-dark);
   transition:filter .15s, transform .1s;
 }
-.prod .buy:hover{filter:brightness(1.06)}
 .prod .buy:active{transform:scale(.97)}
 
+/* hover states only where hover exists (avoids sticky-hover on touch) */
+@media(hover:hover){
+  .ip-chip:not(.dead):hover{border-color:var(--mint-dark)}
+  .top-btn:hover{border-color:var(--mint-dark)}
+  .nav-item:hover{background:var(--panel2)}
+  .btn-mint:hover{filter:brightness(1.06)}
+  .btn-ghost:hover{border-color:var(--mint-dark)}
+  .prod:hover{transform:translateY(-3px);border-color:var(--mint-dark)}
+  .prod .buy:hover{filter:brightness(1.06)}
+}
+
 /* ---------- footer ---------- */
-footer{border-top:1px solid var(--line);background:var(--bg2)}
+footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
 .foot-inner{
   max-width:1120px;margin:0 auto;padding:26px 16px;
   display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
@@ -219,19 +236,25 @@ footer{border-top:1px solid var(--line);background:var(--bg2)}
 
 /* ---------- toast ---------- */
 .toast{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  position:fixed;top:68px;left:50%;transform:translateX(-50%) translateY(-120px);
   background:var(--mint);color:#0c1410;font-weight:800;font-size:14px;
   padding:11px 20px;border-radius:8px;z-index:120;
   transition:transform .25s ease;box-shadow:0 4px 0 var(--mint-dark);
+  visibility:hidden;
 }
-.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.show{transform:translateX(-50%) translateY(0);visibility:visible}
 
 /* ---------- responsive ---------- */
 @media(max-width:900px){
-  .wrap{grid-template-columns:1fr;gap:16px}
-  .side{position:static;flex-direction:column}
+  .wrap{display:flex;flex-direction:column;gap:16px;align-items:stretch}
+  .side{display:contents}
+  .logo-card{order:0}
+  .nav-card{order:1}
+  .main{order:2}
+  .side-note{order:3}
+  .topbar-inner{display:flex;justify-content:space-between;height:56px;padding:0 12px}
+  .ip-chip .hint{display:none}
   .grid{grid-template-columns:repeat(2,1fr)}
-  .topbar-inner{height:auto;padding:10px 12px;flex-wrap:wrap;justify-content:center}
 }
 @media(max-width:520px){
   .grid{grid-template-columns:1fr}
@@ -243,18 +266,23 @@ footer{border-top:1px solid var(--line);background:var(--bg2)}
 <!-- ============ CONFIG — edit these to go live ============ -->
 <script>
 const CONFIG = {
-  serverIp: "play.minthavenmc.com",          // TODO confirm real server IP
-  discord:  "",                               // TODO paste Discord invite URL (empty = button hidden)
-  contactEmail: "",                           // TODO contact email (empty = button hidden)
-  // Tebex/CraftingStore checkout base URL. Empty = Buy shows "checkout opening soon" (honest, no fake links).
+  // TODO real server address. Empty = chip shows "Server address coming soon"
+  // (play.minthavenmc.com doesn't resolve yet — set DNS first, then fill this in).
+  serverIp: "",
+  discord:  "",                               // TODO Discord invite URL (empty = Discord buttons hidden)
+  contactEmail: "",                           // TODO contact email (empty = Contact button hidden)
+  // Tebex store base URL, e.g. "https://minthaven.tebex.io". Buy buttons need BOTH this
+  // and a per-item checkout id/url below. Empty = honest "checkout opening soon" modal.
   checkoutUrl: ""
 };
 
-/* PLACEHOLDER CATALOG — swap names/prices/checkout ids for the real packages */
+/* PLACEHOLDER CATALOG — swap names/prices for the real packages.
+   Per item: url = full checkout link for that package (or set checkoutId once Tebex is up
+   and it composes checkoutUrl + "/package/" + checkoutId). No url/id = no checkout button. */
 const CATALOG = {
   ranks: {
     label: "Ranks",
-    blurb: "Permanent ranks. Perks apply on every season.",
+    blurb: "Rank upgrades for your account.",
     items: [
       { id:"vip",    name:"VIP",     price:9.99,  art:"helm-iron" },
       { id:"vipp",   name:"VIP+",    price:19.99, art:"helm-gold" },
@@ -265,10 +293,10 @@ const CATALOG = {
   },
   keys: {
     label: "Crate Keys",
-    blurb: "Keys are delivered to your in-game balance instantly.",
+    blurb: "Keys are added to your account after purchase.",
     items: [
       { id:"key1",  name:"Mint Key ×1",     price:2.99,  art:"key" },
-      { id:"key5",  name:"Mint Key ×5",     price:12.99, art:"key" },
+      { id:"key5",  name:"Mint Key ×5",     price:12.99, art:"key", badge:"×5" },
       { id:"ekey",  name:"Emerald Key ×1",  price:4.99,  art:"key-em" },
       { id:"hkey",  name:"Haven Key ×1",    price:7.99,  art:"key-gold" }
     ]
@@ -278,17 +306,16 @@ const CATALOG = {
     blurb: "Spend coins in the in-game shop.",
     items: [
       { id:"c1",  name:"1,000 Coins",  price:4.99,  art:"coin" },
-      { id:"c5",  name:"5,000 Coins",  price:19.99, art:"coin-s" },
-      { id:"c10", name:"10,000 Coins", price:34.99, art:"coin-c" }
+      { id:"c5",  name:"5,000 Coins",  price:19.99, art:"coin", badge:"5k" },
+      { id:"c10", name:"10,000 Coins", price:34.99, art:"coin", badge:"10k" }
     ]
   }
 };
 </script>
 
-<!-- ============ pixel-art sprites ============ -->
+<!-- ============ shared logo sprite ============ -->
 <svg width="0" height="0" style="position:absolute">
   <defs>
-    <!-- mint block logo -->
     <g id="px-logo">
       <rect x="2" y="5" width="12" height="9" fill="#2fae74"/>
       <rect x="2" y="5" width="12" height="2" fill="#4ade9b"/>
@@ -305,14 +332,14 @@ const CATALOG = {
 <!-- ============ top bar ============ -->
 <div class="topbar">
   <div class="topbar-inner">
-    <button class="ip-chip" id="ipChip" title="Copy server IP">
-      <svg width="16" height="16" viewBox="0 0 16 16"><use href="#px-logo"/></svg>
+    <button class="ip-chip" id="ipChip">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg>
       <span id="ipText"></span>
-      <span class="hint">click to copy</span>
+      <span class="hint" id="ipHint"></span>
     </button>
     <div class="top-right">
       <a class="top-btn" id="discordTop" target="_blank" rel="noopener" style="display:none">Discord</a>
-      <span class="top-btn" style="cursor:default">USD $</span>
+      <span class="currency">USD $</span>
     </div>
   </div>
 </div>
@@ -321,16 +348,16 @@ const CATALOG = {
 <div class="wrap">
   <aside class="side">
     <div class="logo-card">
-      <svg width="96" height="96" viewBox="0 0 16 16"><use href="#px-logo"/></svg>
+      <svg width="96" height="96" viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg>
       <div class="logo-name px">MINTHAVEN</div>
       <div class="logo-sub">Official Server Store</div>
     </div>
 
-    <nav class="nav-card" id="nav"></nav>
+    <nav class="nav-card" id="nav" aria-label="Store categories"></nav>
 
     <div class="side-note">
       <div class="t px">Need help?</div>
-      <p id="sideHelp">Questions about a purchase? Reach us on Discord and we'll sort it fast.</p>
+      <p id="sideHelp"></p>
     </div>
   </aside>
 
@@ -343,15 +370,15 @@ const CATALOG = {
     <div class="px">MINTHAVEN</div>
     <div class="fb">
       © <span id="year"></span> MintHaven MC. Not affiliated with Mojang Studios or Microsoft.<br>
-      Payments are processed securely; packages are delivered in game.
+      <span id="footNote"></span>
     </div>
   </div>
 </footer>
 
 <!-- ============ buy modal ============ -->
 <div class="modal-bg" id="modalBg">
-  <div class="modal">
-    <svg class="art" viewBox="0 0 16 16" id="modalArt"></svg>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+    <div id="modalArtWrap"></div>
     <h3 class="px" id="modalName"></h3>
     <div class="price-line" id="modalPrice"></div>
     <p class="mp" id="modalMsg"></p>
@@ -362,7 +389,7 @@ const CATALOG = {
   </div>
 </div>
 
-<div class="toast" id="toast">Server IP copied!</div>
+<div class="toast" id="toast" role="status"></div>
 
 <script>
 /* ---------- pixel sprite renderer (explicit fills — <use> shadow DOM can't be styled per instance) ---------- */
@@ -392,26 +419,23 @@ const ART = {
   "key":       key("#8fd9ba","#d7f5e6"),
   "key-em":    key("#4ade9b","#a5ecc9"),
   "key-gold":  key("#f5c04e","#ffd97a"),
-  "coin":      coin(),
-  "coin-s":    coin(),
-  "coin-c":    coin()
+  "coin":      coin()
 };
 function artSvg(artKey, cls){
   const cells = ART[artKey] || ART["coin"];
   const rects = cells.map(([x,y,w,h,f]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/>`).join("");
-  return `<svg class="${cls}" viewBox="0 0 16 16" shape-rendering="crispEdges">${rects}</svg>`;
+  return `<svg class="${cls}" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
 }
 
 /* ---------- nav ---------- */
 const nav = document.getElementById("nav");
-const NAV_ITEMS = [["home","Store Home","#px-logo"]].concat(
-  Object.entries(CATALOG).map(([k,v]) => [k, v.label, null])
+const NAV_ITEMS = [["home","Store Home"]].concat(
+  Object.entries(CATALOG).map(([k,v]) => [k, v.label])
 );
-function navIcon(key){
-  if (key === "home") return `<svg class="ico" viewBox="0 0 16 16"><use href="#px-logo"/></svg>`;
-  if (key === "ranks") return artSvg("helm-em","ico");
-  if (key === "keys")  return artSvg("key","ico");
-  if (key === "coins") return artSvg("coin","ico");
+function navIcon(k){
+  if (k === "home")  return `<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg>`;
+  if (k === "ranks") return artSvg("helm-em","ico");
+  if (k === "keys")  return artSvg("key","ico");
   return artSvg("coin","ico");
 }
 nav.innerHTML = NAV_ITEMS.map(([k,label]) =>
@@ -420,26 +444,33 @@ nav.innerHTML = NAV_ITEMS.map(([k,label]) =>
 
 /* ---------- pages ---------- */
 const main = document.getElementById("main");
+const checkoutLive = !!CONFIG.checkoutUrl;
+const hasDiscord = !!CONFIG.discord;
+const hasMail = !!CONFIG.contactEmail;
+const hasContact = hasDiscord || hasMail;
 function money(n){ return "$" + n.toFixed(2) + " USD"; }
+function itemUrl(it){
+  if (it.url) return it.url;
+  if (checkoutLive && it.checkoutId) return CONFIG.checkoutUrl.replace(/\/$/,"") + "/package/" + it.checkoutId;
+  return null;
+}
 
 function homePage(){
-  const hasDiscord = !!CONFIG.discord;
-  const hasMail = !!CONFIG.contactEmail;
   return `
   <div class="welcome">
-    <div>
-      <div class="wt px">Welcome to our store!</div>
-      <div class="ws">Browse ranks, crate keys and coins — every purchase supports the server.</div>
-    </div>
+    <div class="wt px">Welcome to our store!</div>
+    <div class="ws">Browse ranks, crate keys and coins — every purchase supports the server.</div>
   </div>
   <div class="banner"><div class="banner-label px">MINTHAVEN&nbsp;MC</div></div>
   <div class="card">
     <h2 class="px">Thank you</h2>
     <p>Thank you for supporting <strong>MintHaven MC</strong>. Everything you buy here goes straight back into the server — hosting, plugins and new content.</p>
-    <p><strong>Delivery:</strong> packages are applied to your account automatically. If your purchase hasn't arrived within 15 minutes, relog once — still missing? Contact us and we'll fix it.</p>
-    <p><strong>Important:</strong> make sure you enter your exact Minecraft username at checkout. All purchases are final.</p>
+    ${checkoutLive ? `
+    <p><strong>Delivery:</strong> packages are applied to your account automatically. If your purchase hasn't arrived within 15 minutes, relog once${hasContact ? " — still missing? Contact us and we'll fix it" : ""}.</p>
+    <p><strong>Important:</strong> make sure you enter your exact Minecraft username at checkout. All purchases are final.</p>` : `
+    <p><strong>Heads up:</strong> online checkout is opening soon — browse the packages now and check back shortly.</p>`}
   </div>
-  ${hasDiscord || hasMail ? `<div class="card"><div class="btn-row">
+  ${hasContact ? `<div class="card"><div class="btn-row">
       ${hasDiscord ? `<a class="btn btn-mint" href="${CONFIG.discord}" target="_blank" rel="noopener">Join our Discord</a>` : ""}
       ${hasMail ? `<a class="btn btn-ghost" href="mailto:${CONFIG.contactEmail}">Contact</a>` : ""}
   </div></div>` : ""}`;
@@ -448,12 +479,11 @@ function homePage(){
 function catPage(key){
   const cat = CATALOG[key];
   return `
-  <div class="cat-head px">${cat.label}</div>
-  <div class="card" style="padding:14px 20px"><p>${cat.blurb}</p></div>
+  <div class="cat-head"><span class="ct px">${cat.label}</span><span class="cb">${cat.blurb}</span></div>
   <div class="grid">
     ${cat.items.map(it => `
       <div class="prod">
-        ${artSvg(it.art, "art")}
+        <div class="art-wrap">${artSvg(it.art, "art")}${it.badge ? `<span class="badge">${it.badge}</span>` : ""}</div>
         <div class="name">${it.name}</div>
         <div class="price">${money(it.price)}</div>
         <button class="buy" data-cat="${key}" data-id="${it.id}">Buy</button>
@@ -463,49 +493,79 @@ function catPage(key){
 
 function render(){
   const page = (location.hash || "#").slice(1) || "home";
+  const isCat = page !== "home" && Object.hasOwn(CATALOG, page);
   document.querySelectorAll(".nav-item").forEach(el =>
-    el.classList.toggle("active", el.dataset.page === page));
-  main.innerHTML = (page !== "home" && CATALOG[page]) ? catPage(page) : homePage();
-  window.scrollTo({top:0});
+    el.classList.toggle("active", el.dataset.page === (isCat ? page : "home")));
+  main.innerHTML = isCat ? catPage(page) : homePage();
+  if (isCat && window.matchMedia("(max-width:900px)").matches) main.scrollIntoView();
+  else window.scrollTo({top:0});
 }
-window.addEventListener("hashchange", () => { modalBg.classList.remove("open"); render(); });
+window.addEventListener("hashchange", () => { closeModal(); render(); });
 
 /* ---------- buy modal ---------- */
 const modalBg = document.getElementById("modalBg");
+let lastFocus = null;
+function closeModal(){
+  if (!modalBg.classList.contains("open")) return;
+  modalBg.classList.remove("open");
+  if (lastFocus) { lastFocus.focus(); lastFocus = null; }
+}
 main.addEventListener("click", e => {
   const b = e.target.closest(".buy");
   if (!b) return;
   const it = CATALOG[b.dataset.cat].items.find(x => x.id === b.dataset.id);
-  document.getElementById("modalArt").outerHTML = artSvg(it.art, "art").replace('class="art"','class="art" id="modalArt"');
+  document.getElementById("modalArtWrap").innerHTML = artSvg(it.art, "art");
   document.getElementById("modalName").textContent = it.name;
   document.getElementById("modalPrice").textContent = money(it.price);
   const go = document.getElementById("modalGo");
   const msg = document.getElementById("modalMsg");
-  if (CONFIG.checkoutUrl){
+  const url = itemUrl(it);
+  if (url){
     go.style.display = "inline-flex";
-    go.href = CONFIG.checkoutUrl;
-    msg.textContent = "You'll finish this purchase on our secure checkout.";
+    go.href = url;
+    msg.textContent = "You'll finish this purchase on our checkout.";
   } else {
     go.style.display = "none";
-    msg.textContent = "Online checkout is opening soon. " + (CONFIG.discord ? "Join the Discord to get notified the moment it's live." : "Check back shortly!");
+    msg.textContent = "Online checkout is opening soon. " + (hasDiscord ? "Join the Discord to get notified the moment it's live." : "Check back shortly!");
   }
+  lastFocus = b;
   modalBg.classList.add("open");
+  document.getElementById("modalClose").focus();
 });
-document.getElementById("modalClose").onclick = () => modalBg.classList.remove("open");
-modalBg.addEventListener("click", e => { if (e.target === modalBg) modalBg.classList.remove("open"); });
-window.addEventListener("keydown", e => { if (e.key === "Escape") modalBg.classList.remove("open"); });
+document.getElementById("modalClose").onclick = closeModal;
+modalBg.addEventListener("click", e => { if (e.target === modalBg) closeModal(); });
+window.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
 
-/* ---------- top bar ---------- */
-document.getElementById("ipText").textContent = CONFIG.serverIp.toUpperCase();
-document.getElementById("ipChip").onclick = async () => {
-  try { await navigator.clipboard.writeText(CONFIG.serverIp); } catch(_){}
-  const t = document.getElementById("toast");
-  t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 1800);
-};
+/* ---------- top bar / footer ---------- */
+const chip = document.getElementById("ipChip");
+const toast = document.getElementById("toast");
+function showToast(text){
+  toast.textContent = text;
+  toast.classList.add("show");
+  setTimeout(() => { toast.classList.remove("show"); toast.textContent = ""; }, 2200);
+}
+if (CONFIG.serverIp){
+  document.getElementById("ipText").textContent = CONFIG.serverIp.toUpperCase();
+  document.getElementById("ipHint").textContent = "click to copy";
+  chip.title = "Copy server IP";
+  chip.onclick = () => {
+    navigator.clipboard.writeText(CONFIG.serverIp)
+      .then(() => showToast("Server IP copied!"))
+      .catch(() => showToast("Copy failed — IP: " + CONFIG.serverIp));
+  };
+} else {
+  chip.classList.add("dead");
+  chip.disabled = true;
+  document.getElementById("ipText").textContent = "SERVER ADDRESS COMING SOON";
+}
 const dTop = document.getElementById("discordTop");
-if (CONFIG.discord){ dTop.style.display = "flex"; dTop.href = CONFIG.discord; }
-if (!CONFIG.discord){ document.getElementById("sideHelp").textContent = "Questions about a purchase? Contact the server team and we'll sort it fast."; }
+if (hasDiscord){ dTop.style.display = "flex"; dTop.href = CONFIG.discord; }
+document.getElementById("sideHelp").textContent = hasContact
+  ? "Questions about a purchase? Reach us and we'll sort it fast."
+  : "Support contact details are coming soon.";
+document.getElementById("footNote").textContent = checkoutLive
+  ? "Payments are processed securely; packages are delivered in game."
+  : "Every purchase supports the server.";
 document.getElementById("year").textContent = new Date().getFullYear();
 
 render();
