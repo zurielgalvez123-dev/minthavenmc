@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MintHaven Store</title>
-<meta name="description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more. Support the server, never pay-to-win.">
+<meta name="description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -339,7 +339,6 @@ footer::before{
 .foot-brand{display:inline-flex;align-items:center;gap:9px;font-family:var(--px);font-size:13px;color:var(--mint)}
 .foot-brand svg{width:20px;height:20px;image-rendering:pixelated}
 .foot-inner .fb{font-size:13px;color:var(--muted);font-weight:600;line-height:1.6}
-.ptw{font-size:13px;font-weight:800;color:var(--mint);margin-top:6px;text-shadow:0 0 10px rgba(74,222,155,.25)}
 
 /* ---------- modal ---------- */
 .modal-bg{
@@ -586,7 +585,6 @@ const CATALOG = {
   <div class="foot-inner">
     <div>
       <div class="foot-brand"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg>MINTHAVEN</div>
-      <div class="ptw">🌿 Never pay-to-win — everything here is a helper or cosmetic.</div>
     </div>
     <div class="fb">
       © <span id="year"></span> MintHaven MC. Not affiliated with Mojang Studios or Microsoft. Minecraft artwork © Mojang Studios.<br>
@@ -725,7 +723,7 @@ function itemUrl(it){
   return null;
 }
 
-const SPLASHES = ["Never pay-to-win!","Fresh out the furnace!","100% blocky!","Mint condition!","Now with more mint!","Punch a tree!","Home sweet biome!"];
+const SPLASHES = ["Fresh out the furnace!","100% blocky!","Mint condition!","Now with more mint!","Punch a tree!","Home sweet biome!","Shiny!"];
 function wordmarkHtml(){
   const splash = SPLASHES[Math.floor(Math.random() * SPLASHES.length)];
   return `<h1 class="logo-wrap"><img class="logo-img" src="assets/logo.png" alt="MintHaven"><span class="splash" aria-hidden="true">${splash}</span></h1>`;
@@ -737,7 +735,7 @@ function homePage(){
     <span class="spark" style="top:140px;left:88%;color:#ffd167;animation-delay:.9s"></span>
     <span class="spark" style="top:54px;left:78%;color:#a6d8ff;animation-delay:1.7s"></span>
     ${wordmarkHtml()}
-    <p class="tag">Ranks · Crate Keys · Claim Blocks · More. Everything's earnable in-game too — buying just helps the server. <b>Never pay-to-win.</b></p>
+    <p class="tag">Ranks · Crate Keys · Claim Blocks · More. <b>Every purchase powers the server.</b></p>
     <div class="cta-row">
       <a class="btn btn-green" href="#ranks">Shop Ranks</a>
       ${hasDiscord ? `<a class="btn btn-ghost" href="${CONFIG.discord}" target="_blank" rel="noopener">Discord</a>` : ""}
