@@ -723,7 +723,7 @@ function itemUrl(it){
   return null;
 }
 
-const SPLASHES = ["Fresh out the furnace!","100% blocky!","Mint condition!","Now with more mint!","Punch a tree!","Home sweet biome!","Shiny!"];
+const SPLASHES = ["Fresh out the furnace!","100% blocky!","Mint condition!","Now with more mint!","Punch a tree!","Shiny!"];
 function wordmarkHtml(){
   const splash = SPLASHES[Math.floor(Math.random() * SPLASHES.length)];
   return `<h1 class="logo-wrap"><img class="logo-img" src="assets/logo.png" alt="MintHaven"><span class="splash" aria-hidden="true">${splash}</span></h1>`;
