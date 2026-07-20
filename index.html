@@ -96,6 +96,12 @@ img,svg{display:block}
   border-bottom:2px solid transparent;transition:color .12s;
 }
 .nav-links a.active{color:var(--mint);border-bottom-color:var(--mint)}
+.menu-btn{
+  display:none;align-items:center;
+  font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--text);border:1px solid var(--line-2);border-radius:9px;padding:10px 14px;
+}
+.menu-btn:hover{border-color:var(--mint);color:var(--mint)}
 .play-btn{
   font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:1.6px;text-transform:uppercase;
   border:1px solid var(--mint);color:var(--mint);border-radius:9px;
@@ -146,7 +152,7 @@ img,svg{display:block}
 .btn-line{border:1px solid var(--line-2);color:var(--text);background:rgba(6,13,10,.5)}
 .btn-line:hover{border-color:var(--mint);color:var(--mint)}
 .chip-row{margin-top:34px;display:flex;gap:26px;flex-wrap:wrap}
-.chip{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:1.8px;color:var(--muted);text-transform:uppercase}
+.chip{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:1.8px;color:var(--muted);text-transform:uppercase}
 .chip .d{width:8px;height:8px;background:var(--mint);rotate:45deg;box-shadow:0 0 8px var(--mint-glow)}
 
 /* server card */
@@ -156,7 +162,7 @@ img,svg{display:block}
   box-shadow:0 18px 50px rgba(0,0,0,.5), 0 0 30px rgba(53,224,162,.07);
   max-width:360px;justify-self:end;width:100%;
 }
-.sc-status{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+.sc-status{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:2px;text-transform:uppercase}
 .sc-status .dot{width:9px;height:9px;border-radius:50%}
 .sc-status.on{color:var(--mint)} .sc-status.on .dot{background:var(--mint);box-shadow:0 0 10px var(--mint)}
 .sc-status.soon{color:#d8b968} .sc-status.soon .dot{background:#d8b968;box-shadow:0 0 10px #d8b968;animation:pulse 1.6s infinite}
@@ -175,7 +181,7 @@ img,svg{display:block}
 .sc-social a{
   flex:1;display:flex;align-items:center;justify-content:center;
   background:var(--panel-2);border:1px solid var(--line);border-radius:9px;
-  padding:11px 0;font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:1.4px;color:var(--muted);text-transform:uppercase;
+  padding:11px 0;font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:1.4px;color:var(--muted);text-transform:uppercase;
 }
 .sc-social a:hover{border-color:var(--mint);color:var(--mint)}
 
@@ -194,7 +200,7 @@ img,svg{display:block}
 .fcard p{font-size:14.5px;color:var(--muted);font-weight:500;line-height:1.55;flex:1}
 .fcard .fc-btn{
   align-self:flex-start;margin-top:4px;
-  font-family:var(--disp);font-weight:600;font-size:12.5px;letter-spacing:1.8px;text-transform:uppercase;
+  font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:1.6px;text-transform:uppercase;
   border:1px solid var(--line-2);color:var(--text);border-radius:8px;padding:10px 16px;
   transition:border-color .15s,color .15s;
 }
@@ -214,7 +220,7 @@ img,svg{display:block}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px}
 .logo-card{padding:16px;text-align:center}
 .logo-card img{width:100%;border-radius:10px}
-.logo-sub{font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:2.2px;color:var(--muted);margin-top:12px;text-transform:uppercase}
+.logo-sub{font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:2.2px;color:var(--muted);margin-top:12px;text-transform:uppercase}
 .nav-card{padding:8px}
 .nav-item{
   display:flex;align-items:center;gap:11px;width:100%;text-align:left;
@@ -229,7 +235,7 @@ img,svg{display:block}
   padding:12px 14px;margin:2px 0;color:var(--text);
   font-family:var(--disp);font-weight:600;font-size:13.5px;letter-spacing:1.4px;text-transform:uppercase;
 }
-.nav-group-head .caret{margin-left:auto;transition:transform .15s;color:var(--muted);font-size:12px}
+.nav-group-head .caret{margin-left:auto;transition:transform .15s;color:var(--muted);font-size:13px}
 .nav-group.open .caret{transform:rotate(180deg)}
 .nav-sub{display:none;padding-left:12px}
 .nav-group.open .nav-sub{display:block}
@@ -267,9 +273,10 @@ img,svg{display:block}
 .badge{
   position:absolute;right:9px;top:9px;
   background:rgba(6,12,10,.9);color:var(--mint-dim);border:1px solid var(--line-2);border-radius:6px;
-  font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:1px;padding:3px 8px;
+  font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:1px;padding:2px 8px;
 }
-.prod .name{font-size:15.5px;font-weight:600;color:var(--text);line-height:1.3}
+.prod .name{font-size:15.5px;font-weight:600;color:var(--text);line-height:1.3;flex:1;display:flex;align-items:center;justify-content:center}
+.prod .buy,.prod .buy-state{margin-top:auto}
 .prod .price{font-family:var(--disp);font-weight:600;font-size:16px;letter-spacing:1px;color:var(--mint);margin:3px 0 10px}
 .prod .buy{
   width:100%;max-width:170px;min-height:44px;
@@ -335,18 +342,25 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
 @media(max-width:1000px){
   .hero-inner{grid-template-columns:1fr;padding:44px 18px}
   .server-card{justify-self:start;max-width:420px}
-  .feature-grid{grid-template-columns:1fr}
-  .nav-links{display:none}
+  .feature-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  .menu-btn{display:inline-flex}
+  .nav-links{
+    display:none;position:absolute;top:64px;left:0;right:0;
+    flex-direction:column;gap:2px;padding:10px 14px 14px;
+    background:rgba(6,12,10,.98);border-bottom:1px solid var(--line-2);
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:13px 12px;border-bottom:none;border-radius:8px}
+  .nav-links a.active{background:rgba(53,224,162,.1)}
 }
 @media(max-width:900px){
   .wrap{display:flex;flex-direction:column;gap:14px;align-items:stretch}
-  .side{display:contents}
-  .logo-card{order:0}
-  .nav-card{order:1}
-  .main{order:2}
-  .side-note{order:3}
+  .side{position:static;display:flex;flex-direction:column;gap:14px}
   .grid{grid-template-columns:repeat(2,1fr)}
   .brand .bn{font-size:16px}
+}
+@media(max-width:640px){
+  .feature-grid{grid-template-columns:1fr}
 }
 @media(max-width:520px){
   .grid{grid-template-columns:1fr}
@@ -481,6 +495,7 @@ const CATALOG = {
       <img src="assets/emblem.jpg" alt="">
       <span class="bn">Mint<span>Haven</span></span>
     </a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="topNav" aria-label="Menu">☰ Menu</button>
     <nav class="nav-links" id="topNav" aria-label="Main">
       <a href="#home" data-page="home">Home</a>
       <a href="#ranks" data-page="ranks">Ranks</a>
@@ -614,17 +629,17 @@ function normalizeText(value){
 }
 function safeExternalUrl(value){
   const text = normalizeText(value);
-  if (!text) return "";
+  if (!/^https?:\/\//i.test(text)) return "";
   try {
-    const url = new URL(text, SITE_URL);
-    return /^(https?):$/i.test(url.protocol) ? url.href : "";
+    const url = new URL(text);
+    return /^(https?):$/i.test(url.protocol) && url.hostname.includes(".") ? url.href : "";
   } catch {
     return "";
   }
 }
 function safeEmail(value){
   const text = normalizeText(value);
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text) ? text : "";
+  return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(text) ? text : "";
 }
 function safeServerIp(value){
   const text = normalizeText(value);
@@ -641,12 +656,12 @@ const SAFE_CONFIG = {
 };
 function artSvg(artKey){
   const cells = ART[artKey] || ART["key-mint"];
-  const rects = cells.map(([x,y,w,h,f]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/>`).join("");
+  const rects = cells.map(([x,y,w,h,f]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${escapeAttr(f)}"/>`).join("");
   return `<svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
 }
 function tileHtml(cat, it){
   const [c, g] = TILES[cat.tile] || TILES.mint;
-  return `<div class="tile" style="--tile-c:${c};--tile-g:${g}">${artSvg(it.art)}${it.badge ? `<span class="badge">${escapeHtml(it.badge)}</span>` : ""}</div>`;
+  return `<div class="tile" style="--tile-c:${escapeAttr(c)};--tile-g:${escapeAttr(g)}">${artSvg(it.art)}${it.badge ? `<span class="badge">${escapeHtml(it.badge)}</span>` : ""}</div>`;
 }
 
 /* ---------- sidebar nav ---------- */
@@ -666,9 +681,9 @@ function buildNav(){
   }
   nav.innerHTML = groups.map(g => {
     if (g.type === "link")
-      return `<a class="nav-item" data-page="${escapeAttr(g.key)}" href="#${escapeAttr(g.key)}"><span class="dot" style="background:${g.dot};color:${g.dot}"></span>${escapeHtml(g.label)}</a>`;
+      return `<a class="nav-item" data-page="${escapeAttr(g.key)}" href="#${escapeAttr(g.key)}"><span class="dot" style="background:${escapeAttr(g.dot)};color:${escapeAttr(g.dot)}"></span>${escapeHtml(g.label)}</a>`;
     const kids = g.children.map(c =>
-      `<a class="nav-item" data-page="${escapeAttr(c.key)}" href="#${escapeAttr(c.key)}"><span class="dot" style="background:${c.dot};color:${c.dot}"></span>${escapeHtml(c.label)}</a>`).join("");
+      `<a class="nav-item" data-page="${escapeAttr(c.key)}" href="#${escapeAttr(c.key)}"><span class="dot" style="background:${escapeAttr(c.dot)};color:${escapeAttr(c.dot)}"></span>${escapeHtml(c.label)}</a>`).join("");
     return `<div class="nav-group" data-group-id="${escapeAttr(groupId(g.label))}">
       <button class="nav-group-head" type="button" aria-expanded="false"><span class="dot" style="background:#4a5c54;color:#4a5c54"></span>${escapeHtml(g.label)}<span class="caret" aria-hidden="true">▾</span></button>
       <div class="nav-sub">${kids}</div></div>`;
@@ -685,7 +700,6 @@ buildNav();
 const main = document.getElementById("main");
 const wrapEl = document.getElementById("wrapEl");
 const topbar = document.querySelector(".topbar");
-const checkoutLive = !!SAFE_CONFIG.checkoutUrl;
 const hasDiscord = !!SAFE_CONFIG.discord;
 const hasMail = !!SAFE_CONFIG.contactEmail;
 const hasContact = hasDiscord || hasMail;
@@ -693,11 +707,14 @@ const hasIp = !!SAFE_CONFIG.serverIp;
 function money(n){ return "$" + n.toFixed(2) + " USD"; }
 function itemUrl(it){
   if (it.url) return safeExternalUrl(it.url);
-  if (checkoutLive && it.checkoutId && /^[a-z0-9-]+$/i.test(String(it.checkoutId))){
+  if (SAFE_CONFIG.checkoutUrl && it.checkoutId && /^[a-z0-9-]+$/i.test(String(it.checkoutId))){
     return SAFE_CONFIG.checkoutUrl.replace(/\/$/,"") + "/package/" + encodeURIComponent(it.checkoutId);
   }
   return null;
 }
+// Live-commerce copy only renders when at least one package is actually purchasable.
+const anyBuyable = Object.values(CATALOG).some(c => c.items.some(it => itemUrl(it)));
+const checkoutLive = !!SAFE_CONFIG.checkoutUrl && anyBuyable;
 function getPageFromHash(){
   const raw = normalizeText(location.hash.replace(/^#/, ""));
   if (!raw || raw.toLowerCase() === "home") return "home";
@@ -718,18 +735,14 @@ function setMeta(name, content, property){
 }
 function updateDocumentMeta(page){
   const cat = CATALOG[page];
-  const suffix = cat ? `${cat.group ? `${cat.group} ${cat.label}` : cat.label} | MintHaven Store` : "MintHaven Store";
+  const title = cat ? `${cat.group ? `${cat.group} ${cat.label}` : cat.label} | MintHaven Store` : DEFAULT_TITLE;
   const description = cat ? `${cat.label} for MintHaven MC. ${cat.blurb}` : DEFAULT_DESC;
-  document.title = page === "home" ? DEFAULT_TITLE : `${suffix} — MintHaven`;
+  document.title = title;
   setMeta("description", description);
-  setMeta(null, page === "home" ? DEFAULT_TITLE : `${suffix} — MintHaven`, "og:title");
+  setMeta(null, title, "og:title");
   setMeta(null, description, "og:description");
-  setMeta("twitter:title", page === "home" ? DEFAULT_TITLE : `${suffix} — MintHaven`);
+  setMeta("twitter:title", title);
   setMeta("twitter:description", description);
-  setMeta(null, `${SITE_URL}${page === "home" ? "" : canonicalHashPath(page)}`, "og:url");
-}
-function canonicalHashPath(page){
-  return page === "home" ? "" : `#${page}`;
 }
 function scrollForRoute(isCat){
   if (!isCat){
@@ -770,10 +783,27 @@ function fallbackCopyIp(){
   }
 }
 
+/* Server status: only claim "Online" after a real, successful status check. */
+let serverOnline = null;
+function probeServer(){
+  if (!hasIp) return;
+  fetch("https://api.mcsrvstat.us/3/" + encodeURIComponent(SAFE_CONFIG.serverIp))
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      serverOnline = !!(d && d.online);
+      const st = document.getElementById("scStatus");
+      if (st && serverOnline){
+        st.className = "sc-status on";
+        st.innerHTML = `<span class="dot"></span>Server Online`;
+      }
+    })
+    .catch(() => {});
+}
 function serverCardHtml(){
   if (hasIp){
+    const online = serverOnline === true;
     return `<div class="server-card">
-      <div class="sc-status on"><span class="dot"></span>Server Online</div>
+      <div class="sc-status ${online ? "on" : "soon"}" id="scStatus"><span class="dot"></span>${online ? "Server Online" : "Java Server"}</div>
       <div class="sc-ip">${escapeHtml(SAFE_CONFIG.serverIp.toUpperCase())}</div>
       <div class="sc-note">Java Edition</div>
       <button class="sc-copy" id="scCopy" type="button">Copy IP</button>
@@ -796,7 +826,9 @@ function homePage(){
       <div>
         <span class="eyebrow">Minecraft ✦ Community</span>
         <h1>Play. Earn.<br>Build. <span class="m">Belong.</span></h1>
-        <p class="sub">MintHaven is a Minecraft network where adventure meets ownership. The store is open — the server opens its gates soon.</p>
+        <p class="sub">${hasIp
+          ? "MintHaven is a Minecraft network where adventure meets ownership. Copy the IP and jump in."
+          : "MintHaven is a Minecraft network where adventure meets ownership. The store is open — the server opens its gates soon."}</p>
         <div class="cta-row">
           <a class="btn btn-solid" href="#ranks">Browse the Store</a>
           ${hasDiscord ? `<a class="btn btn-line" href="${escapeAttr(SAFE_CONFIG.discord)}" target="_blank" rel="noopener">Join the Haven</a>` : ""}
@@ -838,17 +870,27 @@ function homePage(){
           <span class="fc-btn">View Claim Blocks ›</span>
         </div>
       </a>
+      <a class="fcard" href="#oneblock-crates">
+        <img src="assets/card-oneblock.jpg" alt="MintHaven Oneblock packages preview" loading="lazy" decoding="async">
+        <div class="fc-body">
+          <h3>Oneblock</h3>
+          <p>Crates, cosmetics and more for the Oneblock game mode.</p>
+          <span class="fc-btn">View Oneblock ›</span>
+        </div>
+      </a>
     </div>
   </section>
 
   <section class="section" style="padding-bottom:28px">
     <div class="card panel">
       <h2>Thank you</h2>
-      <p>Thank you for supporting <strong>MintHaven MC</strong>. Everything you buy here goes straight back into the server — hosting, plugins and new content.</p>
-      ${checkoutLive ? `
+      <p>Thank you for supporting <strong>MintHaven MC</strong>. Every purchase supports the server — hosting, plugins and new content.</p>
+      ${checkoutLive && hasIp ? `
       <p><strong>Delivery:</strong> packages are applied to your account automatically. If your purchase hasn't arrived within 15 minutes, relog once${hasContact ? " — still missing? Contact us and we'll fix it" : ""}.</p>
-      <p><strong>Important:</strong> make sure you enter your exact Minecraft username at checkout. All purchases are final.</p>` : `
-      <p><strong>Heads up:</strong> online checkout is opening soon — browse the packages now and check back shortly. Checkout buttons stay hidden until the real store URL is live.</p>`}
+      <p><strong>Important:</strong> make sure you enter your exact Minecraft username at checkout.${hasContact ? " All purchases are final." : ""}</p>` : checkoutLive ? `
+      <p><strong>Delivery:</strong> purchases are tied to your Minecraft username and applied automatically the moment the server opens.</p>
+      <p><strong>Important:</strong> make sure you enter your exact Minecraft username at checkout.${hasContact ? " All purchases are final." : ""}</p>` : `
+      <p><strong>Heads up:</strong> online checkout is opening soon — browse the packages now and check back shortly.</p>`}
       ${hasContact ? `<div class="btn-row">
         ${hasDiscord ? `<a class="btn btn-solid" href="${escapeAttr(SAFE_CONFIG.discord)}" target="_blank" rel="noopener">Join our Discord</a>` : ""}
         ${hasMail ? `<a class="btn btn-line" href="mailto:${escapeAttr(SAFE_CONFIG.contactEmail)}">Contact</a>` : ""}
@@ -1000,11 +1042,40 @@ if (hasIp){
 document.getElementById("sideHelp").textContent = hasContact
   ? "Questions about a purchase? Reach us and we'll sort it fast."
   : "Support contact details are coming soon.";
-document.getElementById("footNote").textContent = checkoutLive
+document.getElementById("footNote").textContent = checkoutLive && hasIp
   ? "Payments are processed securely; packages are delivered in game."
-  : "Every purchase supports the server.";
+  : checkoutLive
+    ? "Payments are processed securely; packages apply when the server opens."
+    : "Every purchase supports the server.";
 document.getElementById("year").textContent = new Date().getFullYear();
 
+/* Skip link is a scroll/focus target, not a route — keep the router out of it. */
+const skipLink = document.querySelector(".skip-link");
+if (skipLink){
+  skipLink.addEventListener("click", e => {
+    e.preventDefault();
+    main.focus();
+    main.scrollIntoView({ block: "start" });
+  });
+}
+
+/* Mobile nav toggle */
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("topNav");
+if (menuBtn){
+  menuBtn.addEventListener("click", () => {
+    const open = navLinks.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", String(open));
+  });
+  navLinks.addEventListener("click", e => {
+    if (e.target.closest("a")){
+      navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
+probeServer();
 render();
 </script>
 </body>
