@@ -171,11 +171,65 @@ img,svg{display:block}
   position:relative;overflow:hidden;
   border:2px solid var(--edge);clip-path:var(--oct);
   background:
-    linear-gradient(90deg, rgba(7,16,20,.94) 0%, rgba(7,16,20,.82) 34%, rgba(7,16,20,.30) 66%, rgba(7,16,20,.12) 100%),
-    linear-gradient(0deg, rgba(7,13,23,.55) 0%, transparent 30%),
-    url("assets/hero.jpg") right 28% / cover;
-  padding:38px 30px 46px;min-height:280px;
+    radial-gradient(120% 90% at 50% 30%, rgba(7,16,20,.42) 0%, rgba(7,16,20,.66) 62%, rgba(6,11,18,.94) 100%),
+    linear-gradient(0deg, rgba(7,13,23,.72) 0%, transparent 34%),
+    linear-gradient(180deg, rgba(7,13,23,.5) 0%, transparent 26%),
+    url("assets/hero.jpg") center 30% / cover;
+  padding:44px 26px 40px;min-height:330px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
   box-shadow:inset 0 3px 0 rgba(255,255,255,.06), inset 0 -3px 0 rgba(0,0,0,.35);
+}
+
+/* ---------- 3D wordmark ---------- */
+.wordmark{
+  position:relative;display:flex;gap:6px;justify-content:center;flex-wrap:nowrap;
+  font-family:var(--px);font-size:42px;line-height:1;
+  filter:drop-shadow(0 10px 24px rgba(0,0,0,.6));
+}
+.wordmark .wl{
+  display:inline-block;
+  background:linear-gradient(180deg,#c9ffe2 0%,#4ade9b 48%,#2b9c69 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:
+    -2px 0 0 #06130c, 2px 0 0 #06130c, 0 -2px 0 #06130c,
+    0 3px 0 #1d7a4e, 0 6px 0 #16603d, 0 9px 0 #0e4229,
+    0 11px 0 #06130c, 0 14px 18px rgba(0,0,0,.65);
+  animation:wmfloat 3.4s ease-in-out infinite;
+}
+.wordmark .wl.gold{
+  background:linear-gradient(180deg,#fff3cf 0%,#ffd167 48%,#d3941f 100%);
+  -webkit-background-clip:text;background-clip:text;
+  text-shadow:
+    -2px 0 0 #06130c, 2px 0 0 #06130c, 0 -2px 0 #06130c,
+    0 3px 0 #a8761f, 0 6px 0 #7d5715, 0 9px 0 #533a0e,
+    0 11px 0 #06130c, 0 14px 18px rgba(0,0,0,.65);
+}
+@keyframes wmfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.wordmark .wl:nth-child(2n){animation-delay:.25s}
+.wordmark .wl:nth-child(3n){animation-delay:.5s}
+.wordmark .wl:nth-child(1){transform-origin:bottom;rotate:-3deg}
+.wordmark .wl:nth-child(9){rotate:3deg}
+.splash{
+  position:absolute;right:-44px;top:-32px;rotate:-12deg;
+  font-family:var(--px);font-size:13px;color:#ffff55;
+  text-shadow:0 2px 0 #3f3f14, 0 0 14px rgba(255,255,85,.4);
+  animation:splashpulse .5s ease-in-out infinite alternate;
+  white-space:nowrap;pointer-events:none;
+}
+@keyframes splashpulse{from{scale:1}to{scale:1.08}}
+.hero .tag{margin-top:26px;font-weight:800;font-size:15px;color:#eafff3;max-width:520px;line-height:1.6;text-shadow:0 2px 0 rgba(0,0,0,.55)}
+.hero .tag b{color:var(--gold)}
+.hero .cta-row{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
+
+/* button shine sweep */
+.btn-green,.prod .buy{position:relative;overflow:hidden}
+.btn-green::after,.prod .buy::after{
+  content:"";position:absolute;top:0;bottom:0;left:-70%;width:36%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:skewX(-20deg);transition:left .45s ease;
+}
+@media(hover:hover){
+  .btn-green:hover::after,.prod .buy:hover::after{left:130%}
 }
 .spark{position:absolute;width:10px;height:10px;pointer-events:none;
   background:
@@ -183,10 +237,9 @@ img,svg{display:block}
     linear-gradient(90deg,transparent 40%, currentColor 40% 60%, transparent 60%);
   animation:twinkle 2.6s steps(2) infinite;
 }
-.hero h1{font-family:var(--px);font-size:22px;line-height:1.5;color:#fff;max-width:440px;position:relative;text-shadow:0 3px 0 rgba(0,0,0,.45), 0 0 22px rgba(74,222,155,.35)}
-.hero h1 .mintword{color:var(--mint)}
-.hero p{position:relative;margin-top:14px;font-weight:700;font-size:15px;color:#eafff3;max-width:430px;line-height:1.6;text-shadow:0 2px 0 rgba(0,0,0,.35)}
-.hero p b{color:var(--gold)}
+.wordmark--sm{font-size:16px;gap:2px;margin:4px 0 2px}
+.wordmark--sm .wl{-webkit-text-stroke:1px #06130c;text-shadow:0 2px 0 #1d7a4e, 0 4px 0 #0e4229, 0 6px 0 rgba(0,0,0,.5)}
+.wordmark--sm .wl.gold{text-shadow:0 2px 0 #a8761f, 0 4px 0 #533a0e, 0 6px 0 rgba(0,0,0,.5)}
 
 /* ---------- cards ---------- */
 .card{padding:22px}
@@ -318,12 +371,9 @@ footer::before{
   .brand span{display:none}
   .ip-chip .hint{display:none}
   .grid{grid-template-columns:repeat(2,1fr)}
-  .hero{background:
-    linear-gradient(90deg, rgba(7,16,20,.93) 0%, rgba(7,16,20,.84) 46%, rgba(7,16,20,.45) 100%),
-    linear-gradient(0deg, rgba(7,13,23,.55) 0%, transparent 30%),
-    url("assets/hero.jpg") right 30% / cover}
-  .hero h1{font-size:17px;position:relative;z-index:1}
-  .hero p{z-index:1}
+  .hero{min-height:280px;padding:34px 14px}
+  .wordmark{font-size:24px;gap:3px}
+  .splash{right:-16px;top:-20px}
 }
 @media(max-width:520px){
   .grid{grid-template-columns:1fr}
@@ -506,7 +556,7 @@ const CATALOG = {
   <aside class="side">
     <div class="logo-card panel">
       <svg viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg>
-      <div class="logo-name">MINTHAVEN</div>
+      <div class="wordmark wordmark--sm" aria-label="MintHaven"><span class="wl">M</span><span class="wl">I</span><span class="wl">N</span><span class="wl">T</span><span class="wl gold">H</span><span class="wl gold">A</span><span class="wl gold">V</span><span class="wl gold">E</span><span class="wl gold">N</span></div>
       <div class="logo-sub">Official Server Store</div>
     </div>
 
@@ -665,14 +715,25 @@ function itemUrl(it){
   return null;
 }
 
+const SPLASHES = ["Never pay-to-win!","Fresh out the furnace!","100% blocky!","Mint condition!","Now with more mint!","Punch a tree!","Home sweet biome!"];
+function wordmarkHtml(){
+  const letters = [..."MINT"].map(c => `<span class="wl">${c}</span>`).join("") +
+                  [..."HAVEN"].map(c => `<span class="wl gold">${c}</span>`).join("");
+  const splash = SPLASHES[Math.floor(Math.random() * SPLASHES.length)];
+  return `<h1 class="wordmark" aria-label="MintHaven">${letters}<span class="splash" aria-hidden="true">${splash}</span></h1>`;
+}
 function homePage(){
   return `
   <div class="hero">
-    <span class="spark" style="top:34px;left:44%;color:#8fe0af"></span>
-    <span class="spark" style="top:130px;left:52%;color:#ffd167;animation-delay:.9s"></span>
-    <span class="spark" style="top:64px;left:24%;color:#a6d8ff;animation-delay:1.7s"></span>
-    <h1>Welcome to <span class="mintword">MINTHAVEN</span></h1>
-    <p>Grab ranks, crate keys, claim blocks and more. Everything's earnable in-game too — this just helps the server, and it's <b>never pay-to-win</b>.</p>
+    <span class="spark" style="top:34px;left:14%;color:#8fe0af"></span>
+    <span class="spark" style="top:140px;left:88%;color:#ffd167;animation-delay:.9s"></span>
+    <span class="spark" style="top:54px;left:78%;color:#a6d8ff;animation-delay:1.7s"></span>
+    ${wordmarkHtml()}
+    <p class="tag">Ranks · Crate Keys · Claim Blocks · More. Everything's earnable in-game too — buying just helps the server. <b>Never pay-to-win.</b></p>
+    <div class="cta-row">
+      <a class="btn btn-green" href="#ranks">Shop Ranks</a>
+      ${hasDiscord ? `<a class="btn btn-ghost" href="${CONFIG.discord}" target="_blank" rel="noopener">Discord</a>` : ""}
+    </div>
   </div>
   <div class="card panel">
     <h2>Thank you 💚</h2>
