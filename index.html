@@ -36,8 +36,8 @@ body{
   font-family:var(--body);font-size:15px;color:var(--text);
   min-height:100vh;display:flex;flex-direction:column;
   background:
-    radial-gradient(900px 500px at 15% -80px, rgba(74,222,155,.08), transparent 60%),
-    linear-gradient(180deg, rgba(7,13,23,.86) 0%, rgba(7,13,23,.93) 45%, rgba(7,13,23,.985) 100%),
+    radial-gradient(900px 500px at 15% -80px, rgba(74,222,155,.06), transparent 60%),
+    linear-gradient(180deg, rgba(7,13,23,.5) 0%, rgba(7,13,23,.68) 45%, rgba(7,13,23,.88) 100%),
     url("assets/bg-night.jpg") center top / cover fixed,
     var(--night0);
   position:relative;
@@ -171,14 +171,24 @@ img,svg{display:block}
   position:relative;overflow:hidden;
   border:2px solid var(--edge);clip-path:var(--oct);
   background:
-    radial-gradient(120% 90% at 50% 30%, rgba(7,16,20,.42) 0%, rgba(7,16,20,.66) 62%, rgba(6,11,18,.94) 100%),
-    linear-gradient(0deg, rgba(7,13,23,.72) 0%, transparent 34%),
-    linear-gradient(180deg, rgba(7,13,23,.5) 0%, transparent 26%),
-    url("assets/hero.jpg") center 30% / cover;
+    radial-gradient(120% 90% at 50% 34%, rgba(7,16,20,.16) 0%, rgba(7,16,20,.4) 62%, rgba(6,11,18,.85) 100%),
+    linear-gradient(0deg, rgba(7,13,23,.66) 0%, transparent 34%),
+    linear-gradient(180deg, rgba(7,13,23,.35) 0%, transparent 24%),
+    url("assets/hero.jpg") center 62% / cover;
   padding:44px 26px 40px;min-height:330px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
   box-shadow:inset 0 3px 0 rgba(255,255,255,.06), inset 0 -3px 0 rgba(0,0,0,.35);
 }
+
+/* ---------- block logo ---------- */
+.logo-wrap{position:relative;display:inline-block}
+.logo-img{
+  width:min(660px,92vw);height:auto;
+  filter:drop-shadow(0 14px 26px rgba(0,0,0,.65)) drop-shadow(0 0 22px rgba(74,222,155,.25));
+  animation:bob 5s ease-in-out infinite;
+}
+.logo-side{width:100%;max-width:230px;margin:6px auto 4px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
+.brand-img{height:20px;width:auto;filter:drop-shadow(0 0 8px rgba(74,222,155,.35))}
 
 /* ---------- 3D wordmark ---------- */
 .wordmark{
@@ -371,9 +381,9 @@ footer::before{
   .brand span{display:none}
   .ip-chip .hint{display:none}
   .grid{grid-template-columns:repeat(2,1fr)}
-  .hero{min-height:280px;padding:34px 14px}
-  .wordmark{font-size:24px;gap:3px}
-  .splash{right:-16px;top:-20px}
+  .hero{min-height:270px;padding:34px 14px}
+  .brand-img{height:16px}
+  .splash{right:-12px;top:-22px}
 }
 @media(max-width:520px){
   .grid{grid-template-columns:1fr}
@@ -539,7 +549,7 @@ const CATALOG = {
 <!-- ============ top bar ============ -->
 <div class="topbar">
   <div class="topbar-inner">
-    <a class="brand" href="#" aria-label="MintHaven — store home"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg><span>MINTHAVEN</span></a>
+    <a class="brand" href="#" aria-label="MintHaven — store home"><img class="brand-img" src="assets/logo.png" alt=""></a>
     <button class="ip-chip" id="ipChip">
       <span id="ipText"></span>
       <span class="hint" id="ipHint"></span>
@@ -556,7 +566,7 @@ const CATALOG = {
   <aside class="side">
     <div class="logo-card panel">
       <svg viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg>
-      <div class="wordmark wordmark--sm" aria-label="MintHaven"><span class="wl">M</span><span class="wl">I</span><span class="wl">N</span><span class="wl">T</span><span class="wl gold">H</span><span class="wl gold">A</span><span class="wl gold">V</span><span class="wl gold">E</span><span class="wl gold">N</span></div>
+      <img class="logo-side" src="assets/logo.png" alt="MintHaven">
       <div class="logo-sub">Official Server Store</div>
     </div>
 
@@ -717,10 +727,8 @@ function itemUrl(it){
 
 const SPLASHES = ["Never pay-to-win!","Fresh out the furnace!","100% blocky!","Mint condition!","Now with more mint!","Punch a tree!","Home sweet biome!"];
 function wordmarkHtml(){
-  const letters = [..."MINT"].map(c => `<span class="wl">${c}</span>`).join("") +
-                  [..."HAVEN"].map(c => `<span class="wl gold">${c}</span>`).join("");
   const splash = SPLASHES[Math.floor(Math.random() * SPLASHES.length)];
-  return `<h1 class="wordmark" aria-label="MintHaven">${letters}<span class="splash" aria-hidden="true">${splash}</span></h1>`;
+  return `<h1 class="logo-wrap"><img class="logo-img" src="assets/logo.png" alt="MintHaven"><span class="splash" aria-hidden="true">${splash}</span></h1>`;
 }
 function homePage(){
   return `
