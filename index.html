@@ -3,243 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MintHaven MC | Store</title>
-<meta name="description" content="MintHaven MC official store — ranks, crate keys and coins. Support the server, get perks in game.">
+<title>MintHaven Store</title>
+<meta name="description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more. Everything supports the server, and it's never pay-to-win.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#101514;
-  --bg2:#151b1a;
-  --panel:#1a2220;
-  --panel2:#1f2926;
-  --line:#2a3833;
-  --mint:#4ade9b;
-  --mint-dark:#2fae74;
-  --mint-dim:#8fd9ba;
-  --text:#e8f2ec;
-  --muted:#9db3a9;
-  --gold:#f5c04e;
-  --radius:10px;
+  --bg:#f4f7f1;
+  --surface:#ffffff;
+  --surface-2:#fbfdf9;
+  --ink:#222b2a;
+  --ink-2:#5f6b68;
+  --ink-3:#93a09b;
+  --line:#e6ece2;
+  --green:#3cbf6d; --green-d:#31a75d; --green-lt:#e3f5ea;
+  --blue:#3ea6f0; --blue-lt:#e2f1fd;
+  --purple:#977bef; --purple-lt:#ece6fc;
+  --yellow:#ffcb45; --yellow-lt:#fff3d4;
+  --teal:#2fbfae; --teal-lt:#ddf4f1;
+  --orange:#ff9838; --orange-lt:#ffeeda;
+  --r:16px; --r-lg:22px; --r-pill:100px;
+  --shadow:0 12px 26px -14px rgba(30,60,40,.20);
+  --shadow-lg:0 22px 44px -20px rgba(30,60,40,.28);
+  --f-disp:"Baloo 2",system-ui,sans-serif;
+  --f-body:"Nunito",system-ui,sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{background:var(--bg)}
 body{
-  font-family:'Nunito',sans-serif;
-  font-size:15px;
-  color:var(--text);
-  background:
-    radial-gradient(1200px 500px at 50% -100px, rgba(74,222,155,.07), transparent 60%),
-    var(--bg);
-  min-height:100vh;
-  display:flex;flex-direction:column;
+  font-family:var(--f-body);
+  font-size:15px;color:var(--ink);
+  background:var(--bg);
+  min-height:100vh;display:flex;flex-direction:column;
 }
 a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer;border:none}
-.px{font-family:'Press Start 2P',monospace;letter-spacing:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.disp{font-family:var(--f-disp)}
 img,svg{display:block}
 
 /* ---------- top bar ---------- */
 .topbar{
-  background:rgba(13,17,16,.92);
+  background:rgba(255,255,255,.92);
   border-bottom:1px solid var(--line);
   position:sticky;top:0;z-index:50;
-  backdrop-filter:blur(6px);
+  backdrop-filter:blur(8px);
 }
 .topbar-inner{
-  max-width:1120px;margin:0 auto;padding:0 16px;
-  height:56px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;
+  max-width:1140px;margin:0 auto;padding:0 16px;
+  height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;
 }
+.brand{grid-column:1;display:inline-flex;align-items:center;gap:10px;font-family:var(--f-disp);font-weight:800;font-size:19px;color:var(--ink)}
+.brand-mk{width:24px;height:24px;border-radius:7px;background:linear-gradient(145deg,#5fe08a,var(--green-d));box-shadow:0 3px 8px -2px rgba(60,191,109,.6)}
 .ip-chip{
   grid-column:2;
-  display:flex;align-items:center;gap:10px;
-  background:var(--panel);border:1px solid var(--line);border-radius:8px;
-  padding:8px 14px;color:var(--mint);
-  font-size:13px;font-weight:800;letter-spacing:.6px;
+  display:flex;align-items:center;gap:9px;
+  background:var(--green-lt);border:2px solid transparent;border-radius:var(--r-pill);
+  padding:8px 16px;color:var(--green-d);
+  font-size:13px;font-weight:800;letter-spacing:.4px;
   transition:border-color .15s, transform .1s;
 }
-.ip-chip.dead{color:var(--muted);cursor:default}
+.ip-chip.dead{color:var(--ink-3);background:var(--surface-2);cursor:default}
 .ip-chip:active{transform:scale(.98)}
-.ip-chip .hint{color:var(--muted);font-weight:600;letter-spacing:0;text-transform:none}
+.ip-chip .hint{color:var(--ink-3);font-weight:700;letter-spacing:0}
 .top-right{grid-column:3;justify-self:end;display:flex;align-items:center;gap:10px}
 .top-btn{
-  display:flex;align-items:center;gap:8px;
-  background:var(--panel);border:1px solid var(--line);border-radius:8px;
-  padding:8px 14px;font-size:13px;font-weight:700;color:var(--text);
+  display:flex;align-items:center;
+  background:var(--surface);border:2px solid var(--line);border-radius:var(--r-pill);
+  padding:8px 16px;font-size:13px;font-weight:800;color:var(--ink-2);
 }
-.currency{font-size:13px;font-weight:700;color:var(--muted);padding:8px 4px}
+.currency{font-size:13px;font-weight:800;color:var(--ink-3);padding:8px 4px}
 
 /* ---------- layout ---------- */
 .wrap{
-  width:100%;max-width:1120px;margin:24px auto 48px;padding:0 16px;
+  width:100%;max-width:1140px;margin:26px auto 56px;padding:0 16px;
   display:grid;grid-template-columns:280px 1fr;gap:24px;
-  align-items:start;
-  flex:1;
+  align-items:start;flex:1;
 }
 
 /* ---------- sidebar ---------- */
-.side{display:flex;flex-direction:column;gap:16px;position:sticky;top:80px}
+.side{display:flex;flex-direction:column;gap:16px;position:sticky;top:86px}
 .logo-card{
-  background:linear-gradient(180deg, var(--panel2), var(--panel));
-  border:1px solid var(--line);border-radius:var(--radius);
-  padding:26px 16px 20px;text-align:center;
-  position:relative;overflow:hidden;
+  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
+  padding:26px 16px 22px;text-align:center;
 }
-.logo-card::before{
-  content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(transparent 0 92%, rgba(74,222,155,.08) 92%),
-    radial-gradient(300px 120px at 50% -30px, rgba(74,222,155,.14), transparent 70%);
-  pointer-events:none;
-}
-.logo-card svg{margin:0 auto 14px;image-rendering:pixelated}
-.logo-name{font-size:14px;color:var(--mint)}
-.logo-sub{font-size:13px;color:var(--muted);margin-top:8px;font-weight:600}
-.nav-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.nav-item{
-  display:flex;align-items:center;gap:12px;width:100%;text-align:left;
-  padding:14px 16px;background:none;color:var(--text);
-  font-size:14px;font-weight:700;
-  border-left:3px solid transparent;
-  border-bottom:1px solid var(--line);
-  transition:background .12s,border-color .12s;
-}
-.nav-item:last-child{border-bottom:none}
-.nav-item.active{border-left-color:var(--mint);background:var(--panel2);color:var(--mint)}
-.nav-item .ico{width:22px;height:22px;flex:none;image-rendering:pixelated}
-.side-note{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:16px;text-align:center;
-}
-.side-note .t{font-size:13px;color:var(--gold);margin-bottom:10px}
-.side-note p{font-size:13px;color:var(--muted);font-weight:600;line-height:1.5}
-.side-note a{color:var(--mint);font-weight:700}
-
-/* ---------- main ---------- */
-.main{display:flex;flex-direction:column;gap:20px;min-width:0;scroll-margin-top:72px}
-.welcome{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:16px 20px;
-}
-.welcome .wt{font-size:13px;color:var(--mint)}
-.welcome .ws{font-size:13px;color:var(--muted);font-weight:600;margin-top:6px}
-.banner{
-  border-radius:var(--radius);border:1px solid var(--line);
-  background:
-    linear-gradient(115deg, rgba(16,21,20,.15) 40%, rgba(16,21,20,.55)),
-    repeating-linear-gradient(90deg, #2fae74 0 24px, #35bd80 24px 48px, #2fae74 48px 72px, #28a06a 72px 96px),
-    var(--mint-dark);
-  min-height:150px;position:relative;overflow:hidden;
+.logo-mk{
+  width:74px;height:74px;border-radius:20px;margin:0 auto 14px;
+  background:linear-gradient(145deg,#5fe08a,var(--green-d));
+  box-shadow:0 10px 22px -8px rgba(60,191,109,.55);
   display:flex;align-items:center;justify-content:center;
 }
-.banner::before{
+.logo-mk svg{width:46px;height:46px;image-rendering:pixelated}
+.logo-name{font-family:var(--f-disp);font-weight:800;font-size:22px;color:var(--ink)}
+.logo-sub{font-size:13px;color:var(--ink-2);margin-top:2px;font-weight:700}
+.nav-card{background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden;padding:8px}
+.nav-item{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  padding:12px 14px;border-radius:12px;color:var(--ink-2);
+  font-family:var(--f-disp);font-size:15px;font-weight:700;
+  transition:background .12s,color .12s;
+}
+.nav-item.active{background:var(--green);color:#fff}
+.nav-item .dot{width:10px;height:10px;border-radius:4px;flex:none}
+.nav-item.active .dot{background:rgba(255,255,255,.85)!important}
+.nav-group-head{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  padding:12px 14px;border-radius:12px;color:var(--ink-2);
+  font-family:var(--f-disp);font-size:15px;font-weight:700;
+}
+.nav-group-head .caret{margin-left:auto;transition:transform .15s;font-size:13px;color:var(--ink-3)}
+.nav-group.open .caret{transform:rotate(180deg)}
+.nav-sub{display:none;padding-left:14px}
+.nav-group.open .nav-sub{display:block}
+.side-note{
+  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
+  padding:18px;text-align:center;
+}
+.side-note .t{font-family:var(--f-disp);font-weight:800;font-size:16px;color:var(--ink);margin-bottom:6px}
+.side-note p{font-size:13px;color:var(--ink-2);font-weight:700;line-height:1.55}
+
+/* ---------- main ---------- */
+.main{display:flex;flex-direction:column;gap:20px;min-width:0;scroll-margin-top:76px}
+.banner{
+  border-radius:var(--r-lg);box-shadow:var(--shadow-lg);
+  background:linear-gradient(135deg,#5fe08a,#31a75d 65%,#2b9151);
+  padding:34px 30px;position:relative;overflow:hidden;color:#fff;
+}
+.banner::after{
   content:"";position:absolute;inset:0;
   background:
-    repeating-linear-gradient(0deg, transparent 0 22px, rgba(0,0,0,.06) 22px 24px),
-    repeating-linear-gradient(90deg, transparent 0 22px, rgba(0,0,0,.06) 22px 24px);
+    radial-gradient(340px 200px at 88% -40px, rgba(255,255,255,.28), transparent 70%),
+    repeating-linear-gradient(0deg, transparent 0 30px, rgba(255,255,255,.045) 30px 32px),
+    repeating-linear-gradient(90deg, transparent 0 30px, rgba(255,255,255,.045) 30px 32px);
+  pointer-events:none;
 }
-.banner-label{
-  position:relative;padding:14px 22px;border-radius:8px;
-  background:rgba(13,17,16,.82);border:1px solid rgba(74,222,155,.35);
-  font-size:17px;color:var(--text);text-align:center;
-}
+.banner h1{font-family:var(--f-disp);font-weight:800;font-size:30px;position:relative}
+.banner p{position:relative;margin-top:6px;font-weight:700;font-size:15px;color:rgba(255,255,255,.92);max-width:520px;line-height:1.55}
 .card{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
   padding:22px;
 }
-.card h2{font-size:14px;color:var(--mint);margin-bottom:14px}
-.card p{font-size:15px;line-height:1.65;color:var(--muted);font-weight:600}
-.card p + p{margin-top:12px}
-.card p strong{color:var(--text)}
+.card h2{font-family:var(--f-disp);font-weight:800;font-size:19px;color:var(--ink);margin-bottom:10px}
+.card p{font-size:15px;line-height:1.65;color:var(--ink-2);font-weight:600}
+.card p + p{margin-top:11px}
+.card p strong{color:var(--ink)}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 .btn{
-  display:inline-flex;align-items:center;gap:8px;
-  border-radius:8px;padding:12px 18px;
-  font-size:14px;font-weight:800;
-  transition:transform .1s, filter .15s;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:var(--r-pill);padding:12px 22px;
+  font-family:var(--f-disp);font-size:15px;font-weight:700;
+  transition:transform .12s, box-shadow .12s, background .12s;
 }
-.btn:active{transform:scale(.97)}
-.btn-mint{background:var(--mint);color:#0c1410;box-shadow:0 4px 0 var(--mint-dark)}
-.btn-ghost{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+.btn-green{background:var(--green);color:#fff;box-shadow:0 5px 0 var(--green-d)}
+.btn-green:active{transform:translateY(3px);box-shadow:0 2px 0 var(--green-d)}
+.btn-ghost{background:var(--surface);color:var(--ink-2);border:2px solid var(--line)}
 
 /* ---------- category grid ---------- */
 .cat-head{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:16px 20px;
+  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
+  padding:16px 22px;
   display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
 }
-.cat-head .ct{font-size:13px;color:var(--text)}
-.cat-head .cb{font-size:13px;color:var(--muted);font-weight:600}
+.cat-head .ct{font-family:var(--f-disp);font-weight:800;font-size:19px;color:var(--ink)}
+.cat-head .cb{font-size:13px;color:var(--ink-2);font-weight:700}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .prod{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:22px 16px 18px;text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  transition:transform .15s, border-color .15s;
+  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
+  padding:14px 14px 16px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  transition:transform .15s, box-shadow .15s;
 }
-.art-wrap{position:relative;margin-bottom:8px}
-.prod .art{width:88px;height:88px;image-rendering:pixelated}
+.tile{
+  width:100%;border-radius:var(--r);height:110px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;margin-bottom:9px;
+}
+.tile svg{width:72px;height:72px;image-rendering:pixelated}
 .badge{
-  position:absolute;right:-6px;bottom:-2px;
-  background:var(--gold);color:#3a2c07;border-radius:6px;
-  font-size:13px;font-weight:800;padding:2px 7px;
+  position:absolute;right:10px;top:10px;
+  background:#fff;color:var(--ink);border-radius:var(--r-pill);
+  font-size:13px;font-weight:800;padding:2px 10px;box-shadow:var(--shadow);
 }
-.prod .name{font-size:15px;font-weight:800;color:var(--text)}
-.prod .price{font-size:14px;font-weight:800;color:var(--mint-dim);margin-bottom:10px}
+.prod .name{font-family:var(--f-disp);font-size:16px;font-weight:700;color:var(--ink);line-height:1.25}
+.prod .price{font-size:14px;font-weight:800;color:var(--ink-2);margin-bottom:9px}
 .prod .buy{
-  width:100%;max-width:150px;min-height:44px;
-  background:var(--mint);color:#0c1410;border-radius:8px;
-  font-size:14px;font-weight:800;
-  box-shadow:0 3px 0 var(--mint-dark);
-  transition:filter .15s, transform .1s;
+  width:100%;max-width:170px;min-height:44px;
+  background:var(--green);color:#fff;border-radius:var(--r-pill);
+  font-family:var(--f-disp);font-size:15px;font-weight:700;
+  box-shadow:0 5px 0 var(--green-d);
+  transition:transform .12s, box-shadow .12s, background .12s;
 }
-.prod .buy:active{transform:scale(.97)}
+.prod .buy:active{transform:translateY(3px);box-shadow:0 2px 0 var(--green-d)}
 
-/* hover states only where hover exists (avoids sticky-hover on touch) */
 @media(hover:hover){
-  .ip-chip:not(.dead):hover{border-color:var(--mint-dark)}
-  .top-btn:hover{border-color:var(--mint-dark)}
-  .nav-item:hover{background:var(--panel2)}
-  .btn-mint:hover{filter:brightness(1.06)}
-  .btn-ghost:hover{border-color:var(--mint-dark)}
-  .prod:hover{transform:translateY(-3px);border-color:var(--mint-dark)}
-  .prod .buy:hover{filter:brightness(1.06)}
+  .ip-chip:not(.dead):hover{border-color:var(--green)}
+  .top-btn:hover{border-color:var(--ink-3)}
+  .nav-item:not(.active):hover{background:var(--surface-2);color:var(--ink)}
+  .nav-group-head:hover{background:var(--surface-2)}
+  .btn-green:hover{background:#46cc78;transform:translateY(-2px);box-shadow:0 7px 0 var(--green-d)}
+  .btn-ghost:hover{border-color:var(--ink-3)}
+  .prod:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .prod .buy:hover{background:#46cc78;transform:translateY(-2px);box-shadow:0 7px 0 var(--green-d)}
 }
 
 /* ---------- footer ---------- */
-footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
+footer{border-top:1px solid var(--line);background:var(--surface);margin-top:auto}
 .foot-inner{
-  max-width:1120px;margin:0 auto;padding:26px 16px;
-  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  max-width:1140px;margin:0 auto;padding:26px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
 }
-.foot-inner .fb{font-size:13px;color:var(--muted);font-weight:600;line-height:1.6}
-.foot-inner .px{font-size:13px;color:var(--text)}
+.foot-brand{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-disp);font-weight:800;font-size:16px}
+.foot-inner .fb{font-size:13px;color:var(--ink-2);font-weight:600;line-height:1.6}
+.ptw{font-size:13px;font-weight:800;color:var(--green-d)}
 
 /* ---------- modal ---------- */
 .modal-bg{
-  position:fixed;inset:0;background:rgba(8,11,10,.7);backdrop-filter:blur(3px);
+  position:fixed;inset:0;background:rgba(24,38,30,.45);backdrop-filter:blur(3px);
   display:none;align-items:center;justify-content:center;z-index:100;padding:16px;
 }
 .modal-bg.open{display:flex}
 .modal{
-  background:var(--panel2);border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);
   max-width:420px;width:100%;padding:26px;text-align:center;
 }
-.modal .art{width:72px;height:72px;margin:0 auto 12px;image-rendering:pixelated}
-.modal h3{font-size:14px;color:var(--mint);margin-bottom:6px}
-.modal .mp{font-size:15px;color:var(--muted);font-weight:600;line-height:1.6;margin:10px 0 18px}
-.modal .price-line{font-size:16px;font-weight:800;color:var(--text)}
-.modal .btn{justify-content:center}
+.modal .tile{height:120px;max-width:200px;margin:0 auto 6px}
+.modal h3{font-family:var(--f-disp);font-weight:800;font-size:20px;color:var(--ink);margin-bottom:2px}
+.modal .mp{font-size:15px;color:var(--ink-2);font-weight:600;line-height:1.6;margin:10px 0 18px}
+.modal .price-line{font-size:16px;font-weight:800;color:var(--ink-2)}
 .modal .btn + .btn{margin-left:8px}
 
 /* ---------- toast ---------- */
 .toast{
-  position:fixed;top:68px;left:50%;transform:translateX(-50%) translateY(-120px);
-  background:var(--mint);color:#0c1410;font-weight:800;font-size:14px;
-  padding:11px 20px;border-radius:8px;z-index:120;
-  transition:transform .25s ease;box-shadow:0 4px 0 var(--mint-dark);
+  position:fixed;top:72px;left:50%;transform:translateX(-50%) translateY(-140px);
+  background:var(--ink);color:#fff;font-weight:800;font-size:14px;
+  padding:11px 20px;border-radius:var(--r-pill);z-index:120;
+  transition:transform .25s ease;box-shadow:var(--shadow-lg);
   visibility:hidden;
 }
 .toast.show{transform:translateX(-50%) translateY(0);visibility:visible}
@@ -252,7 +251,8 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
   .nav-card{order:1}
   .main{order:2}
   .side-note{order:3}
-  .topbar-inner{display:flex;justify-content:space-between;height:56px;padding:0 12px}
+  .topbar-inner{display:flex;justify-content:space-between;height:60px;padding:0 12px}
+  .brand span{display:none}
   .ip-chip .hint{display:none}
   .grid{grid-template-columns:repeat(2,1fr)}
 }
@@ -267,7 +267,7 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
 <script>
 const CONFIG = {
   // TODO real server address. Empty = chip shows "Server address coming soon"
-  // (play.minthavenmc.com doesn't resolve yet — set DNS first, then fill this in).
+  // (play.minthavenmc.com has no DNS yet — set A/SRV records first, then fill this in).
   serverIp: "",
   discord:  "",                               // TODO Discord invite URL (empty = Discord buttons hidden)
   contactEmail: "",                           // TODO contact email (empty = Contact button hidden)
@@ -276,38 +276,94 @@ const CONFIG = {
   checkoutUrl: ""
 };
 
-/* PLACEHOLDER CATALOG — swap names/prices for the real packages.
-   Per item: url = full checkout link for that package (or set checkoutId once Tebex is up
-   and it composes checkoutUrl + "/package/" + checkoutId). No url/id = no checkout button. */
+/* CATALOG — structure + pricing cloned from store.pixelblockmc.com 2026-07-20
+   (brand-specific names swapped: Pixelblock Key→MintHaven Key, Pixel Pass→Mint Pass).
+   Per item: url = full checkout link (or checkoutId once Tebex is up → composes
+   checkoutUrl + "/package/" + checkoutId). No url/id = no checkout button yet. */
 const CATALOG = {
-  ranks: {
-    label: "Ranks",
-    blurb: "Rank upgrades for your account.",
-    items: [
-      { id:"vip",    name:"VIP",     price:9.99,  art:"helm-iron" },
-      { id:"vipp",   name:"VIP+",    price:19.99, art:"helm-gold" },
-      { id:"mvp",    name:"MVP",     price:34.99, art:"helm-dia" },
-      { id:"mvpp",   name:"MVP+",    price:49.99, art:"helm-em" },
-      { id:"haven",  name:"HAVEN",   price:79.99, art:"crown" }
+  "ranks": {
+    label:"Global Ranks", tile:"green", blurb:"Permanent ranks across all game modes.",
+    items:[
+      { id:"vip",  name:"VIP",   price:15.00, art:"helm-iron" },
+      { id:"vipp", name:"VIP +", price:20.00, art:"helm-gold" },
+      { id:"pro",  name:"Pro",   price:30.00, art:"helm-dia" },
+      { id:"prop", name:"Pro +", price:45.00, art:"helm-em" },
+      { id:"mvp",  name:"MVP",   price:75.00, art:"crown" }
     ]
   },
-  keys: {
-    label: "Crate Keys",
-    blurb: "Keys are added to your account after purchase.",
-    items: [
-      { id:"key1",  name:"Mint Key ×1",     price:2.99,  art:"key" },
-      { id:"key5",  name:"Mint Key ×5",     price:12.99, art:"key", badge:"×5" },
-      { id:"ekey",  name:"Emerald Key ×1",  price:4.99,  art:"key-em" },
-      { id:"hkey",  name:"Haven Key ×1",    price:7.99,  art:"key-gold" }
+  "survival-crates": {
+    label:"Crates", group:"Survival", tile:"blue", blurb:"Crate keys for the Survival mode.",
+    items:[
+      { id:"sam1",   name:"Samurai Crate Key",          price:4.00,   art:"key-red" },
+      { id:"sam10",  name:"10 Samurai Key Bundle",      price:23.87,  art:"key-red",  badge:"×10" },
+      { id:"sam35",  name:"35 Samurai Key Bundle Pack", price:67.50,  art:"key-red",  badge:"×35" },
+      { id:"sam100", name:"100 Samurai Key Bundle",     price:195.00, art:"key-red",  badge:"×100" },
+      { id:"div1",   name:"Divine Key",                 price:4.00,   art:"key-gold" },
+      { id:"div10",  name:"10 Divine Key Bundle",       price:23.87,  art:"key-gold", badge:"×10" },
+      { id:"divall", name:"Divine Key All!",            price:40.00,  art:"key-gold" },
+      { id:"div35",  name:"35 Divine Key Pack",         price:67.50,  art:"key-gold", badge:"×35" },
+      { id:"div100", name:"100 Divine Key Pack",        price:195.00, art:"key-gold", badge:"×100" },
+      { id:"ultra",  name:"Ultra Crate Key",            price:3.00,   art:"key-cyan" },
+      { id:"spawn",  name:"Spawner Crate Key",          price:5.00,   art:"key-blue" },
+      { id:"mhkey",  name:"MintHaven Crate Key",        price:6.00,   art:"key-mint" },
+      { id:"kb1",    name:"Key Bundle I",               price:17.75,  art:"key-mint", badge:"I" },
+      { id:"kb2",    name:"Key Bundle II",              price:47.75,  art:"key-mint", badge:"II" },
+      { id:"kb3",    name:"Key Bundle III",             price:120.00, art:"key-mint", badge:"III" }
     ]
   },
-  coins: {
-    label: "Coins",
-    blurb: "Spend coins in the in-game shop.",
-    items: [
-      { id:"c1",  name:"1,000 Coins",  price:4.99,  art:"coin" },
-      { id:"c5",  name:"5,000 Coins",  price:19.99, art:"coin", badge:"5k" },
-      { id:"c10", name:"10,000 Coins", price:34.99, art:"coin", badge:"10k" }
+  "survival-claim": {
+    label:"Claim Blocks", group:"Survival", tile:"yellow", blurb:"Protect more land in Survival.",
+    items:[
+      { id:"cb2",  name:"2k Claim Blocks",  price:2.00,  art:"block" },
+      { id:"cb5",  name:"5k Claim Blocks",  price:3.50,  art:"block", badge:"5k" },
+      { id:"cb10", name:"10k Claim Blocks", price:7.00,  art:"block", badge:"10k" },
+      { id:"cb40", name:"40k Claim Blocks", price:20.00, art:"block", badge:"40k" }
+    ]
+  },
+  "survival-misc": {
+    label:"Miscellaneous", group:"Survival", tile:"purple", blurb:"Extras for the Survival mode.",
+    items:[
+      { id:"pass",  name:"Mint Pass Premium", price:14.98, art:"ticket" },
+      { id:"title", name:"Custom Title",      price:17.50, art:"star" },
+      { id:"rain",  name:"Make it Rain",      price:17.50, art:"cloud" }
+    ]
+  },
+  "survival-furniture": {
+    label:"Furniture", group:"Survival", tile:"teal", blurb:"Infinite build blocks for decorating.",
+    items:[
+      { id:"con1",  name:"Infinite Concrete Key",            price:3.50,  art:"key-grey" },
+      { id:"con5",  name:"5 Infinite Concrete Key Bundle",   price:14.98, art:"key-grey", badge:"×5" },
+      { id:"con10", name:"10 Infinite Concrete Key Bundle",  price:19.98, art:"key-grey", badge:"×10" },
+      { id:"gla1",  name:"Infinite Stained Glass Key",       price:3.50,  art:"key-cyan" },
+      { id:"gla5",  name:"5 Infinite Stained Glass Bundle",  price:14.98, art:"key-cyan", badge:"×5" },
+      { id:"gla10", name:"10 Infinite Stained Glass Bundle", price:19.98, art:"key-cyan", badge:"×10" }
+    ]
+  },
+  "oneblock-crates": {
+    label:"Crates", group:"Oneblock", tile:"orange", blurb:"Crate keys for the Oneblock mode.",
+    items:[
+      { id:"osam1",   name:"Samurai Crate Key",          price:4.00,   art:"key-red" },
+      { id:"osam10",  name:"10 Samurai Key Bundle",      price:23.87,  art:"key-red",  badge:"×10" },
+      { id:"osam35",  name:"35 Samurai Key Bundle Pack", price:67.50,  art:"key-red",  badge:"×35" },
+      { id:"osam100", name:"100 Samurai Key Bundle",     price:195.00, art:"key-red",  badge:"×100" },
+      { id:"odiv1",   name:"Divine Key",                 price:4.00,   art:"key-gold" },
+      { id:"odiv10",  name:"10 Divine Key Bundle",       price:23.87,  art:"key-gold", badge:"×10" },
+      { id:"odivall", name:"Divine Key All!",            price:40.00,  art:"key-gold" },
+      { id:"odiv35",  name:"35 Divine Key Pack",         price:67.50,  art:"key-gold", badge:"×35" },
+      { id:"odiv100", name:"100 Divine Key Pack",        price:195.00, art:"key-gold", badge:"×100" },
+      { id:"tulip",   name:"Tulip Crate Key",            price:6.00,   art:"key-pink" },
+      { id:"ospawn",  name:"Spawner Crate Key",          price:6.00,   art:"key-blue" },
+      { id:"okb1",    name:"Key Bundle I",               price:35.35,  art:"key-mint", badge:"I" },
+      { id:"okb2",    name:"Key Bundle II",              price:75.00,  art:"key-mint", badge:"II" },
+      { id:"okb3",    name:"Key Bundle III",             price:120.00, art:"key-mint", badge:"III" }
+    ]
+  },
+  "oneblock-misc": {
+    label:"Miscellaneous", group:"Oneblock", tile:"purple", blurb:"Extras for the Oneblock mode.",
+    items:[
+      { id:"opass",  name:"Mint Pass Premium", price:14.98, art:"ticket" },
+      { id:"otitle", name:"Custom Title",      price:17.50, art:"star" },
+      { id:"orain",  name:"Make it Rain",      price:17.50, art:"cloud" }
     ]
   }
 };
@@ -317,14 +373,14 @@ const CATALOG = {
 <svg width="0" height="0" style="position:absolute">
   <defs>
     <g id="px-logo">
-      <rect x="2" y="5" width="12" height="9" fill="#2fae74"/>
-      <rect x="2" y="5" width="12" height="2" fill="#4ade9b"/>
-      <rect x="2" y="12" width="12" height="2" fill="#1f7a52"/>
-      <rect x="2" y="2" width="3" height="3" fill="#4ade9b"/>
-      <rect x="6" y="1" width="3" height="4" fill="#35bd80"/>
-      <rect x="10" y="2" width="3" height="3" fill="#4ade9b"/>
-      <rect x="4" y="7" width="2" height="2" fill="#8fd9ba"/>
-      <rect x="10" y="9" width="2" height="2" fill="#1f7a52"/>
+      <rect x="2" y="5" width="12" height="9" fill="#ffffff" opacity=".95"/>
+      <rect x="2" y="5" width="12" height="2" fill="#ffffff"/>
+      <rect x="2" y="12" width="12" height="2" fill="#d8f5e3"/>
+      <rect x="2" y="2" width="3" height="3" fill="#ffffff"/>
+      <rect x="6" y="1" width="3" height="4" fill="#eafff2"/>
+      <rect x="10" y="2" width="3" height="3" fill="#ffffff"/>
+      <rect x="4" y="7" width="2" height="2" fill="#a9ecc4"/>
+      <rect x="10" y="9" width="2" height="2" fill="#a9ecc4"/>
     </g>
   </defs>
 </svg>
@@ -332,8 +388,8 @@ const CATALOG = {
 <!-- ============ top bar ============ -->
 <div class="topbar">
   <div class="topbar-inner">
+    <a class="brand" href="#"><span class="brand-mk"></span><span>MintHaven</span></a>
     <button class="ip-chip" id="ipChip">
-      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg>
       <span id="ipText"></span>
       <span class="hint" id="ipHint"></span>
     </button>
@@ -348,15 +404,15 @@ const CATALOG = {
 <div class="wrap">
   <aside class="side">
     <div class="logo-card">
-      <svg width="96" height="96" viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg>
-      <div class="logo-name px">MINTHAVEN</div>
+      <div class="logo-mk"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg></div>
+      <div class="logo-name">MintHaven</div>
       <div class="logo-sub">Official Server Store</div>
     </div>
 
     <nav class="nav-card" id="nav" aria-label="Store categories"></nav>
 
     <div class="side-note">
-      <div class="t px">Need help?</div>
+      <div class="t">Need help?</div>
       <p id="sideHelp"></p>
     </div>
   </aside>
@@ -367,7 +423,10 @@ const CATALOG = {
 <!-- ============ footer ============ -->
 <footer>
   <div class="foot-inner">
-    <div class="px">MINTHAVEN</div>
+    <div>
+      <div class="foot-brand"><span class="brand-mk"></span>MintHaven</div>
+      <div class="ptw">🌿 Never pay-to-win — everything here is a helper or cosmetic.</div>
+    </div>
     <div class="fb">
       © <span id="year"></span> MintHaven MC. Not affiliated with Mojang Studios or Microsoft.<br>
       <span id="footNote"></span>
@@ -379,11 +438,11 @@ const CATALOG = {
 <div class="modal-bg" id="modalBg">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalName">
     <div id="modalArtWrap"></div>
-    <h3 class="px" id="modalName"></h3>
+    <h3 id="modalName"></h3>
     <div class="price-line" id="modalPrice"></div>
     <p class="mp" id="modalMsg"></p>
     <div>
-      <a class="btn btn-mint" id="modalGo" target="_blank" rel="noopener" style="display:none">Checkout</a>
+      <a class="btn btn-green" id="modalGo" target="_blank" rel="noopener" style="display:none">Checkout</a>
       <button class="btn btn-ghost" id="modalClose">Close</button>
     </div>
   </div>
@@ -392,8 +451,8 @@ const CATALOG = {
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-/* ---------- pixel sprite renderer (explicit fills — <use> shadow DOM can't be styled per instance) ---------- */
-const SLOT = "#0d1211";
+/* ---------- pixel sprite renderer ---------- */
+const SLOT = "#20302a";
 function helm(A,B,C){ return [
   [4,3,8,1,B],[3,4,10,3,A],[5,7,6,2,SLOT],
   [3,7,2,4,A],[11,7,2,4,A],[12,4,1,3,C],[3,10,2,1,C],[11,10,2,1,C]
@@ -402,45 +461,90 @@ function key(K,L){ return [
   [4,2,4,1,K],[3,3,1,4,K],[7,3,1,4,K],[4,6,4,1,K],
   [5,7,2,6,K],[7,9,2,1,K],[7,12,2,1,K],[4,2,2,1,L]
 ];}
-function coin(){ const G="#f5c04e",H="#ffd97a",S="#c99b2e"; return [
-  [5,2,6,1,G],[4,3,8,1,G],[3,4,10,8,G],[4,12,8,1,G],[5,13,6,1,G],
-  [5,3,2,2,H],[6,6,4,4,S],[7,7,2,2,G]
-];}
 const CROWN = [
-  [3,10,10,3,"#f5c04e"],[3,5,2,5,"#f5c04e"],[7,4,2,6,"#f5c04e"],[11,5,2,5,"#f5c04e"],
-  [4,11,2,1,"#4ade9b"],[7,11,2,1,"#e2554d"],[10,11,2,1,"#4a90de"],[3,10,10,1,"#ffd97a"]
+  [3,10,10,3,"#f5b83d"],[3,5,2,5,"#f5b83d"],[7,4,2,6,"#f5b83d"],[11,5,2,5,"#f5b83d"],
+  [4,11,2,1,"#3cbf6d"],[7,11,2,1,"#e2554d"],[10,11,2,1,"#3ea6f0"],[3,10,10,1,"#ffd97a"]
+];
+const BLOCK = [
+  [3,3,10,3,"#4fca77"],[3,3,10,1,"#7ddf9e"],
+  [3,6,10,7,"#a9744f"],[3,6,10,1,"#8a5c3b"],
+  [5,8,2,2,"#8a5c3b"],[9,10,2,2,"#8a5c3b"],[4,4,2,1,"#a3ecbb"]
+];
+const TICKET = [
+  [2,5,12,6,"#977bef"],[2,5,12,1,"#b29cf5"],[2,10,12,1,"#7a5fd0"],
+  [7,5,1,6,"#f4f7f1"],[9,7,3,2,"#f4f7f1"],[4,7,2,2,"#f4f7f1"]
+];
+const STAR = [
+  [7,2,2,3,"#ffcb45"],[7,11,2,3,"#ffcb45"],[2,7,3,2,"#ffcb45"],[11,7,3,2,"#ffcb45"],
+  [5,5,6,6,"#ffcb45"],[6,6,4,4,"#ffd97a"],[7,7,2,2,"#fff3d4"]
+];
+const CLOUD = [
+  [3,4,10,3,"#ffffff"],[4,3,8,1,"#ffffff"],[3,7,10,1,"#dfe9f4"],
+  [4,9,1,2,"#3ea6f0"],[7,10,1,2,"#3ea6f0"],[10,9,1,2,"#3ea6f0"],[6,12,1,2,"#3ea6f0"],[9,13,1,2,"#3ea6f0"]
 ];
 const ART = {
-  "helm-iron": helm("#c9d1cd","#eef3f0","#8f9a94"),
-  "helm-gold": helm("#f5c04e","#ffd97a","#c99b2e"),
-  "helm-dia":  helm("#57d4e0","#a8ecf2","#3aa8b5"),
-  "helm-em":   helm("#4ade9b","#8fd9ba","#2fae74"),
+  "helm-iron": helm("#aeb8b3","#dfe6e2","#8f9a94"),
+  "helm-gold": helm("#f5b83d","#ffd97a","#cf982a"),
+  "helm-dia":  helm("#45c4d3","#a8ecf2","#2fa1af"),
+  "helm-em":   helm("#3cbf6d","#7ddf9e","#31a75d"),
   "crown":     CROWN,
-  "key":       key("#8fd9ba","#d7f5e6"),
-  "key-em":    key("#4ade9b","#a5ecc9"),
-  "key-gold":  key("#f5c04e","#ffd97a"),
-  "coin":      coin()
+  "key-mint":  key("#3cbf6d","#8fe0af"),
+  "key-gold":  key("#f5b83d","#ffd97a"),
+  "key-red":   key("#e2554d","#f0928c"),
+  "key-blue":  key("#3ea6f0","#9dd2f8"),
+  "key-cyan":  key("#2fbfae","#8fe0d7"),
+  "key-pink":  key("#ef7bb8","#f7b6d9"),
+  "key-grey":  key("#93a09b","#c3ccc8"),
+  "block":     BLOCK,
+  "ticket":    TICKET,
+  "star":      STAR,
+  "cloud":     CLOUD
 };
-function artSvg(artKey, cls){
-  const cells = ART[artKey] || ART["coin"];
+const TILES = {
+  green:"linear-gradient(145deg,#d9f2e2,#b9e8cd)",
+  blue:"linear-gradient(145deg,#ddeffd,#bcdff9)",
+  yellow:"linear-gradient(145deg,#fff1cf,#ffe3a1)",
+  purple:"linear-gradient(145deg,#ebe4fc,#d7c9f8)",
+  teal:"linear-gradient(145deg,#dcf4f0,#bde8e2)",
+  orange:"linear-gradient(145deg,#ffeeda,#ffdcb0)"
+};
+function artSvg(artKey){
+  const cells = ART[artKey] || ART["key-mint"];
   const rects = cells.map(([x,y,w,h,f]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/>`).join("");
-  return `<svg class="${cls}" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
+  return `<svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
+}
+function tileHtml(cat, it){
+  return `<div class="tile" style="background:${TILES[cat.tile] || TILES.green}">${artSvg(it.art)}${it.badge ? `<span class="badge">${it.badge}</span>` : ""}</div>`;
 }
 
-/* ---------- nav ---------- */
+/* ---------- nav (grouped like the reference: top-level + collapsible groups) ---------- */
 const nav = document.getElementById("nav");
-const NAV_ITEMS = [["home","Store Home"]].concat(
-  Object.entries(CATALOG).map(([k,v]) => [k, v.label])
-);
-function navIcon(k){
-  if (k === "home")  return `<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><use href="#px-logo"/></svg>`;
-  if (k === "ranks") return artSvg("helm-em","ico");
-  if (k === "keys")  return artSvg("key","ico");
-  return artSvg("coin","ico");
+const DOTS = {green:"#3cbf6d",blue:"#3ea6f0",yellow:"#ffcb45",purple:"#977bef",teal:"#2fbfae",orange:"#ff9838"};
+function buildNav(){
+  const groups = [];
+  const seen = {};
+  groups.push({type:"link", key:"home", label:"Store Home", dot:"#3cbf6d"});
+  for (const [key, cat] of Object.entries(CATALOG)){
+    if (!cat.group){
+      groups.push({type:"link", key, label:cat.label, dot:DOTS[cat.tile]});
+    } else {
+      if (!seen[cat.group]){ seen[cat.group] = {type:"group", label:cat.group, children:[]}; groups.push(seen[cat.group]); }
+      seen[cat.group].children.push({key, label:cat.label, dot:DOTS[cat.tile]});
+    }
+  }
+  nav.innerHTML = groups.map(g => {
+    if (g.type === "link")
+      return `<a class="nav-item" data-page="${g.key}" href="#${g.key === "home" ? "" : g.key}"><span class="dot" style="background:${g.dot}"></span>${g.label}</a>`;
+    const kids = g.children.map(c =>
+      `<a class="nav-item" data-page="${c.key}" href="#${c.key}"><span class="dot" style="background:${c.dot}"></span>${c.label}</a>`).join("");
+    return `<div class="nav-group" data-group="${g.label}">
+      <button class="nav-group-head" type="button"><span class="dot" style="background:#93a09b"></span>${g.label}<span class="caret">▾</span></button>
+      <div class="nav-sub">${kids}</div></div>`;
+  }).join("");
+  nav.querySelectorAll(".nav-group-head").forEach(h =>
+    h.addEventListener("click", () => h.parentElement.classList.toggle("open")));
 }
-nav.innerHTML = NAV_ITEMS.map(([k,label]) =>
-  `<a class="nav-item" data-page="${k}" href="#${k === "home" ? "" : k}">${navIcon(k)}${label}</a>`
-).join("");
+buildNav();
 
 /* ---------- pages ---------- */
 const main = document.getElementById("main");
@@ -457,13 +561,12 @@ function itemUrl(it){
 
 function homePage(){
   return `
-  <div class="welcome">
-    <div class="wt px">Welcome to our store!</div>
-    <div class="ws">Browse ranks, crate keys and coins — every purchase supports the server.</div>
+  <div class="banner">
+    <h1>Welcome to the MintHaven Store!</h1>
+    <p>Grab ranks, crate keys, claim blocks and more. Everything's earnable in-game too — this just helps the server, and it's <b>never pay-to-win</b>.</p>
   </div>
-  <div class="banner"><div class="banner-label px">MINTHAVEN&nbsp;MC</div></div>
   <div class="card">
-    <h2 class="px">Thank you</h2>
+    <h2>Thank you 💚</h2>
     <p>Thank you for supporting <strong>MintHaven MC</strong>. Everything you buy here goes straight back into the server — hosting, plugins and new content.</p>
     ${checkoutLive ? `
     <p><strong>Delivery:</strong> packages are applied to your account automatically. If your purchase hasn't arrived within 15 minutes, relog once${hasContact ? " — still missing? Contact us and we'll fix it" : ""}.</p>
@@ -471,19 +574,20 @@ function homePage(){
     <p><strong>Heads up:</strong> online checkout is opening soon — browse the packages now and check back shortly.</p>`}
   </div>
   ${hasContact ? `<div class="card"><div class="btn-row">
-      ${hasDiscord ? `<a class="btn btn-mint" href="${CONFIG.discord}" target="_blank" rel="noopener">Join our Discord</a>` : ""}
+      ${hasDiscord ? `<a class="btn btn-green" href="${CONFIG.discord}" target="_blank" rel="noopener">Join our Discord</a>` : ""}
       ${hasMail ? `<a class="btn btn-ghost" href="mailto:${CONFIG.contactEmail}">Contact</a>` : ""}
   </div></div>` : ""}`;
 }
 
 function catPage(key){
   const cat = CATALOG[key];
+  const title = cat.group ? `${cat.group} — ${cat.label}` : cat.label;
   return `
-  <div class="cat-head"><span class="ct px">${cat.label}</span><span class="cb">${cat.blurb}</span></div>
+  <div class="cat-head"><span class="ct">${title}</span><span class="cb">${cat.blurb}</span></div>
   <div class="grid">
     ${cat.items.map(it => `
       <div class="prod">
-        <div class="art-wrap">${artSvg(it.art, "art")}${it.badge ? `<span class="badge">${it.badge}</span>` : ""}</div>
+        ${tileHtml(cat, it)}
         <div class="name">${it.name}</div>
         <div class="price">${money(it.price)}</div>
         <button class="buy" data-cat="${key}" data-id="${it.id}">Buy</button>
@@ -496,6 +600,10 @@ function render(){
   const isCat = page !== "home" && Object.hasOwn(CATALOG, page);
   document.querySelectorAll(".nav-item").forEach(el =>
     el.classList.toggle("active", el.dataset.page === (isCat ? page : "home")));
+  if (isCat && CATALOG[page].group){
+    const g = nav.querySelector(`.nav-group[data-group="${CATALOG[page].group}"]`);
+    if (g) g.classList.add("open");
+  }
   main.innerHTML = isCat ? catPage(page) : homePage();
   if (isCat && window.matchMedia("(max-width:900px)").matches) main.scrollIntoView();
   else window.scrollTo({top:0});
@@ -513,8 +621,9 @@ function closeModal(){
 main.addEventListener("click", e => {
   const b = e.target.closest(".buy");
   if (!b) return;
-  const it = CATALOG[b.dataset.cat].items.find(x => x.id === b.dataset.id);
-  document.getElementById("modalArtWrap").innerHTML = artSvg(it.art, "art");
+  const cat = CATALOG[b.dataset.cat];
+  const it = cat.items.find(x => x.id === b.dataset.id);
+  document.getElementById("modalArtWrap").innerHTML = tileHtml(cat, it);
   document.getElementById("modalName").textContent = it.name;
   document.getElementById("modalPrice").textContent = money(it.price);
   const go = document.getElementById("modalGo");
@@ -546,7 +655,7 @@ function showToast(text){
 }
 if (CONFIG.serverIp){
   document.getElementById("ipText").textContent = CONFIG.serverIp.toUpperCase();
-  document.getElementById("ipHint").textContent = "click to copy";
+  document.getElementById("ipHint").textContent = "· copy";
   chip.title = "Copy server IP";
   chip.onclick = () => {
     navigator.clipboard.writeText(CONFIG.serverIp)
@@ -556,7 +665,7 @@ if (CONFIG.serverIp){
 } else {
   chip.classList.add("dead");
   chip.disabled = true;
-  document.getElementById("ipText").textContent = "SERVER ADDRESS COMING SOON";
+  document.getElementById("ipText").textContent = "Server address coming soon";
 }
 const dTop = document.getElementById("discordTop");
 if (hasDiscord){ dTop.style.display = "flex"; dTop.href = CONFIG.discord; }
