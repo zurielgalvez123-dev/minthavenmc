@@ -36,9 +36,10 @@ body{
   font-family:var(--body);font-size:15px;color:var(--text);
   min-height:100vh;display:flex;flex-direction:column;
   background:
-    radial-gradient(900px 500px at 15% -80px, rgba(74,222,155,.10), transparent 60%),
-    radial-gradient(700px 420px at 90% 30px, rgba(85,164,255,.07), transparent 60%),
-    linear-gradient(180deg,#0a1322 0%,#0a1220 40%,var(--night0) 100%);
+    radial-gradient(900px 500px at 15% -80px, rgba(74,222,155,.08), transparent 60%),
+    linear-gradient(180deg, rgba(7,13,23,.86) 0%, rgba(7,13,23,.93) 45%, rgba(7,13,23,.985) 100%),
+    url("assets/bg-night.jpg") center top / cover fixed,
+    var(--night0);
   position:relative;
 }
 /* pixel star field */
@@ -169,28 +170,12 @@ img,svg{display:block}
 .hero{
   position:relative;overflow:hidden;
   border:2px solid var(--edge);clip-path:var(--oct);
-  background:linear-gradient(180deg,#0e2b4a 0%,#0f3552 34%,#14584e 78%,#187653 100%);
-  padding:34px 30px 42px;min-height:250px;
-  box-shadow:inset 0 3px 0 rgba(255,255,255,.06), inset 0 -3px 0 rgba(0,0,0,.35);
-}
-.hero .moon{
-  position:absolute;top:26px;right:64px;width:34px;height:34px;
   background:
-    linear-gradient(#f4f7e8,#d8e6c9);
-  box-shadow:0 0 30px 6px rgba(244,247,232,.35);
-  image-rendering:pixelated;
-  clip-path:polygon(25% 0,75% 0,75% 12.5%,100% 12.5%,100% 87.5%,75% 87.5%,75% 100%,25% 100%,25% 87.5%,0 87.5%,0 12.5%,25% 12.5%);
-}
-.cloud{position:absolute;height:12px;background:rgba(255,255,255,.16);box-shadow:14px -8px 0 rgba(255,255,255,.13), 34px 0 0 rgba(255,255,255,.10);width:46px;animation:drift linear infinite}
-.c1{top:44px;left:-60px;animation-duration:56s}
-.c2{top:96px;left:-120px;animation-duration:74s;transform:scale(1.5)}
-.c3{top:150px;left:-80px;animation-duration:64s;opacity:.7}
-@keyframes drift{to{transform:translateX(1400px)}}
-.hero .island{
-  position:absolute;right:26px;bottom:14px;width:236px;height:190px;
-  image-rendering:pixelated;
-  filter:drop-shadow(0 18px 22px rgba(0,0,0,.45)) drop-shadow(0 0 18px rgba(74,222,155,.25));
-  animation:bob 6s ease-in-out infinite;
+    linear-gradient(90deg, rgba(7,16,20,.94) 0%, rgba(7,16,20,.82) 34%, rgba(7,16,20,.30) 66%, rgba(7,16,20,.12) 100%),
+    linear-gradient(0deg, rgba(7,13,23,.55) 0%, transparent 30%),
+    url("assets/hero.jpg") right 28% / cover;
+  padding:38px 30px 46px;min-height:280px;
+  box-shadow:inset 0 3px 0 rgba(255,255,255,.06), inset 0 -3px 0 rgba(0,0,0,.35);
 }
 .spark{position:absolute;width:10px;height:10px;pointer-events:none;
   background:
@@ -333,7 +318,10 @@ footer::before{
   .brand span{display:none}
   .ip-chip .hint{display:none}
   .grid{grid-template-columns:repeat(2,1fr)}
-  .hero .island{width:150px;height:120px;opacity:.5;right:0;bottom:-6px;z-index:0}
+  .hero{background:
+    linear-gradient(90deg, rgba(7,16,20,.93) 0%, rgba(7,16,20,.84) 46%, rgba(7,16,20,.45) 100%),
+    linear-gradient(0deg, rgba(7,13,23,.55) 0%, transparent 30%),
+    url("assets/hero.jpg") right 30% / cover}
   .hero h1{font-size:17px;position:relative;z-index:1}
   .hero p{z-index:1}
 }
@@ -541,7 +529,7 @@ const CATALOG = {
       <div class="ptw">🌿 Never pay-to-win — everything here is a helper or cosmetic.</div>
     </div>
     <div class="fb">
-      © <span id="year"></span> MintHaven MC. Not affiliated with Mojang Studios or Microsoft.<br>
+      © <span id="year"></span> MintHaven MC. Not affiliated with Mojang Studios or Microsoft. Minecraft artwork © Mojang Studios.<br>
       <span id="footNote"></span>
     </div>
   </div>
@@ -680,12 +668,9 @@ function itemUrl(it){
 function homePage(){
   return `
   <div class="hero">
-    <div class="moon"></div>
-    <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
-    <svg class="island" viewBox="0 0 32 26" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><use href="#px-island"/></svg>
-    <span class="spark" style="top:38px;left:46%;color:#8fe0af"></span>
-    <span class="spark" style="top:120px;left:58%;color:#ffd167;animation-delay:.9s"></span>
-    <span class="spark" style="top:70px;left:30%;color:#a6d8ff;animation-delay:1.7s"></span>
+    <span class="spark" style="top:34px;left:44%;color:#8fe0af"></span>
+    <span class="spark" style="top:130px;left:52%;color:#ffd167;animation-delay:.9s"></span>
+    <span class="spark" style="top:64px;left:24%;color:#a6d8ff;animation-delay:1.7s"></span>
     <h1>Welcome to <span class="mintword">MINTHAVEN</span></h1>
     <p>Grab ranks, crate keys, claim blocks and more. Everything's earnable in-game too — this just helps the server, and it's <b>never pay-to-win</b>.</p>
   </div>
