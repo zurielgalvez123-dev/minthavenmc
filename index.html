@@ -5,8 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MintHaven — Play. Earn. Build. Belong.</title>
 <meta name="description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#070f0c">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MintHaven MC">
+<meta property="og:title" content="MintHaven — Play. Earn. Build. Belong.">
+<meta property="og:description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more.">
+<meta property="og:url" content="https://store.minthavenmc.com/">
+<meta property="og:image" content="https://store.minthavenmc.com/assets/emblem.jpg">
+<meta property="og:image:alt" content="MintHaven emblem">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MintHaven — Play. Earn. Build. Belong.">
+<meta name="twitter:description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more.">
+<meta name="twitter:image" content="https://store.minthavenmc.com/assets/emblem.jpg">
+<link rel="canonical" href="https://store.minthavenmc.com/">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch.png">
+<link rel="preload" as="image" href="assets/hero-art.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -39,10 +54,25 @@ body{
     radial-gradient(800px 600px at 0% 30%, rgba(53,224,162,.03), transparent 60%),
     var(--bg);
 }
+body.modal-open{overflow:hidden}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 img,svg{display:block}
 .disp{font-family:var(--disp)}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+.skip-link{
+  position:absolute;left:20px;top:-48px;z-index:200;
+  padding:10px 14px;border-radius:8px;background:var(--mint);color:#04120c;
+  font-family:var(--disp);font-weight:600;letter-spacing:1.2px;text-transform:uppercase;
+}
+.skip-link:focus{top:12px}
+:focus-visible{
+  outline:2px solid var(--mint);
+  outline-offset:3px;
+}
 
 /* ---------- top nav ---------- */
 .topbar{
@@ -248,6 +278,13 @@ img,svg{display:block}
   transition:filter .15s, transform .12s;
 }
 .prod .buy:active{transform:translateY(1px)}
+.buy-state{
+  width:100%;max-width:170px;min-height:44px;
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:10px 12px;border-radius:9px;border:1px solid var(--line-2);
+  background:var(--panel-2);color:var(--muted);
+  font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:2px;text-transform:uppercase;
+}
 @media(hover:hover){
   .nav-item:not(.active):hover{color:var(--text);background:rgba(255,255,255,.03)}
   .nav-links a:hover{color:var(--text)}
@@ -316,11 +353,22 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
   .play-btn{display:none}
 }
 @media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
   .play-btn.soon .dot,.sc-status.soon .dot{animation:none}
+  .btn,.fcard,.fc-btn,.nav-item,.prod,.prod .buy,.toast,.nav-group-head .caret{transition:none}
 }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
+<noscript>
+  <div class="section" style="padding-top:18px;padding-bottom:18px">
+    <div class="card panel">
+      <h2>JavaScript Required</h2>
+      <p>This store uses a single-file client-side catalog. Enable JavaScript to browse packages.</p>
+    </div>
+  </div>
+</noscript>
 
 <!-- ============ CONFIG — edit these to go live ============ -->
 <script>
@@ -330,7 +378,7 @@ const CONFIG = {
   discord:  "",                               // TODO Discord invite URL (empty = Discord buttons hidden)
   contactEmail: "",                           // TODO contact email (empty = Contact button hidden)
   // Tebex store base URL, e.g. "https://minthaven.tebex.io". Buy buttons need BOTH this
-  // and a per-item checkout id/url below. Empty = honest "checkout opening soon" modal.
+  // and a per-item checkout id/url below. Empty = honest "checkout opening soon" UI with hidden checkout buttons.
   checkoutUrl: ""
 };
 
@@ -429,12 +477,12 @@ const CATALOG = {
 <!-- ============ top nav ============ -->
 <div class="topbar">
   <div class="topbar-inner">
-    <a class="brand" href="#" aria-label="MintHaven — home">
+    <a class="brand" href="#home" aria-label="MintHaven — home">
       <img src="assets/emblem.jpg" alt="">
       <span class="bn">Mint<span>Haven</span></span>
     </a>
     <nav class="nav-links" id="topNav" aria-label="Main">
-      <a href="#" data-page="home">Home</a>
+      <a href="#home" data-page="home">Home</a>
       <a href="#ranks" data-page="ranks">Ranks</a>
       <a href="#survival-crates" data-page="survival">Survival</a>
       <a href="#oneblock-crates" data-page="oneblock">Oneblock</a>
@@ -447,7 +495,7 @@ const CATALOG = {
 <div class="wrap" id="wrapEl">
   <aside class="side">
     <div class="logo-card panel">
-      <img src="assets/emblem.jpg" alt="MintHaven emblem">
+      <img src="assets/emblem.jpg" alt="MintHaven emblem" decoding="async">
       <div class="logo-sub">Official Server Store</div>
     </div>
     <nav class="nav-card panel" id="nav" aria-label="Store categories"></nav>
@@ -456,14 +504,14 @@ const CATALOG = {
       <p id="sideHelp"></p>
     </div>
   </aside>
-  <main class="main" id="main"></main>
+  <main class="main" id="main" tabindex="-1"></main>
 </div>
 
 <!-- ============ footer ============ -->
 <footer>
   <div class="foot-inner">
     <div class="foot-brand">
-      <img src="assets/emblem.jpg" alt="">
+      <img src="assets/emblem.jpg" alt="" loading="lazy" decoding="async">
       <span class="bn">MintHaven</span>
     </div>
     <div class="fb">
@@ -474,8 +522,8 @@ const CATALOG = {
 </footer>
 
 <!-- ============ buy modal ============ -->
-<div class="modal-bg" id="modalBg">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+<div class="modal-bg" id="modalBg" aria-hidden="true">
+  <div class="modal" id="modalCard" role="dialog" aria-modal="true" aria-labelledby="modalName" aria-describedby="modalMsg" tabindex="-1">
     <div id="modalArtWrap"></div>
     <h3 id="modalName"></h3>
     <div class="price-line" id="modalPrice"></div>
@@ -487,7 +535,7 @@ const CATALOG = {
   </div>
 </div>
 
-<div class="toast" id="toast" role="status"></div>
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
 <script>
 /* ---------- pixel sprite renderer ---------- */
@@ -546,6 +594,51 @@ const TILES = {
   purple: ["#6d5a9e","rgba(200,155,255,.3)"],
   teal:   ["#2f8a80","rgba(62,211,192,.3)"]
 };
+const SITE_URL = "https://store.minthavenmc.com/";
+const DEFAULT_TITLE = "MintHaven — Play. Earn. Build. Belong.";
+const DEFAULT_DESC = "MintHaven MC official store — ranks, crate keys, claim blocks and more.";
+function escapeHtml(value){
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    "\"":"&quot;",
+    "'":"&#39;"
+  }[char]));
+}
+function escapeAttr(value){
+  return escapeHtml(value).replace(/`/g, "&#96;");
+}
+function normalizeText(value){
+  return String(value ?? "").trim();
+}
+function safeExternalUrl(value){
+  const text = normalizeText(value);
+  if (!text) return "";
+  try {
+    const url = new URL(text, SITE_URL);
+    return /^(https?):$/i.test(url.protocol) ? url.href : "";
+  } catch {
+    return "";
+  }
+}
+function safeEmail(value){
+  const text = normalizeText(value);
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text) ? text : "";
+}
+function safeServerIp(value){
+  const text = normalizeText(value);
+  return /^[a-z0-9][a-z0-9.:-]{0,252}$/i.test(text) ? text : "";
+}
+function groupId(value){
+  return normalizeText(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+const SAFE_CONFIG = {
+  serverIp: safeServerIp(CONFIG.serverIp),
+  discord: safeExternalUrl(CONFIG.discord),
+  contactEmail: safeEmail(CONFIG.contactEmail),
+  checkoutUrl: safeExternalUrl(CONFIG.checkoutUrl)
+};
 function artSvg(artKey){
   const cells = ART[artKey] || ART["key-mint"];
   const rects = cells.map(([x,y,w,h,f]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/>`).join("");
@@ -553,7 +646,7 @@ function artSvg(artKey){
 }
 function tileHtml(cat, it){
   const [c, g] = TILES[cat.tile] || TILES.mint;
-  return `<div class="tile" style="--tile-c:${c};--tile-g:${g}">${artSvg(it.art)}${it.badge ? `<span class="badge">${it.badge}</span>` : ""}</div>`;
+  return `<div class="tile" style="--tile-c:${c};--tile-g:${g}">${artSvg(it.art)}${it.badge ? `<span class="badge">${escapeHtml(it.badge)}</span>` : ""}</div>`;
 }
 
 /* ---------- sidebar nav ---------- */
@@ -573,11 +666,11 @@ function buildNav(){
   }
   nav.innerHTML = groups.map(g => {
     if (g.type === "link")
-      return `<a class="nav-item" data-page="${g.key}" href="#${g.key === "home" ? "" : g.key}"><span class="dot" style="background:${g.dot};color:${g.dot}"></span>${g.label}</a>`;
+      return `<a class="nav-item" data-page="${escapeAttr(g.key)}" href="#${escapeAttr(g.key)}"><span class="dot" style="background:${g.dot};color:${g.dot}"></span>${escapeHtml(g.label)}</a>`;
     const kids = g.children.map(c =>
-      `<a class="nav-item" data-page="${c.key}" href="#${c.key}"><span class="dot" style="background:${c.dot};color:${c.dot}"></span>${c.label}</a>`).join("");
-    return `<div class="nav-group" data-group="${g.label}">
-      <button class="nav-group-head" type="button" aria-expanded="false"><span class="dot" style="background:#4a5c54;color:#4a5c54"></span>${g.label}<span class="caret">▾</span></button>
+      `<a class="nav-item" data-page="${escapeAttr(c.key)}" href="#${escapeAttr(c.key)}"><span class="dot" style="background:${c.dot};color:${c.dot}"></span>${escapeHtml(c.label)}</a>`).join("");
+    return `<div class="nav-group" data-group-id="${escapeAttr(groupId(g.label))}">
+      <button class="nav-group-head" type="button" aria-expanded="false"><span class="dot" style="background:#4a5c54;color:#4a5c54"></span>${escapeHtml(g.label)}<span class="caret" aria-hidden="true">▾</span></button>
       <div class="nav-sub">${kids}</div></div>`;
   }).join("");
   nav.querySelectorAll(".nav-group-head").forEach(h =>
@@ -591,39 +684,108 @@ buildNav();
 /* ---------- pages ---------- */
 const main = document.getElementById("main");
 const wrapEl = document.getElementById("wrapEl");
-const checkoutLive = !!CONFIG.checkoutUrl;
-const hasDiscord = !!CONFIG.discord;
-const hasMail = !!CONFIG.contactEmail;
+const topbar = document.querySelector(".topbar");
+const checkoutLive = !!SAFE_CONFIG.checkoutUrl;
+const hasDiscord = !!SAFE_CONFIG.discord;
+const hasMail = !!SAFE_CONFIG.contactEmail;
 const hasContact = hasDiscord || hasMail;
-const hasIp = !!CONFIG.serverIp;
+const hasIp = !!SAFE_CONFIG.serverIp;
 function money(n){ return "$" + n.toFixed(2) + " USD"; }
 function itemUrl(it){
-  if (it.url) return it.url;
-  if (checkoutLive && it.checkoutId) return CONFIG.checkoutUrl.replace(/\/$/,"") + "/package/" + it.checkoutId;
+  if (it.url) return safeExternalUrl(it.url);
+  if (checkoutLive && it.checkoutId && /^[a-z0-9-]+$/i.test(String(it.checkoutId))){
+    return SAFE_CONFIG.checkoutUrl.replace(/\/$/,"") + "/package/" + encodeURIComponent(it.checkoutId);
+  }
   return null;
 }
+function getPageFromHash(){
+  const raw = normalizeText(location.hash.replace(/^#/, ""));
+  if (!raw || raw.toLowerCase() === "home") return "home";
+  return Object.prototype.hasOwnProperty.call(CATALOG, raw) ? raw : "home";
+}
+function normalizeRoute(){
+  const page = getPageFromHash();
+  const canonicalHash = page === "home" ? "#home" : `#${page}`;
+  if (location.hash !== canonicalHash){
+    history.replaceState(null, "", canonicalHash);
+  }
+  return page;
+}
+function setMeta(name, content, property){
+  const selector = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
+  const el = document.querySelector(selector);
+  if (el) el.setAttribute("content", content);
+}
+function updateDocumentMeta(page){
+  const cat = CATALOG[page];
+  const suffix = cat ? `${cat.group ? `${cat.group} ${cat.label}` : cat.label} | MintHaven Store` : "MintHaven Store";
+  const description = cat ? `${cat.label} for MintHaven MC. ${cat.blurb}` : DEFAULT_DESC;
+  document.title = page === "home" ? DEFAULT_TITLE : `${suffix} — MintHaven`;
+  setMeta("description", description);
+  setMeta(null, page === "home" ? DEFAULT_TITLE : `${suffix} — MintHaven`, "og:title");
+  setMeta(null, description, "og:description");
+  setMeta("twitter:title", page === "home" ? DEFAULT_TITLE : `${suffix} — MintHaven`);
+  setMeta("twitter:description", description);
+  setMeta(null, `${SITE_URL}${page === "home" ? "" : canonicalHashPath(page)}`, "og:url");
+}
+function canonicalHashPath(page){
+  return page === "home" ? "" : `#${page}`;
+}
+function scrollForRoute(isCat){
+  if (!isCat){
+    window.scrollTo({ top:0, behavior:"auto" });
+    return;
+  }
+  requestAnimationFrame(() => {
+    const topOffset = (topbar ? topbar.offsetHeight : 0) + 12;
+    const top = main.getBoundingClientRect().top + window.scrollY - topOffset;
+    window.scrollTo({ top: Math.max(0, top), behavior:"auto" });
+    main.focus({ preventScroll:true });
+  });
+}
 function copyIp(){
-  navigator.clipboard.writeText(CONFIG.serverIp)
-    .then(() => showToast("Server IP copied!"))
-    .catch(() => showToast("Copy failed — IP: " + CONFIG.serverIp));
+  if (!hasIp) return;
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(SAFE_CONFIG.serverIp)
+      .then(() => showToast("Server IP copied!"))
+      .catch(() => fallbackCopyIp());
+    return;
+  }
+  fallbackCopyIp();
+}
+function fallbackCopyIp(){
+  const helper = document.createElement("textarea");
+  helper.value = SAFE_CONFIG.serverIp;
+  helper.setAttribute("readonly", "");
+  helper.className = "sr-only";
+  document.body.appendChild(helper);
+  helper.select();
+  try {
+    document.execCommand("copy");
+    showToast("Server IP copied!");
+  } catch {
+    showToast(`Server IP: ${SAFE_CONFIG.serverIp}`);
+  } finally {
+    helper.remove();
+  }
 }
 
 function serverCardHtml(){
   if (hasIp){
     return `<div class="server-card">
       <div class="sc-status on"><span class="dot"></span>Server Online</div>
-      <div class="sc-ip">${CONFIG.serverIp.toUpperCase()}</div>
+      <div class="sc-ip">${escapeHtml(SAFE_CONFIG.serverIp.toUpperCase())}</div>
       <div class="sc-note">Java Edition</div>
-      <button class="sc-copy" id="scCopy">Copy IP</button>
-      ${hasDiscord ? `<div class="sc-social"><a href="${CONFIG.discord}" target="_blank" rel="noopener">Discord</a></div>` : ""}
+      <button class="sc-copy" id="scCopy" type="button">Copy IP</button>
+      ${hasDiscord ? `<div class="sc-social"><a href="${escapeAttr(SAFE_CONFIG.discord)}" target="_blank" rel="noopener">Discord</a></div>` : ""}
     </div>`;
   }
   return `<div class="server-card">
     <div class="sc-status soon"><span class="dot"></span>Server Launching Soon</div>
     <div class="sc-ip muted">Address at launch</div>
     <div class="sc-note">The store is open now — the gates open soon.</div>
-    <button class="sc-copy" disabled>Copy IP — Soon</button>
-    ${hasDiscord ? `<div class="sc-social"><a href="${CONFIG.discord}" target="_blank" rel="noopener">Discord</a></div>` : ""}
+    <div class="buy-state" aria-hidden="true">IP At Launch</div>
+    ${hasDiscord ? `<div class="sc-social"><a href="${escapeAttr(SAFE_CONFIG.discord)}" target="_blank" rel="noopener">Discord</a></div>` : ""}
   </div>`;
 }
 
@@ -637,7 +799,7 @@ function homePage(){
         <p class="sub">MintHaven is a Minecraft network where adventure meets ownership. The store is open — the server opens its gates soon.</p>
         <div class="cta-row">
           <a class="btn btn-solid" href="#ranks">Browse the Store</a>
-          ${hasDiscord ? `<a class="btn btn-line" href="${CONFIG.discord}" target="_blank" rel="noopener">Join the Haven</a>` : ""}
+          ${hasDiscord ? `<a class="btn btn-line" href="${escapeAttr(SAFE_CONFIG.discord)}" target="_blank" rel="noopener">Join the Haven</a>` : ""}
         </div>
         <div class="chip-row">
           <span class="chip"><span class="d"></span>Survival</span>
@@ -653,7 +815,7 @@ function homePage(){
     <div class="sec-head">Featured in the store</div>
     <div class="feature-grid">
       <a class="fcard" href="#ranks">
-        <img src="assets/card-ranks.jpg" alt="">
+        <img src="assets/card-ranks.jpg" alt="MintHaven rank packages preview" loading="lazy" decoding="async">
         <div class="fc-body">
           <h3>Global Ranks</h3>
           <p>Permanent ranks with perks across every game mode — VIP through MVP.</p>
@@ -661,7 +823,7 @@ function homePage(){
         </div>
       </a>
       <a class="fcard" href="#survival-crates">
-        <img src="assets/card-crates.jpg" alt="">
+        <img src="assets/card-crates.jpg" alt="MintHaven crate key packages preview" loading="lazy" decoding="async">
         <div class="fc-body">
           <h3>Crate Keys</h3>
           <p>Samurai, Divine, Ultra and more — keys and bundles for Survival and Oneblock.</p>
@@ -669,7 +831,7 @@ function homePage(){
         </div>
       </a>
       <a class="fcard" href="#survival-claim">
-        <img src="assets/card-claim.jpg" alt="">
+        <img src="assets/card-claim.jpg" alt="MintHaven claim block packages preview" loading="lazy" decoding="async">
         <div class="fc-body">
           <h3>Claim Blocks</h3>
           <p>Protect more of your land in Survival — from 2k to 40k blocks.</p>
@@ -686,10 +848,10 @@ function homePage(){
       ${checkoutLive ? `
       <p><strong>Delivery:</strong> packages are applied to your account automatically. If your purchase hasn't arrived within 15 minutes, relog once${hasContact ? " — still missing? Contact us and we'll fix it" : ""}.</p>
       <p><strong>Important:</strong> make sure you enter your exact Minecraft username at checkout. All purchases are final.</p>` : `
-      <p><strong>Heads up:</strong> online checkout is opening soon — browse the packages now and check back shortly.</p>`}
+      <p><strong>Heads up:</strong> online checkout is opening soon — browse the packages now and check back shortly. Checkout buttons stay hidden until the real store URL is live.</p>`}
       ${hasContact ? `<div class="btn-row">
-        ${hasDiscord ? `<a class="btn btn-solid" href="${CONFIG.discord}" target="_blank" rel="noopener">Join our Discord</a>` : ""}
-        ${hasMail ? `<a class="btn btn-line" href="mailto:${CONFIG.contactEmail}">Contact</a>` : ""}
+        ${hasDiscord ? `<a class="btn btn-solid" href="${escapeAttr(SAFE_CONFIG.discord)}" target="_blank" rel="noopener">Join our Discord</a>` : ""}
+        ${hasMail ? `<a class="btn btn-line" href="mailto:${escapeAttr(SAFE_CONFIG.contactEmail)}">Contact</a>` : ""}
       </div>` : ""}
     </div>
   </section>`;
@@ -699,78 +861,109 @@ function catPage(key){
   const cat = CATALOG[key];
   const title = cat.group ? `${cat.group} — ${cat.label}` : cat.label;
   return `
-  <div class="cat-head panel"><span class="ct">${title}</span><span class="cb">${cat.blurb}</span></div>
+  <div class="cat-head panel"><span class="ct">${escapeHtml(title)}</span><span class="cb">${escapeHtml(cat.blurb)}</span></div>
   <div class="grid">
     ${cat.items.map(it => `
       <div class="prod panel">
         ${tileHtml(cat, it)}
-        <div class="name">${it.name}</div>
+        <div class="name">${escapeHtml(it.name)}</div>
         <div class="price">${money(it.price)}</div>
-        <button class="buy" data-cat="${key}" data-id="${it.id}" aria-label="Buy ${it.name} — ${money(it.price)}">Buy</button>
+        <button class="buy" type="button" data-cat="${escapeAttr(key)}" data-id="${escapeAttr(it.id)}" aria-label="${escapeAttr(`Buy ${it.name} — ${money(it.price)}`)}">Buy</button>
       </div>`).join("")}
   </div>`;
 }
 
 function render(){
-  const page = (location.hash || "#").slice(1) || "home";
+  const page = normalizeRoute();
   const isCat = page !== "home" && !!CATALOG[page];
+  updateDocumentMeta(page);
   wrapEl.classList.toggle("home-mode", !isCat);
-  document.querySelectorAll(".nav-item").forEach(el =>
-    el.classList.toggle("active", el.dataset.page === (isCat ? page : "home")));
+  document.querySelectorAll(".nav-item").forEach(el => {
+    const active = el.dataset.page === (isCat ? page : "home");
+    el.classList.toggle("active", active);
+    if (active) el.setAttribute("aria-current", "page");
+    else el.removeAttribute("aria-current");
+  });
   const topKey = !isCat ? "home" : (page === "ranks" ? "ranks" : (page.startsWith("survival") ? "survival" : "oneblock"));
-  document.querySelectorAll("#topNav a").forEach(el =>
-    el.classList.toggle("active", el.dataset.page === topKey));
+  document.querySelectorAll("#topNav a").forEach(el => {
+    const active = el.dataset.page === topKey;
+    el.classList.toggle("active", active);
+    if (active) el.setAttribute("aria-current", "page");
+    else el.removeAttribute("aria-current");
+  });
+  nav.querySelectorAll(".nav-group").forEach(group => {
+    group.classList.remove("open");
+    const head = group.querySelector(".nav-group-head");
+    if (head) head.setAttribute("aria-expanded", "false");
+  });
   if (isCat && CATALOG[page].group){
-    const g = nav.querySelector(`.nav-group[data-group="${CATALOG[page].group}"]`);
-    if (g){ g.classList.add("open"); g.querySelector(".nav-group-head").setAttribute("aria-expanded","true"); }
+    const targetGroupId = groupId(CATALOG[page].group);
+    const g = Array.from(nav.querySelectorAll(".nav-group"))
+      .find(group => group.dataset.groupId === targetGroupId);
+    if (g){
+      g.classList.add("open");
+      const head = g.querySelector(".nav-group-head");
+      if (head) head.setAttribute("aria-expanded", "true");
+    }
   }
   main.innerHTML = isCat ? catPage(page) : homePage();
-  if (!isCat){
-    const sc = document.getElementById("scCopy");
-    if (sc) sc.onclick = copyIp;
-  }
-  if (isCat && window.matchMedia("(max-width:900px)").matches) main.scrollIntoView();
-  else window.scrollTo({top:0});
+  main.setAttribute("aria-label", isCat ? `${CATALOG[page].label} catalog` : "MintHaven store home");
+  scrollForRoute(isCat && window.matchMedia("(max-width:900px)").matches);
 }
 window.addEventListener("hashchange", () => { closeModal(); render(); });
 
 /* ---------- buy modal ---------- */
 const modalBg = document.getElementById("modalBg");
+const modalCard = document.getElementById("modalCard");
+const modalGo = document.getElementById("modalGo");
+const modalClose = document.getElementById("modalClose");
 let lastFocus = null;
 function closeModal(){
   if (!modalBg.classList.contains("open")) return;
   modalBg.classList.remove("open");
-  if (lastFocus) { lastFocus.focus(); lastFocus = null; }
+  modalBg.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+  modalGo.removeAttribute("href");
+  if (lastFocus && document.contains(lastFocus)) { lastFocus.focus(); }
+  lastFocus = null;
 }
 main.addEventListener("click", e => {
+  const copyButton = e.target.closest("#scCopy");
+  if (copyButton){
+    copyIp();
+    return;
+  }
   const b = e.target.closest(".buy");
   if (!b) return;
   const cat = CATALOG[b.dataset.cat];
+  if (!cat) return;
   const it = cat.items.find(x => x.id === b.dataset.id);
+  if (!it) return;
   document.getElementById("modalArtWrap").innerHTML = tileHtml(cat, it);
   document.getElementById("modalName").textContent = it.name;
   document.getElementById("modalPrice").textContent = money(it.price);
-  const go = document.getElementById("modalGo");
   const msg = document.getElementById("modalMsg");
   const url = itemUrl(it);
   if (url){
-    go.style.display = "inline-flex";
-    go.href = url;
+    modalGo.style.display = "inline-flex";
+    modalGo.href = url;
     msg.textContent = "You'll finish this purchase on our checkout.";
   } else {
-    go.style.display = "none";
+    modalGo.style.display = "none";
     msg.textContent = "Online checkout is opening soon. " + (hasDiscord ? "Join the Discord to get notified the moment it's live." : "Check back shortly!");
   }
   lastFocus = b;
   modalBg.classList.add("open");
-  document.getElementById("modalClose").focus();
+  modalBg.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+  modalCard.focus();
 });
-document.getElementById("modalClose").onclick = closeModal;
+modalClose.onclick = closeModal;
 modalBg.addEventListener("click", e => { if (e.target === modalBg) closeModal(); });
 window.addEventListener("keydown", e => {
   if (e.key === "Escape") closeModal();
   if (e.key === "Tab" && modalBg.classList.contains("open")){
-    const focusables = [document.getElementById("modalGo"), document.getElementById("modalClose")]
+    const focusables = [modalGo, modalClose]
       .filter(el => el.style.display !== "none");
     const first = focusables[0], last = focusables[focusables.length - 1];
     if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
@@ -781,19 +974,27 @@ window.addEventListener("keydown", e => {
 
 /* ---------- top bar / footer ---------- */
 const toast = document.getElementById("toast");
+let toastTimer = null;
 function showToast(text){
+  if (toastTimer) clearTimeout(toastTimer);
   toast.textContent = text;
   toast.classList.add("show");
-  setTimeout(() => { toast.classList.remove("show"); toast.textContent = ""; }, 2200);
+  toastTimer = window.setTimeout(() => {
+    toast.classList.remove("show");
+    toast.textContent = "";
+    toastTimer = null;
+  }, 2200);
 }
 const playBtn = document.getElementById("playBtn");
 if (hasIp){
   document.getElementById("playBtnText").textContent = "Play Now";
   playBtn.title = "Copy server IP";
+  playBtn.setAttribute("aria-label", "Copy server IP");
   playBtn.onclick = copyIp;
 } else {
   playBtn.classList.add("soon");
   playBtn.disabled = true;
+  playBtn.setAttribute("aria-disabled", "true");
   document.getElementById("playBtnText").textContent = "Launching Soon";
 }
 document.getElementById("sideHelp").textContent = hasContact
