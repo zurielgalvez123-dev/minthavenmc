@@ -64,7 +64,7 @@ img,svg{display:block}
   font-size:13px;font-weight:800;letter-spacing:.4px;
   transition:border-color .15s, transform .1s;
 }
-.ip-chip.dead{color:var(--ink-3);background:var(--surface-2);cursor:default}
+.ip-chip.dead{color:var(--ink-2);background:var(--surface-2);cursor:default}
 .ip-chip:active{transform:scale(.98)}
 .ip-chip .hint{color:var(--ink-3);font-weight:700;letter-spacing:0}
 .top-right{grid-column:3;justify-self:end;display:flex;align-items:center;gap:10px}
@@ -73,7 +73,7 @@ img,svg{display:block}
   background:var(--surface);border:2px solid var(--line);border-radius:var(--r-pill);
   padding:8px 16px;font-size:13px;font-weight:800;color:var(--ink-2);
 }
-.currency{font-size:13px;font-weight:800;color:var(--ink-3);padding:8px 4px}
+.currency{font-size:13px;font-weight:800;color:var(--ink-2);padding:8px 4px}
 
 /* ---------- layout ---------- */
 .wrap{
@@ -95,7 +95,7 @@ img,svg{display:block}
   display:flex;align-items:center;justify-content:center;
 }
 .logo-mk svg{width:46px;height:46px;image-rendering:pixelated}
-.logo-name{font-family:var(--f-disp);font-weight:800;font-size:22px;color:var(--ink)}
+.logo-name{font-family:var(--f-disp);font-weight:800;font-size:22px;color:var(--ink);line-height:1.15}
 .logo-sub{font-size:13px;color:var(--ink-2);margin-top:2px;font-weight:700}
 .nav-card{background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden;padding:8px}
 .nav-item{
@@ -127,19 +127,19 @@ img,svg{display:block}
 .main{display:flex;flex-direction:column;gap:20px;min-width:0;scroll-margin-top:76px}
 .banner{
   border-radius:var(--r-lg);box-shadow:var(--shadow-lg);
-  background:linear-gradient(135deg,#5fe08a,#31a75d 65%,#2b9151);
+  background:linear-gradient(135deg,#28874e,#1e6f41);
   padding:34px 30px;position:relative;overflow:hidden;color:#fff;
 }
 .banner::after{
   content:"";position:absolute;inset:0;
   background:
-    radial-gradient(340px 200px at 88% -40px, rgba(255,255,255,.28), transparent 70%),
+    radial-gradient(300px 160px at 92% -50px, rgba(255,255,255,.18), transparent 70%),
     repeating-linear-gradient(0deg, transparent 0 30px, rgba(255,255,255,.045) 30px 32px),
     repeating-linear-gradient(90deg, transparent 0 30px, rgba(255,255,255,.045) 30px 32px);
   pointer-events:none;
 }
-.banner h1{font-family:var(--f-disp);font-weight:800;font-size:30px;position:relative}
-.banner p{position:relative;margin-top:6px;font-weight:700;font-size:15px;color:rgba(255,255,255,.92);max-width:520px;line-height:1.55}
+.banner h1{font-family:var(--f-disp);font-weight:800;font-size:30px;position:relative;line-height:1.15}
+.banner p{position:relative;margin-top:8px;font-weight:700;font-size:15px;color:#fff;max-width:520px;line-height:1.55}
 .card{
   background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
   padding:22px;
@@ -186,7 +186,7 @@ img,svg{display:block}
   font-size:13px;font-weight:800;padding:2px 10px;box-shadow:var(--shadow);
 }
 .prod .name{font-family:var(--f-disp);font-size:16px;font-weight:700;color:var(--ink);line-height:1.25}
-.prod .price{font-size:14px;font-weight:800;color:var(--ink-2);margin-bottom:9px}
+.prod .price{font-family:var(--f-disp);font-size:16px;font-weight:800;color:var(--ink);margin-bottom:9px}
 .prod .buy{
   width:100%;max-width:170px;min-height:44px;
   background:var(--green);color:#fff;border-radius:var(--r-pill);
@@ -230,7 +230,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);margin-top:aut
 .modal .tile{height:120px;max-width:200px;margin:0 auto 6px}
 .modal h3{font-family:var(--f-disp);font-weight:800;font-size:20px;color:var(--ink);margin-bottom:2px}
 .modal .mp{font-size:15px;color:var(--ink-2);font-weight:600;line-height:1.6;margin:10px 0 18px}
-.modal .price-line{font-size:16px;font-weight:800;color:var(--ink-2)}
+.modal .price-line{font-family:var(--f-disp);font-size:17px;font-weight:800;color:var(--ink)}
 .modal .btn + .btn{margin-left:8px}
 
 /* ---------- toast ---------- */
@@ -252,7 +252,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);margin-top:aut
   .main{order:2}
   .side-note{order:3}
   .topbar-inner{display:flex;justify-content:space-between;height:60px;padding:0 12px}
-  .brand span{display:none}
+  .brand span:not(.brand-mk){display:none}
   .ip-chip .hint{display:none}
   .grid{grid-template-columns:repeat(2,1fr)}
 }
@@ -335,8 +335,8 @@ const CATALOG = {
       { id:"con5",  name:"5 Infinite Concrete Key Bundle",   price:14.98, art:"key-grey", badge:"×5" },
       { id:"con10", name:"10 Infinite Concrete Key Bundle",  price:19.98, art:"key-grey", badge:"×10" },
       { id:"gla1",  name:"Infinite Stained Glass Key",       price:3.50,  art:"key-cyan" },
-      { id:"gla5",  name:"5 Infinite Stained Glass Bundle",  price:14.98, art:"key-cyan", badge:"×5" },
-      { id:"gla10", name:"10 Infinite Stained Glass Bundle", price:19.98, art:"key-cyan", badge:"×10" }
+      { id:"gla5",  name:"5 Infinite Stained Glass Key Bundle",  price:14.98, art:"key-cyan", badge:"×5" },
+      { id:"gla10", name:"10 Infinite Stained Glass Key Bundle", price:19.98, art:"key-cyan", badge:"×10" }
     ]
   },
   "oneblock-crates": {
@@ -388,7 +388,7 @@ const CATALOG = {
 <!-- ============ top bar ============ -->
 <div class="topbar">
   <div class="topbar-inner">
-    <a class="brand" href="#"><span class="brand-mk"></span><span>MintHaven</span></a>
+    <a class="brand" href="#" aria-label="MintHaven — store home"><span class="brand-mk"></span><span>MintHaven</span></a>
     <button class="ip-chip" id="ipChip">
       <span id="ipText"></span>
       <span class="hint" id="ipHint"></span>
@@ -479,7 +479,7 @@ const STAR = [
   [5,5,6,6,"#ffcb45"],[6,6,4,4,"#ffd97a"],[7,7,2,2,"#fff3d4"]
 ];
 const CLOUD = [
-  [3,4,10,3,"#ffffff"],[4,3,8,1,"#ffffff"],[3,7,10,1,"#dfe9f4"],
+  [3,4,10,3,"#f2f6fb"],[4,3,8,1,"#ffffff"],[3,7,10,1,"#b9c6d6"],
   [4,9,1,2,"#3ea6f0"],[7,10,1,2,"#3ea6f0"],[10,9,1,2,"#3ea6f0"],[6,12,1,2,"#3ea6f0"],[9,13,1,2,"#3ea6f0"]
 ];
 const ART = {
@@ -538,11 +538,14 @@ function buildNav(){
     const kids = g.children.map(c =>
       `<a class="nav-item" data-page="${c.key}" href="#${c.key}"><span class="dot" style="background:${c.dot}"></span>${c.label}</a>`).join("");
     return `<div class="nav-group" data-group="${g.label}">
-      <button class="nav-group-head" type="button"><span class="dot" style="background:#93a09b"></span>${g.label}<span class="caret">▾</span></button>
+      <button class="nav-group-head" type="button" aria-expanded="false"><span class="dot" style="background:#93a09b"></span>${g.label}<span class="caret">▾</span></button>
       <div class="nav-sub">${kids}</div></div>`;
   }).join("");
   nav.querySelectorAll(".nav-group-head").forEach(h =>
-    h.addEventListener("click", () => h.parentElement.classList.toggle("open")));
+    h.addEventListener("click", () => {
+      h.parentElement.classList.toggle("open");
+      h.setAttribute("aria-expanded", h.parentElement.classList.contains("open"));
+    }));
 }
 buildNav();
 
@@ -590,19 +593,19 @@ function catPage(key){
         ${tileHtml(cat, it)}
         <div class="name">${it.name}</div>
         <div class="price">${money(it.price)}</div>
-        <button class="buy" data-cat="${key}" data-id="${it.id}">Buy</button>
+        <button class="buy" data-cat="${key}" data-id="${it.id}" aria-label="Buy ${it.name} — ${money(it.price)}">Buy</button>
       </div>`).join("")}
   </div>`;
 }
 
 function render(){
   const page = (location.hash || "#").slice(1) || "home";
-  const isCat = page !== "home" && Object.hasOwn(CATALOG, page);
+  const isCat = page !== "home" && !!CATALOG[page];
   document.querySelectorAll(".nav-item").forEach(el =>
     el.classList.toggle("active", el.dataset.page === (isCat ? page : "home")));
   if (isCat && CATALOG[page].group){
     const g = nav.querySelector(`.nav-group[data-group="${CATALOG[page].group}"]`);
-    if (g) g.classList.add("open");
+    if (g){ g.classList.add("open"); g.querySelector(".nav-group-head").setAttribute("aria-expanded","true"); }
   }
   main.innerHTML = isCat ? catPage(page) : homePage();
   if (isCat && window.matchMedia("(max-width:900px)").matches) main.scrollIntoView();
@@ -643,7 +646,17 @@ main.addEventListener("click", e => {
 });
 document.getElementById("modalClose").onclick = closeModal;
 modalBg.addEventListener("click", e => { if (e.target === modalBg) closeModal(); });
-window.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+window.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeModal();
+  if (e.key === "Tab" && modalBg.classList.contains("open")){
+    const focusables = [document.getElementById("modalGo"), document.getElementById("modalClose")]
+      .filter(el => el.style.display !== "none");
+    const first = focusables[0], last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    else if (!focusables.includes(document.activeElement)){ e.preventDefault(); first.focus(); }
+  }
+});
 
 /* ---------- top bar / footer ---------- */
 const chip = document.getElementById("ipChip");
