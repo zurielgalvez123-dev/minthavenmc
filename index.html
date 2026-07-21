@@ -418,9 +418,10 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
 <!-- ============ CONFIG — edit these to go live ============ -->
 <script>
 const CONFIG = {
-  // TODO real server address. Empty = "launching soon" states everywhere.
+  // DNS ready (play.minthavenmc.com → server via A+SRV). Kept EMPTY until the
+  // server build (Survival/Oneblock/Geyser) is done + whitelist off — then flip live.
   serverIp: "",
-  javaVersion: "Java Edition",                // shown under the IP on the server card
+  javaVersion: "Java + Bedrock",              // shown under the IP on the server card
   playersOnline: "",                          // e.g. "1,248" — empty = no player count shown (never fake it)
   discord:  "https://discord.gg/S7c74MQbDR",  // MintHaven Discord invite (permanent)
   twitter:  "",                               // TODO full https URL (empty = hidden)
