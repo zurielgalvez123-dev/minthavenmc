@@ -450,13 +450,12 @@ const CONFIG = {
    once Tebex is up → composes checkoutUrl + "/package/" + checkoutId). */
 const CATALOG = {
   "ranks": {
-    label:"Global Ranks", tile:"mint", blurb:"Permanent ranks across all game modes.",
+    label:"Global Ranks", tile:"mint", blurb:"Permanent cosmetic ranks across all game modes.",
     items:[
-      { id:"vip",  name:"VIP",   price:15.00, art:"helm-iron" },
-      { id:"vipp", name:"VIP +", price:20.00, art:"helm-gold" },
-      { id:"pro",  name:"Pro",   price:30.00, art:"helm-dia" },
-      { id:"prop", name:"Pro +", price:45.00, art:"helm-em" },
-      { id:"mvp",  name:"MVP",   price:75.00, art:"crown" }
+      { id:"vip",   name:"VIP",   price:9.99,  art:"helm-iron" },
+      { id:"pro",   name:"Pro",   price:14.99, art:"helm-dia",  badge:"POPULAR" },
+      { id:"mvp",   name:"MVP",   price:19.99, art:"helm-gold" },
+      { id:"haven", name:"HAVEN", price:29.99, art:"crown" }
     ]
   },
   "survival-crates": {
