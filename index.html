@@ -232,6 +232,21 @@ button.sc-copy:hover{filter:brightness(1.08)} button.sc-copy:active{transform:tr
   .fcard .fc-btn:hover{border-color:var(--mint);color:var(--mint)}
 }
 
+/* crate worlds */
+.world-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:22px}
+.wcard{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .15s, border-color .15s, box-shadow .15s;
+}
+.wc-img{width:100%;aspect-ratio:1;overflow:hidden;border-bottom:1px solid var(--line)}
+.wcard .wc-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.wcard .wc-body{padding:16px 14px 18px;display:flex;flex-direction:column;align-items:center;gap:10px;flex:1}
+.wcard h3{font-family:var(--disp);font-weight:600;font-size:17px;letter-spacing:1.6px;text-transform:uppercase;text-align:center;flex:1}
+@media(hover:hover){
+  .wcard:hover{transform:translateY(-4px);border-color:var(--mint);box-shadow:0 14px 40px rgba(0,0,0,.45), 0 0 24px rgba(53,224,162,.12)}
+  .wcard:hover .wc-img img{transform:scale(1.05)}
+}
+
 /* ---------- store layout (category pages) ---------- */
 .wrap{
   width:100%;max-width:1280px;margin:26px auto 30px;padding:0 20px;
@@ -364,7 +379,7 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
 
 /* ---------- responsive ---------- */
 @media(max-width:1100px){
-  .feature-grid{grid-template-columns:repeat(3,1fr);gap:14px}
+  .feature-grid,.world-grid{grid-template-columns:repeat(3,1fr);gap:14px}
 }
 @media(max-width:1000px){
   .hero-inner{grid-template-columns:1fr;padding:44px 18px}
@@ -388,7 +403,7 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
   .brand .bn{font-size:16px}
 }
 @media(max-width:660px){
-  .feature-grid{grid-template-columns:repeat(2,1fr)}
+  .feature-grid,.world-grid{grid-template-columns:repeat(2,1fr)}
   .stats-bar{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:520px){
@@ -396,11 +411,11 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
   .play-btn{display:none}
 }
 @media(max-width:440px){
-  .feature-grid{grid-template-columns:1fr}
+  .feature-grid,.world-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .btn,.fcard,.fc-btn,.fc-img img,.nav-item,.prod,.prod .buy,.toast,.nav-group-head .caret,.chip{transition:none}
+  .btn,.fcard,.fc-btn,.fc-img img,.wcard,.wc-img img,.nav-item,.prod,.prod .buy,.toast,.nav-group-head .caret,.chip{transition:none}
 }
 </style>
 </head>
@@ -534,6 +549,16 @@ const CATALOG = {
     ]
   }
 };
+
+/* CRATE WORLDS — themed crate showcase on the homepage. Keys aren't sellable yet:
+   no prices/links on purpose — cards render an honest "Keys Coming Soon" state. */
+const WORLDS = [
+  { id:"world-dragons-hoard", name:"Dragon's Hoard", img:"world-dragon.jpg" },
+  { id:"world-crystal",       name:"Crystal",        img:"world-crystal.jpg" },
+  { id:"world-galaxy",        name:"Galaxy",         img:"world-galaxy.jpg" },
+  { id:"world-halloween",     name:"Halloween",      img:"world-halloween.jpg" },
+  { id:"world-mech-hero",     name:"Mech Hero",      img:"world-mechhero.jpg" }
+];
 </script>
 
 <!-- ============ top nav ============ -->
@@ -946,6 +971,20 @@ function homePage(){
           <span class="fc-btn">${escapeHtml(f.cta)} ›</span>
         </div>
       </a>`).join("")}
+    </div>
+  </section>
+
+  <section class="section" id="worlds">
+    <div class="sec-head">Crate Worlds</div>
+    <div class="world-grid">
+      ${WORLDS.map(w => `
+      <div class="wcard" id="${escapeAttr(w.id)}">
+        <div class="wc-img"><img src="assets/${escapeAttr(w.img)}" alt="${escapeAttr(`${w.name} crate key art`)}" loading="lazy" decoding="async"></div>
+        <div class="wc-body">
+          <h3>${escapeHtml(w.name)}</h3>
+          <span class="buy-state">Keys Coming Soon</span>
+        </div>
+      </div>`).join("")}
     </div>
   </section>
 
