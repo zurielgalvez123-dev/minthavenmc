@@ -232,6 +232,21 @@ button.sc-copy:hover{filter:brightness(1.08)} button.sc-copy:active{transform:tr
   .fcard .fc-btn:hover{border-color:var(--mint);color:var(--mint)}
 }
 
+/* crate worlds */
+.world-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:22px}
+.wcard{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .15s, border-color .15s, box-shadow .15s;
+}
+.wc-img{width:100%;aspect-ratio:1;overflow:hidden;border-bottom:1px solid var(--line)}
+.wcard .wc-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.wcard .wc-body{padding:16px 14px 18px;display:flex;flex-direction:column;align-items:center;gap:10px;flex:1}
+.wcard h3{font-family:var(--disp);font-weight:600;font-size:17px;letter-spacing:1.6px;text-transform:uppercase;text-align:center;flex:1}
+@media(hover:hover){
+  .wcard:hover{transform:translateY(-4px);border-color:var(--mint);box-shadow:0 14px 40px rgba(0,0,0,.45), 0 0 24px rgba(53,224,162,.12)}
+  .wcard:hover .wc-img img{transform:scale(1.05)}
+}
+
 /* ---------- store layout (category pages) ---------- */
 .wrap{
   width:100%;max-width:1280px;margin:26px auto 30px;padding:0 20px;
@@ -364,7 +379,7 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
 
 /* ---------- responsive ---------- */
 @media(max-width:1100px){
-  .feature-grid{grid-template-columns:repeat(3,1fr);gap:14px}
+  .feature-grid,.world-grid{grid-template-columns:repeat(3,1fr);gap:14px}
 }
 @media(max-width:1000px){
   .hero-inner{grid-template-columns:1fr;padding:44px 18px}
@@ -388,7 +403,7 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
   .brand .bn{font-size:16px}
 }
 @media(max-width:660px){
-  .feature-grid{grid-template-columns:repeat(2,1fr)}
+  .feature-grid,.world-grid{grid-template-columns:repeat(2,1fr)}
   .stats-bar{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:520px){
@@ -396,11 +411,11 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
   .play-btn{display:none}
 }
 @media(max-width:440px){
-  .feature-grid{grid-template-columns:1fr}
+  .feature-grid,.world-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .btn,.fcard,.fc-btn,.fc-img img,.nav-item,.prod,.prod .buy,.toast,.nav-group-head .caret,.chip{transition:none}
+  .btn,.fcard,.fc-btn,.fc-img img,.wcard,.wc-img img,.nav-item,.prod,.prod .buy,.toast,.nav-group-head .caret,.chip{transition:none}
 }
 </style>
 </head>
@@ -418,9 +433,9 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
 <!-- ============ CONFIG — edit these to go live ============ -->
 <script>
 const CONFIG = {
-  // DNS ready (play.minthavenmc.com → server via A+SRV). Kept EMPTY until the
-  // server build (Survival/Oneblock/Geyser) is done + whitelist off — then flip live.
-  serverIp: "",
+  // LIVE 2026-08-04: A + SRV (_minecraft._tcp.play) both resolve, mcsrvstat reports
+  // online on 9175. Players connect with the bare hostname, no port.
+  serverIp: "play.minthavenmc.com",
   javaVersion: "Java + Bedrock",              // shown under the IP on the server card
   playersOnline: "",                          // e.g. "1,248" — empty = no player count shown (never fake it)
   discord:  "https://discord.gg/S7c74MQbDR",  // MintHaven Discord invite (permanent)
@@ -436,18 +451,22 @@ const CONFIG = {
   // Homepage stats strip. Keep these TRUE — swap to real metrics as they become real.
   stats: [
     { n:"2",    l:"Game Modes" },
-    { n:"50+",  l:"Store Packages" },
+    { n:"4",    l:"Store Packages" },
     { n:"100%", l:"Player-Driven" },
-    { n:"2026", l:"Launching" },
-    { n:"Open", l:"Store Live Now" }
+    { n:"2026", l:"Launching" }
   ],
   // "Trusted by" partner logos. Leave empty until real partnerships exist (strip hides itself).
   partners: []
 };
 
-/* CATALOG — structure + pricing cloned from store.pixelblockmc.com 2026-07-20
-   (brand-specific names swapped). Per item: url = full checkout link (or checkoutId
-   once Tebex is up → composes checkoutUrl + "/package/" + checkoutId). */
+/* CATALOG — every entry here MUST exist on Tebex and be deliverable in game.
+   As of 2026-08-04 that is exactly the four ranks: Tebex /listing returns one category
+   (Ranks) with 4 packages, and /plugins/ExcellentCrates/keys holds two keys that have no
+   Tebex package yet. The 45 crate/claim/furniture SKUs that used to live here were
+   cloned from another server's store in July and none of them existed — including a
+   purchasable mob spawner, which would have been pay-to-win even if it had.
+   Per item: url = full checkout link (or checkoutId once Tebex is up → composes
+   checkoutUrl + "/package/" + checkoutId). */
 const CATALOG = {
   "ranks": {
     label:"Global Ranks", tile:"mint", blurb:"Permanent cosmetic ranks across all game modes.",
@@ -458,82 +477,17 @@ const CATALOG = {
       { id:"haven", name:"HAVEN", price:29.99, art:"crown" }
     ]
   },
-  "survival-crates": {
-    label:"Crates", group:"Survival", tile:"blue", blurb:"Crate keys for the Survival mode.",
-    items:[
-      { id:"sam1",   name:"Samurai Crate Key",          price:4.00,   art:"key-red" },
-      { id:"sam10",  name:"10 Samurai Key Bundle",      price:23.87,  art:"key-red",  badge:"×10" },
-      { id:"sam35",  name:"35 Samurai Key Bundle Pack", price:67.50,  art:"key-red",  badge:"×35" },
-      { id:"sam100", name:"100 Samurai Key Bundle",     price:195.00, art:"key-red",  badge:"×100" },
-      { id:"div1",   name:"Divine Key",                 price:4.00,   art:"key-gold" },
-      { id:"div10",  name:"10 Divine Key Bundle",       price:23.87,  art:"key-gold", badge:"×10" },
-      { id:"divall", name:"Divine Key All!",            price:40.00,  art:"key-gold" },
-      { id:"div35",  name:"35 Divine Key Pack",         price:67.50,  art:"key-gold", badge:"×35" },
-      { id:"div100", name:"100 Divine Key Pack",        price:195.00, art:"key-gold", badge:"×100" },
-      { id:"ultra",  name:"Ultra Crate Key",            price:3.00,   art:"key-cyan" },
-      { id:"spawn",  name:"Spawner Crate Key",          price:5.00,   art:"key-blue" },
-      { id:"mhkey",  name:"MintHaven Crate Key",        price:6.00,   art:"key-mint" },
-      { id:"kb1",    name:"Key Bundle I",               price:17.75,  art:"key-mint", badge:"I" },
-      { id:"kb2",    name:"Key Bundle II",              price:47.75,  art:"key-mint", badge:"II" },
-      { id:"kb3",    name:"Key Bundle III",             price:120.00, art:"key-mint", badge:"III" }
-    ]
-  },
-  "survival-claim": {
-    label:"Claim Blocks", group:"Survival", tile:"amber", blurb:"Protect more land in Survival.",
-    items:[
-      { id:"cb2",  name:"2k Claim Blocks",  price:2.00,  art:"block" },
-      { id:"cb5",  name:"5k Claim Blocks",  price:3.50,  art:"block", badge:"5k" },
-      { id:"cb10", name:"10k Claim Blocks", price:7.00,  art:"block", badge:"10k" },
-      { id:"cb40", name:"40k Claim Blocks", price:20.00, art:"block", badge:"40k" }
-    ]
-  },
-  "survival-misc": {
-    label:"Miscellaneous", group:"Survival", tile:"purple", blurb:"Extras for the Survival mode.",
-    items:[
-      { id:"pass",  name:"Mint Pass Premium", price:14.98, art:"ticket" },
-      { id:"title", name:"Custom Title",      price:17.50, art:"star" },
-      { id:"rain",  name:"Make it Rain",      price:17.50, art:"cloud" }
-    ]
-  },
-  "survival-furniture": {
-    label:"Furniture", group:"Survival", tile:"teal", blurb:"Infinite build blocks for decorating.",
-    items:[
-      { id:"con1",  name:"Infinite Concrete Key",                price:3.50,  art:"key-grey" },
-      { id:"con5",  name:"5 Infinite Concrete Key Bundle",       price:14.98, art:"key-grey", badge:"×5" },
-      { id:"con10", name:"10 Infinite Concrete Key Bundle",      price:19.98, art:"key-grey", badge:"×10" },
-      { id:"gla1",  name:"Infinite Stained Glass Key",           price:3.50,  art:"key-cyan" },
-      { id:"gla5",  name:"5 Infinite Stained Glass Key Bundle",  price:14.98, art:"key-cyan", badge:"×5" },
-      { id:"gla10", name:"10 Infinite Stained Glass Key Bundle", price:19.98, art:"key-cyan", badge:"×10" }
-    ]
-  },
-  "oneblock-crates": {
-    label:"Crates", group:"Oneblock", tile:"blue", blurb:"Crate keys for the Oneblock mode.",
-    items:[
-      { id:"osam1",   name:"Samurai Crate Key",          price:4.00,   art:"key-red" },
-      { id:"osam10",  name:"10 Samurai Key Bundle",      price:23.87,  art:"key-red",  badge:"×10" },
-      { id:"osam35",  name:"35 Samurai Key Bundle Pack", price:67.50,  art:"key-red",  badge:"×35" },
-      { id:"osam100", name:"100 Samurai Key Bundle",     price:195.00, art:"key-red",  badge:"×100" },
-      { id:"odiv1",   name:"Divine Key",                 price:4.00,   art:"key-gold" },
-      { id:"odiv10",  name:"10 Divine Key Bundle",       price:23.87,  art:"key-gold", badge:"×10" },
-      { id:"odivall", name:"Divine Key All!",            price:40.00,  art:"key-gold" },
-      { id:"odiv35",  name:"35 Divine Key Pack",         price:67.50,  art:"key-gold", badge:"×35" },
-      { id:"odiv100", name:"100 Divine Key Pack",        price:195.00, art:"key-gold", badge:"×100" },
-      { id:"tulip",   name:"Tulip Crate Key",            price:6.00,   art:"key-pink" },
-      { id:"ospawn",  name:"Spawner Crate Key",          price:6.00,   art:"key-blue" },
-      { id:"okb1",    name:"Key Bundle I",               price:35.35,  art:"key-mint", badge:"I" },
-      { id:"okb2",    name:"Key Bundle II",              price:75.00,  art:"key-mint", badge:"II" },
-      { id:"okb3",    name:"Key Bundle III",             price:120.00, art:"key-mint", badge:"III" }
-    ]
-  },
-  "oneblock-misc": {
-    label:"Miscellaneous", group:"Oneblock", tile:"purple", blurb:"Extras for the Oneblock mode.",
-    items:[
-      { id:"opass",  name:"Mint Pass Premium", price:14.98, art:"ticket" },
-      { id:"otitle", name:"Custom Title",      price:17.50, art:"star" },
-      { id:"orain",  name:"Make it Rain",      price:17.50, art:"cloud" }
-    ]
-  }
 };
+
+/* CRATE WORLDS — themed crate showcase on the homepage. Keys aren't sellable yet:
+   no prices/links on purpose — cards render an honest "Keys Coming Soon" state. */
+const WORLDS = [
+  { id:"world-dragons-hoard", name:"Dragon's Hoard", img:"world-dragon.jpg" },
+  { id:"world-crystal",       name:"Crystal",        img:"world-crystal.jpg" },
+  { id:"world-galaxy",        name:"Galaxy",         img:"world-galaxy.jpg" },
+  { id:"world-halloween",     name:"Halloween",      img:"world-halloween.jpg" },
+  { id:"world-mech-hero",     name:"Mech Hero",      img:"world-mechhero.jpg" }
+];
 </script>
 
 <!-- ============ top nav ============ -->
@@ -548,7 +502,6 @@ const CATALOG = {
       <a href="#home" data-page="home">Home</a>
       <a href="#home" data-scroll="about">About</a>
       <a href="#home" data-scroll="economy">Economy</a>
-      <a href="#home" data-scroll="nfts">NFTs</a>
       <a href="#home" data-scroll="community">Community</a>
       <a href="#ranks" data-page="shop">Shop</a>
     </nav>
@@ -884,16 +837,16 @@ function serverCardHtml(){
 }
 
 const CHIPS = [
-  { l:"Survival",    s:"#survival-crates" },
-  { l:"Oneblock",    s:"#oneblock-crates" },
+  { l:"Ranks",       s:"#ranks" },
+  { l:"Crate Worlds", s:"worlds", scroll:true },
   { l:"Player Economy", s:"economy", scroll:true },
   { l:"Community",   s:"community", scroll:true }
 ];
 const FEATURES = [
   { id:"economy",   img:"card-ranks.jpg",     h:"Global Ranks",    p:"Permanent ranks with perks across every game mode — VIP through MVP.",         cta:"View Ranks",        href:"#ranks" },
-  { id:"crates",    img:"card-crates.jpg",    h:"Crate Keys",      p:"Samurai, Divine, Ultra and more — keys and bundles for Survival and Oneblock.", cta:"View Crates",       href:"#survival-crates" },
-  { id:"nfts",      img:"card-claim.jpg",     h:"Claim Blocks",    p:"Protect more of your land in Survival — from 2k to 40k blocks.",                cta:"View Claim Blocks", href:"#survival-claim" },
-  { id:"oneblock",  img:"card-oneblock.jpg",  h:"Oneblock",        p:"Crates, cosmetics and more built for the Oneblock game mode.",                  cta:"View Oneblock",     href:"#oneblock-crates" },
+  { id:"crates",    img:"card-crates.jpg",    h:"Crate Keys",      p:"Dragon's Hoard and Galactic Order are live in game. Keys are not on the store yet — earn them by voting and playing.", cta:"See the Crates",    href:"#worlds" },
+  { id:"claims",    img:"card-claim.jpg",     h:"Land Claims",     p:"Claim and protect your build in Survival with /claim — free, and yours from the first block you place.", cta:"How Claims Work",  href:"#about" },
+  { id:"oneblock",  img:"card-oneblock.jpg",  h:"Oneblock",        p:"Start on a single block and build a world out of it. A full second game mode, included — no purchase.", cta:"Join and Play",     href:"#about" },
   { id:"community", img:"card-community.jpg", h:"Community",       p:"Join a growing world of players and builders. Everyone's welcome at MintHaven.", cta:hasDiscord?"Join Discord":"Browse Store", href:hasDiscord?SAFE_CONFIG.discord:"#ranks", ext:hasDiscord }
 ];
 
@@ -946,6 +899,20 @@ function homePage(){
           <span class="fc-btn">${escapeHtml(f.cta)} ›</span>
         </div>
       </a>`).join("")}
+    </div>
+  </section>
+
+  <section class="section" id="worlds">
+    <div class="sec-head">Crate Worlds</div>
+    <div class="world-grid">
+      ${WORLDS.map(w => `
+      <div class="wcard" id="${escapeAttr(w.id)}">
+        <div class="wc-img"><img src="assets/${escapeAttr(w.img)}" alt="${escapeAttr(`${w.name} crate key art`)}" loading="lazy" decoding="async"></div>
+        <div class="wc-body">
+          <h3>${escapeHtml(w.name)}</h3>
+          <span class="buy-state">Keys Coming Soon</span>
+        </div>
+      </div>`).join("")}
     </div>
   </section>
 
