@@ -417,6 +417,9 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
   html{scroll-behavior:auto}
   .btn,.fcard,.fc-btn,.fc-img img,.wcard,.wc-img img,.nav-item,.prod,.prod .buy,.toast,.nav-group-head .caret,.chip{transition:none}
 }
+  .prod .perks{list-style:none;margin:10px 0 4px;padding:0;text-align:left;display:grid;gap:5px}
+  .prod .perks li{font-size:13px;line-height:1.35;color:var(--muted,#9aa4b2);padding-left:16px;position:relative}
+  .prod .perks li::before{content:"";position:absolute;left:2px;top:6px;width:6px;height:6px;border-radius:50%;background:var(--mint,#57F2B2);opacity:.8}
 </style>
 </head>
 <body>
@@ -469,12 +472,16 @@ const CONFIG = {
    checkoutUrl + "/package/" + checkoutId). */
 const CATALOG = {
   "ranks": {
-    label:"Global Ranks", tile:"mint", blurb:"Permanent cosmetic ranks across all game modes.",
+    label:"Global Ranks", tile:"mint", blurb:"Permanent cosmetic ranks across every game mode. Each tier contains the one below it — upgrades are pay-the-difference. No combat, mining or income advantage, ever.",
     items:[
-      { id:"vip",   name:"VIP",   price:9.99,  art:"helm-iron" },
-      { id:"pro",   name:"Pro",   price:14.99, art:"helm-dia",  badge:"POPULAR" },
-      { id:"mvp",   name:"MVP",   price:19.99, art:"helm-gold" },
-      { id:"haven", name:"HAVEN", price:29.99, art:"crown" }
+      { id:"vip",   name:"VIP",   price:9.99,  art:"helm-iron",
+        perks:["Green VIP tag in chat and tab","5 homes (up from 3)","/hat and /nick","/back after a teleport","Weekly VIP cosmetic kit"] },
+      { id:"pro",   name:"Pro",   price:14.99, art:"helm-dia",  badge:"POPULAR",
+        perks:["Everything in VIP","Blue Pro tag","8 homes","Rename and re-lore your items","Disguise as cow, pig, sheep or chicken","Weekly Pro cosmetic kit"] },
+      { id:"mvp",   name:"MVP",   price:19.99, art:"helm-gold",
+        perks:["Everything in Pro","Pink MVP tag","12 homes","Your own personal time and weather","/near to find players around you","Disguise as wolf, fox, axolotl or allay","Weekly MVP cosmetic kit"] },
+      { id:"haven", name:"HAVEN", price:29.99, art:"crown",
+        perks:["Everything in MVP","Bold green HAVEN tag","20 homes","Coloured and hex-coloured nicknames","Disguise as ANY mob","Weekly HAVEN kit, including a dragon head"] }
     ]
   },
 };
@@ -941,6 +948,7 @@ function catPage(key){
       <div class="prod panel">
         ${tileHtml(cat, it)}
         <div class="name">${escapeHtml(it.name)}</div>
+        ${Array.isArray(it.perks) && it.perks.length ? `<ul class="perks">${it.perks.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>` : ""}
         <div class="price">${money(it.price)}</div>
         <button class="buy" type="button" data-cat="${escapeAttr(key)}" data-id="${escapeAttr(it.id)}" aria-label="${escapeAttr(`Buy ${it.name} — ${money(it.price)}`)}">Buy</button>
       </div>`).join("")}
