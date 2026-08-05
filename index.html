@@ -331,6 +331,9 @@ button.sc-copy:hover{filter:brightness(1.08)} button.sc-copy:active{transform:tr
   background:var(--panel-2);color:var(--muted);
   font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:2px;text-transform:uppercase;
 }
+/* a crate that exists in-game reads live; a roadmap teaser reads muted and stays labelled */
+.wcard:not(.is-soon) .buy-state{border-color:rgba(53,224,162,.45);color:var(--mint);background:rgba(53,224,162,.07)}
+.wcard.is-soon .wc-img img{filter:saturate(.55) brightness(.82)}
 @media(hover:hover){
   .nav-item:not(.active):hover{color:var(--text);background:rgba(255,255,255,.03)}
   .nav-links a:hover{color:var(--text)}
@@ -486,14 +489,18 @@ const CATALOG = {
   },
 };
 
-/* CRATE WORLDS — themed crate showcase on the homepage. Keys aren't sellable yet:
-   no prices/links on purpose — cards render an honest "Keys Coming Soon" state. */
+/* CRATE WORLDS — themed crate showcase on the homepage.
+   A card without `soon` means the crate EXISTS in-game and a player can open it today.
+   Exactly two do: Dragon's Hoard and Galactic Order (the space crate — its rewards are the
+   nexo:galaxy_* items, which is why it carries the galaxy key art). The rest are roadmap
+   teasers and must stay labelled, or the page promises a crate the server does not have.
+   Keys aren't sellable yet either, so no prices/links until Tebex is published. */
 const WORLDS = [
-  { id:"world-dragons-hoard", name:"Dragon's Hoard", img:"world-dragon.jpg" },
-  { id:"world-crystal",       name:"Crystal",        img:"world-crystal.jpg" },
-  { id:"world-galaxy",        name:"Galaxy",         img:"world-galaxy.jpg" },
-  { id:"world-halloween",     name:"Halloween",      img:"world-halloween.jpg" },
-  { id:"world-mech-hero",     name:"Mech Hero",      img:"world-mechhero.jpg" }
+  { id:"world-dragons-hoard",  name:"Dragon's Hoard", img:"world-dragon.jpg" },
+  { id:"world-galactic-order", name:"Galactic Order", img:"world-galaxy.jpg" },
+  { id:"world-crystal",        name:"Crystal",        img:"world-crystal.jpg",   soon:true },
+  { id:"world-halloween",      name:"Halloween",      img:"world-halloween.jpg", soon:true },
+  { id:"world-mech-hero",      name:"Mech Hero",      img:"world-mechhero.jpg",  soon:true }
 ];
 </script>
 
@@ -913,11 +920,11 @@ function homePage(){
     <div class="sec-head">Crate Worlds</div>
     <div class="world-grid">
       ${WORLDS.map(w => `
-      <div class="wcard" id="${escapeAttr(w.id)}">
+      <div class="wcard${w.soon ? " is-soon" : ""}" id="${escapeAttr(w.id)}">
         <div class="wc-img"><img src="assets/${escapeAttr(w.img)}" alt="${escapeAttr(`${w.name} crate key art`)}" loading="lazy" decoding="async"></div>
         <div class="wc-body">
           <h3>${escapeHtml(w.name)}</h3>
-          <span class="buy-state">Keys Coming Soon</span>
+          <span class="buy-state">${w.soon ? "Coming Soon" : (checkoutLive ? "Keys in the store" : "In-game now &middot; keys at launch")}</span>
         </div>
       </div>`).join("")}
     </div>
