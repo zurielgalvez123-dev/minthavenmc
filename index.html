@@ -351,6 +351,8 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
 .foot-brand img{height:36px;width:36px;object-fit:cover;border-radius:8px}
 .foot-brand .bn{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:1.6px;text-transform:uppercase}
 .foot-inner .fb{font-size:13px;color:var(--muted);font-weight:500;line-height:1.6;text-align:right}
+.foot-inner .fb .flegal a{color:var(--mint-dim);border-bottom:1px solid rgba(143,217,189,.28);padding-bottom:1px}
+.foot-inner .fb .flegal a:hover{color:var(--mint);border-bottom-color:var(--mint)}
 
 /* ---------- modal ---------- */
 .modal-bg{
@@ -547,6 +549,11 @@ const WORLDS = [
       <span class="bn">MintHaven</span>
     </div>
     <div class="fb">
+      <span class="flegal">
+        <a href="terms.html">Terms of Service</a> ·
+        <a href="privacy.html">Privacy Policy</a> ·
+        <a href="refund.html">Refund Policy</a>
+      </span><br>
       © <span id="year"></span> MintHaven MC. Not affiliated with Mojang Studios or Microsoft.<br>
       <span id="footNote"></span>
     </div>
