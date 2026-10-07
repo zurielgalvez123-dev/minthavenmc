@@ -452,8 +452,13 @@ const CONFIG = {
   tiktok:   "",                               // TODO full https URL (empty = hidden)
   trailerUrl: "",                             // TODO trailer link (empty = Watch Trailer button hidden — no dead link)
   contactEmail: "support@minthavenmc.com",    // forwards to operator inbox (Namecheap forward)
-  // Tebex store base URL, e.g. "https://minthaven.tebex.io". Buy buttons need BOTH this
-  // and a per-item checkout id/url below. Empty = honest "checkout opening soon" UI with hidden checkout buttons.
+  // Tebex store base URL. Buy buttons need BOTH this and a per-item checkoutId below.
+  // Verified 2026-10-06: minthaven.tebex.store IS linked (server 2388645, plugin
+  // secret-key live) and has all 4 Ranks packages for sale with real IDs (wired below)
+  // — but the storefront itself still 404s, meaning it hasn't been hit Publish in the
+  // Tebex Creator dashboard yet. Flip this to "https://minthaven.tebex.store" the moment
+  // that one owner action happens — everything else is ready. Empty = honest "checkout
+  // opening soon" UI with hidden checkout buttons, which is still the true state today.
   checkoutUrl: "",
 
   // Homepage stats strip. Keep these TRUE — swap to real metrics as they become real.
@@ -479,13 +484,13 @@ const CATALOG = {
   "ranks": {
     label:"Global Ranks", tile:"mint", blurb:"Permanent cosmetic ranks across every game mode. Each tier contains the one below it — upgrades are pay-the-difference. No combat, mining or income advantage, ever.",
     items:[
-      { id:"vip",   name:"VIP",   price:9.99,  art:"helm-iron",
+      { id:"vip",   name:"VIP",   price:9.99,  art:"helm-iron",  checkoutId:"7573412",
         perks:["Green VIP tag in chat and tab","5 homes (up from 3)","/hat and /nick","/back after a teleport","Weekly VIP cosmetic kit"] },
-      { id:"pro",   name:"Pro",   price:14.99, art:"helm-dia",  badge:"POPULAR",
+      { id:"pro",   name:"Pro",   price:14.99, art:"helm-dia",  badge:"POPULAR", checkoutId:"7573416",
         perks:["Everything in VIP","Blue Pro tag","8 homes","Rename and re-lore your items","Disguise as cow, pig, sheep or chicken","Weekly Pro cosmetic kit"] },
-      { id:"mvp",   name:"MVP",   price:19.99, art:"helm-gold",
+      { id:"mvp",   name:"MVP",   price:19.99, art:"helm-gold",  checkoutId:"7573418",
         perks:["Everything in Pro","Pink MVP tag","12 homes","Your own personal time and weather","/near to find players around you","Disguise as wolf, fox, axolotl or allay","Weekly MVP cosmetic kit"] },
-      { id:"haven", name:"HAVEN", price:29.99, art:"crown",
+      { id:"haven", name:"HAVEN", price:29.99, art:"crown",  checkoutId:"7573419",
         perks:["Everything in MVP","Bold green HAVEN tag","20 homes","Coloured and hex-coloured nicknames","Disguise as ANY mob","Weekly HAVEN kit, including a dragon head"] }
     ]
   },
