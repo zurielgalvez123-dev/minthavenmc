@@ -4,24 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MintHaven — Play. Build. Belong.</title>
-<meta name="description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more.">
+<meta name="description" content="MintHaven: Minecraft Survival and Oneblock with themed crates and custom gear. Java + Bedrock. Cosmetic ranks, never pay-to-win.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#070f0c">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MintHaven MC">
 <meta property="og:title" content="MintHaven — Play. Build. Belong.">
-<meta property="og:description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more.">
+<meta property="og:description" content="MintHaven: Minecraft Survival and Oneblock with themed crates and custom gear. Java + Bedrock. Cosmetic ranks, never pay-to-win.">
 <meta property="og:url" content="https://store.minthavenmc.com/">
-<meta property="og:image" content="https://store.minthavenmc.com/assets/emblem.jpg">
-<meta property="og:image:alt" content="MintHaven emblem">
+<meta property="og:image" content="https://store.minthavenmc.com/assets/og.jpg">
+<meta property="og:image:alt" content="MintHaven — Minecraft Survival, Oneblock and custom crates">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MintHaven — Play. Build. Belong.">
-<meta name="twitter:description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more.">
-<meta name="twitter:image" content="https://store.minthavenmc.com/assets/emblem.jpg">
+<meta name="twitter:description" content="MintHaven: Minecraft Survival and Oneblock with themed crates and custom gear. Java + Bedrock. Cosmetic ranks, never pay-to-win.">
+<meta name="twitter:image" content="https://store.minthavenmc.com/assets/og.jpg">
 <link rel="canonical" href="https://store.minthavenmc.com/">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch.png">
-<link rel="preload" as="image" href="assets/hero-art.jpg">
+<link rel="preload" as="image" href="assets/hero-art-820.webp" media="(max-width:820px)">
+<link rel="preload" as="image" href="assets/hero-art-1600.webp" media="(min-width:821px)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -120,8 +123,11 @@ img,svg{display:block}
   background:
     linear-gradient(90deg, rgba(6,13,10,.94) 0%, rgba(6,13,10,.7) 24%, rgba(6,13,10,.12) 46%, rgba(6,13,10,.04) 60%, rgba(6,13,10,.5) 100%),
     linear-gradient(0deg, rgba(7,15,12,.85) 0%, transparent 30%),
-    url("assets/hero-art.jpg") center 60% / cover;
+    url("assets/hero-art-1600.webp") center 60% / cover;
 }
+@media(max-width:820px){.hero{background:
+    linear-gradient(0deg, rgba(7,15,12,.92) 0%, rgba(6,13,10,.55) 55%, rgba(6,13,10,.35) 100%),
+    url("assets/hero-art-820.webp") center 60% / cover}}
 .hero-inner{
   width:100%;max-width:1280px;margin:0 auto;padding:56px 20px;
   display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;
@@ -191,7 +197,7 @@ button.sc-copy:hover{filter:brightness(1.08)} button.sc-copy:active{transform:tr
 /* stats bar */
 .stats-bar{
   max-width:1280px;margin:0 auto;padding:0 20px;width:100%;
-  display:grid;grid-template-columns:repeat(5,1fr);gap:1px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
   background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:8px;
 }
 .stat{background:var(--bg2);padding:22px 16px;text-align:center}
@@ -233,7 +239,7 @@ button.sc-copy:hover{filter:brightness(1.08)} button.sc-copy:active{transform:tr
 }
 
 /* crate worlds */
-.world-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:22px}
+.world-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,300px));gap:16px;margin-top:22px}
 .wcard{
   background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;
   display:flex;flex-direction:column;transition:transform .15s, border-color .15s, box-shadow .15s;
@@ -384,7 +390,7 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
 
 /* ---------- responsive ---------- */
 @media(max-width:1100px){
-  .feature-grid,.world-grid{grid-template-columns:repeat(3,1fr);gap:14px}
+  .feature-grid{grid-template-columns:repeat(3,1fr);gap:14px}
 }
 @media(max-width:1000px){
   .hero-inner{grid-template-columns:1fr;padding:44px 18px}
@@ -408,7 +414,7 @@ footer{border-top:1px solid var(--line);background:var(--bg2);margin-top:auto}
   .brand .bn{font-size:16px}
 }
 @media(max-width:660px){
-  .feature-grid,.world-grid{grid-template-columns:repeat(2,1fr)}
+  .feature-grid{grid-template-columns:repeat(2,1fr)}
   .stats-bar{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:520px){
@@ -463,10 +469,10 @@ const CONFIG = {
 
   // Homepage stats strip. Keep these TRUE — swap to real metrics as they become real.
   stats: [
-    { n:"2",    l:"Game Modes" },
-    { n:"4",    l:"Store Packages" },
-    { n:"100%", l:"Player-Driven" },
-    { n:"2026", l:"Launching" }
+    { n:"Cross-play", l:"Java + Bedrock" },
+    { n:"2",          l:"Game modes" },
+    { n:"2",          l:"Themed crates live" },
+    { n:"0",          l:"Pay-to-win perks" }
   ],
   // "Trusted by" partner logos. Leave empty until real partnerships exist (strip hides itself).
   partners: []
@@ -505,9 +511,6 @@ const CATALOG = {
 const WORLDS = [
   { id:"world-dragons-hoard",  name:"Dragon's Hoard", img:"world-dragon.jpg" },
   { id:"world-galactic-order", name:"Galactic Order", img:"world-galaxy.jpg" },
-  { id:"world-crystal",        name:"Crystal",        img:"world-crystal.jpg",   soon:true },
-  { id:"world-halloween",      name:"Halloween",      img:"world-halloween.jpg", soon:true },
-  { id:"world-mech-hero",      name:"Mech Hero",      img:"world-mechhero.jpg",  soon:true }
 ];
 </script>
 
@@ -520,11 +523,10 @@ const WORLDS = [
     </a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="topNav" aria-label="Menu">☰ Menu</button>
     <nav class="nav-links" id="topNav" aria-label="Main">
-      <a href="#home" data-page="home">Home</a>
-      <a href="#home" data-scroll="about">About</a>
-      <a href="#home" data-scroll="economy">Economy</a>
+      <a href="#home" data-page="home">Play</a>
+      <a href="#ranks" data-page="shop">Store</a>
+      <a href="#home" data-scroll="worlds">Crates</a>
       <a href="#home" data-scroll="community">Community</a>
-      <a href="#ranks" data-page="shop">Shop</a>
     </nav>
     <button class="play-btn" id="playBtn"><span class="dot"></span><span id="playBtnText"></span></button>
   </div>
@@ -640,7 +642,7 @@ const TILES = {
 };
 const SITE_URL = "https://store.minthavenmc.com/";
 const DEFAULT_TITLE = "MintHaven — Play. Build. Belong.";
-const DEFAULT_DESC = "MintHaven MC official store — ranks, crate keys, claim blocks and more.";
+const DEFAULT_DESC = "MintHaven: Minecraft Survival and Oneblock with themed crates and custom gear. Java + Bedrock. Cosmetic ranks, never pay-to-win.";
 function escapeHtml(value){
   return String(value ?? "").replace(/[&<>"']/g, char => ({
     "&":"&amp;",
@@ -898,9 +900,10 @@ function homePage(){
       <div class="hero-copy">
         <span class="eyebrow">Minecraft ✦ Survival ✦ Community</span>
         <h1>Play.<br>Build. <span class="m">Belong.</span></h1>
-        <p class="sub">MintHaven is a Minecraft network built around a player-driven world — adventure, building and a growing community of players and creators.</p>
+        <p class="sub">Survival and Oneblock on one network, with themed crates full of custom-modelled gear you won't find on vanilla servers. Java or Bedrock, PC, console or phone. Ranks are cosmetic, never pay-to-win.</p>
         <div class="cta-row">
           <a class="btn btn-solid" href="${joinHref}"${joinExt}>Join the Haven ›</a>
+          <a class="btn btn-line" href="#ranks">View Ranks ›</a>
           ${SAFE_CONFIG.trailerUrl ? `<a class="btn btn-line" href="${escapeAttr(SAFE_CONFIG.trailerUrl)}" target="_blank" rel="noopener">▶ Watch Trailer</a>` : ""}
         </div>
         <div class="chip-row">
@@ -945,7 +948,7 @@ function homePage(){
   <section class="section" id="about" style="padding-bottom:10px">
     <div class="card panel about">
       <h2>Welcome to MintHaven</h2>
-      <p>MintHaven is a fresh Minecraft network built around <strong>Survival</strong> and <strong>Oneblock</strong> — with a player-driven economy where your time and builds hold real value. The store is open now; the server opens its gates soon.</p>
+      <p>MintHaven is a fresh Minecraft network built around <strong>Survival</strong> and <strong>Oneblock</strong> — with a player-driven economy where your time and builds hold real value. The server is live — copy the IP and jump in.</p>
       <p>Every purchase goes straight back into the network — hosting, plugins and new content.${checkoutLive ? " Packages are tied to your Minecraft username and applied automatically." : " Online checkout is opening soon — browse the packages now and check back shortly."}</p>
       ${(hasContact || SOCIALS.length) ? `<div class="btn-row" id="community">
         ${hasDiscord ? `<a class="btn btn-solid" href="${escapeAttr(SAFE_CONFIG.discord)}" target="_blank" rel="noopener">Join our Discord</a>` : ""}
