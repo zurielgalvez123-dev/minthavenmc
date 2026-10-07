@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MintHaven — Play. Earn. Build. Belong.</title>
+<title>MintHaven — Play. Build. Belong.</title>
 <meta name="description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#070f0c">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MintHaven MC">
-<meta property="og:title" content="MintHaven — Play. Earn. Build. Belong.">
+<meta property="og:title" content="MintHaven — Play. Build. Belong.">
 <meta property="og:description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more.">
 <meta property="og:url" content="https://store.minthavenmc.com/">
 <meta property="og:image" content="https://store.minthavenmc.com/assets/emblem.jpg">
 <meta property="og:image:alt" content="MintHaven emblem">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MintHaven — Play. Earn. Build. Belong.">
+<meta name="twitter:title" content="MintHaven — Play. Build. Belong.">
 <meta name="twitter:description" content="MintHaven MC official store — ranks, crate keys, claim blocks and more.">
 <meta name="twitter:image" content="https://store.minthavenmc.com/assets/emblem.jpg">
 <link rel="canonical" href="https://store.minthavenmc.com/">
@@ -634,7 +634,7 @@ const TILES = {
   teal:   ["#2f8a80","rgba(62,211,192,.3)"]
 };
 const SITE_URL = "https://store.minthavenmc.com/";
-const DEFAULT_TITLE = "MintHaven — Play. Earn. Build. Belong.";
+const DEFAULT_TITLE = "MintHaven — Play. Build. Belong.";
 const DEFAULT_DESC = "MintHaven MC official store — ranks, crate keys, claim blocks and more.";
 function escapeHtml(value){
   return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -891,9 +891,9 @@ function homePage(){
   <section class="hero" id="play">
     <div class="hero-inner">
       <div class="hero-copy">
-        <span class="eyebrow">Minecraft ✦ Web3 ✦ Community</span>
-        <h1>Play. Earn.<br>Build. <span class="m">Belong.</span></h1>
-        <p class="sub">MintHaven is a Minecraft network where adventure meets ownership — a growing world of players, creators and builders.</p>
+        <span class="eyebrow">Minecraft ✦ Survival ✦ Community</span>
+        <h1>Play.<br>Build. <span class="m">Belong.</span></h1>
+        <p class="sub">MintHaven is a Minecraft network built around a player-driven world — adventure, building and a growing community of players and creators.</p>
         <div class="cta-row">
           <a class="btn btn-solid" href="${joinHref}"${joinExt}>Join the Haven ›</a>
           ${SAFE_CONFIG.trailerUrl ? `<a class="btn btn-line" href="${escapeAttr(SAFE_CONFIG.trailerUrl)}" target="_blank" rel="noopener">▶ Watch Trailer</a>` : ""}
